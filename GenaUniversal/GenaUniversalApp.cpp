@@ -9,25 +9,28 @@
 
 #include "GenaUniversalApp.h"
 
-//(*AppHeaders
 #include "GenaUniversalMain.h"
 #include <wx/image.h>
-//*)
+
+#include <cstdio>
 
 IMPLEMENT_APP(GenaUniversalApp);
 
 bool GenaUniversalApp::OnInit()
 {
-    //(*AppInitialize
-    bool wxsOK = true;
+    int a, b;
+    scanf("%d%d", &a, &b);
+    printf("%d\n", a + b);
+
+    /*bool wxsOK = true;
     wxInitAllImageHandlers();
     if ( wxsOK )
     {
     	GenaUniversalFrame* Frame = new GenaUniversalFrame(0);
     	Frame->Show();
     	SetTopWindow(Frame);
-    }
-    //*)
-    return wxsOK;
+    }*/
+
+    return false;
 
 }
