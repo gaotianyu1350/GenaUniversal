@@ -1,3 +1,11 @@
+/***************************************************************
+ * Name:      runner_linux.c
+ * Purpose:   runner for unix-like operating system
+ * Author:    VL (Vincent Gao, Liangjs)
+ * Created:   2015-03-10
+ * Copyright: VL (Vincent Gao, Liangjs)
+ **************************************************************/
+
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>

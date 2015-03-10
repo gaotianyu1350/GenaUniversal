@@ -1,3 +1,11 @@
+/***************************************************************
+ * Name:      runner_win.c
+ * Purpose:   runner for windows operating system
+ * Author:    VL (Vincent Gao, Liangjs)
+ * Created:   2015-03-10
+ * Copyright: VL (Vincent Gao, Liangjs)
+ **************************************************************/
+
 #include <time.h>
 #include <windows.h>
 #include <stdio.h>
