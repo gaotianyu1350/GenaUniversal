@@ -9,6 +9,14 @@
 #ifndef FILEGROUP_H_INCLUDED
 #define FILEGROUP_H_INCLUDED
 
+#include <vector>
 
+class FileGroup
+{
+public:
+    FileGroup();
+private:
+    vector<
+};
 
 #endif // FILEGROUP_H_INCLUDED
