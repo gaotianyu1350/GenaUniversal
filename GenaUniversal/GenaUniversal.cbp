@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;" />
+		<Option virtualFolders="GUI\;judge\;judge\runner\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -97,6 +97,18 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 			<Option virtualFolder="GUI/" />
+		</Unit>
+		<Unit filename="runner_linux.c">
+			<Option compilerVar="CC" />
+			<Option link="0" />
+			<Option virtualFolder="judge/runner/" />
+			<Option compiler="gcc" use="1" buildCommand="$compiler $file -o runner_linux -O2 -static" />
+		</Unit>
+		<Unit filename="runner_win.c">
+			<Option compilerVar="CC" />
+			<Option link="0" />
+			<Option virtualFolder="judge/runner/" />
+			<Option compiler="gcc" use="1" buildCommand="$compiler $file -o runner_win -O2 -lpsapi -static" />
 		</Unit>
 		<Unit filename="wxsmith/GenaUniversalframe.wxs">
 			<Option virtualFolder="GUI/" />
