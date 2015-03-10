@@ -1,7 +1,5 @@
-obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
- E:\wxWidgets-3.0.2\include/wx/app.h \
- E:\wxWidgets-3.0.2\include/wx/event.h \
- E:\wxWidgets-3.0.2\include/wx/defs.h \
+obj\Debug\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h \
+ E:\wxWidgets-3.0.2\include/wx/wx.h E:\wxWidgets-3.0.2\include/wx/defs.h \
  E:\wxWidgets-3.0.2\include/wx/platform.h \
  E:\wxWidgets-3.0.2\include/wx/compiler.h \
  E:\wxWidgets-3.0.2\lib\gcc_lib\mswu/wx/setup.h \
@@ -149,9 +147,7 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  E:\wxWidgets-3.0.2\include/wx/xti.h E:\wxWidgets-3.0.2\include/wx/rtti.h \
  E:\wxWidgets-3.0.2\include/wx/flags.h \
  E:\wxWidgets-3.0.2\include/wx/xti2.h \
- E:\wxWidgets-3.0.2\include/wx/clntdata.h \
- E:\wxWidgets-3.0.2\include/wx/hashmap.h \
- E:\wxWidgets-3.0.2\include/wx/gdicmn.h \
+ E:\wxWidgets-3.0.2\include/wx/dynarray.h \
  E:\wxWidgets-3.0.2\include/wx/list.h \
  E:\wxWidgets-3.0.2\include/wx/vector.h \
  E:\wxWidgets-3.0.2\include/wx/scopeguard.h \
@@ -159,15 +155,8 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  E:\wxWidgets-3.0.2\include/wx/meta/movable.h \
  E:\wxWidgets-3.0.2\include/wx/meta/pod.h \
  E:\wxWidgets-3.0.2\include/wx/meta/if.h \
- E:\wxWidgets-3.0.2\include/wx/math.h \
- D:/TDM-GCC-64/x86_64-w64-mingw32/include/math.h \
- D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/cmath \
- E:\wxWidgets-3.0.2\include/wx/cursor.h \
- E:\wxWidgets-3.0.2\include/wx/msw/cursor.h \
- E:\wxWidgets-3.0.2\include/wx/msw/gdiimage.h \
- E:\wxWidgets-3.0.2\include/wx/gdiobj.h \
- E:\wxWidgets-3.0.2\include/wx/utils.h \
- E:\wxWidgets-3.0.2\include/wx/filefn.h \
+ E:\wxWidgets-3.0.2\include/wx/hash.h \
+ E:\wxWidgets-3.0.2\include/wx/hashmap.h \
  E:\wxWidgets-3.0.2\include/wx/arrstr.h \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/iterator \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/ostream \
@@ -189,6 +178,26 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/istream \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/bits/istream.tcc \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/bits/stream_iterator.h \
+ E:\wxWidgets-3.0.2\include/wx/intl.h \
+ E:\wxWidgets-3.0.2\include/wx/translation.h \
+ E:\wxWidgets-3.0.2\include/wx/language.h \
+ E:\wxWidgets-3.0.2\include/wx/scopedptr.h \
+ E:\wxWidgets-3.0.2\include/wx/checkeddelete.h \
+ E:\wxWidgets-3.0.2\include/wx/log.h \
+ E:\wxWidgets-3.0.2\include/wx/thread.h \
+ E:\wxWidgets-3.0.2\include/wx/generic/logg.h \
+ E:\wxWidgets-3.0.2\include/wx/event.h \
+ E:\wxWidgets-3.0.2\include/wx/clntdata.h \
+ E:\wxWidgets-3.0.2\include/wx/gdicmn.h \
+ E:\wxWidgets-3.0.2\include/wx/math.h \
+ D:/TDM-GCC-64/x86_64-w64-mingw32/include/math.h \
+ D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/cmath \
+ E:\wxWidgets-3.0.2\include/wx/cursor.h \
+ E:\wxWidgets-3.0.2\include/wx/msw/cursor.h \
+ E:\wxWidgets-3.0.2\include/wx/msw/gdiimage.h \
+ E:\wxWidgets-3.0.2\include/wx/gdiobj.h \
+ E:\wxWidgets-3.0.2\include/wx/utils.h \
+ E:\wxWidgets-3.0.2\include/wx/filefn.h \
  D:/TDM-GCC-64/x86_64-w64-mingw32/include/sys/stat.h \
  D:/TDM-GCC-64/x86_64-w64-mingw32/include/fcntl.h \
  E:\wxWidgets-3.0.2\include/wx/versioninfo.h \
@@ -198,8 +207,6 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  E:\wxWidgets-3.0.2\include/wx/longlong.h \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/limits \
  E:\wxWidgets-3.0.2\include/wx/platinfo.h \
- E:\wxWidgets-3.0.2\include/wx/dynarray.h \
- E:\wxWidgets-3.0.2\include/wx/thread.h \
  E:\wxWidgets-3.0.2\include/wx/tracker.h \
  E:\wxWidgets-3.0.2\include/wx/typeinfo.h \
  D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/typeinfo \
@@ -209,6 +216,7 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  E:\wxWidgets-3.0.2\include/wx/variant.h \
  E:\wxWidgets-3.0.2\include/wx/meta/convertible.h \
  E:\wxWidgets-3.0.2\include/wx/meta/removeref.h \
+ E:\wxWidgets-3.0.2\include/wx/app.h \
  E:\wxWidgets-3.0.2\include/wx/eventfilter.h \
  E:\wxWidgets-3.0.2\include/wx/build.h \
  E:\wxWidgets-3.0.2\include/wx/cmdargs.h \
@@ -384,18 +392,10 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  D:/TDM-GCC-64/x86_64-w64-mingw32/include/winsvc.h \
  D:/TDM-GCC-64/x86_64-w64-mingw32/include/mcx.h \
  D:/TDM-GCC-64/x86_64-w64-mingw32/include/imm.h \
- E:\wxWidgets-3.0.2\include/wx/intl.h \
- E:\wxWidgets-3.0.2\include/wx/translation.h \
- E:\wxWidgets-3.0.2\include/wx/language.h \
- E:\wxWidgets-3.0.2\include/wx/scopedptr.h \
- E:\wxWidgets-3.0.2\include/wx/checkeddelete.h \
- E:\wxWidgets-3.0.2\include/wx/log.h \
- E:\wxWidgets-3.0.2\include/wx/generic/logg.h \
  E:\wxWidgets-3.0.2\include/wx/msw/app.h \
  E:\wxWidgets-3.0.2\include/wx/icon.h \
  E:\wxWidgets-3.0.2\include/wx/iconloc.h \
- E:\wxWidgets-3.0.2\include/wx/msw/icon.h GenaUniversalMain.h \
- E:\wxWidgets-3.0.2\include/wx/wx.h E:\wxWidgets-3.0.2\include/wx/hash.h \
+ E:\wxWidgets-3.0.2\include/wx/msw/icon.h \
  E:\wxWidgets-3.0.2\include/wx/stream.h \
  E:\wxWidgets-3.0.2\include/wx/stopwatch.h \
  E:\wxWidgets-3.0.2\include/wx/time.h \
@@ -536,11 +536,9 @@ obj\Debug\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h \
  E:\wxWidgets-3.0.2\include/wx/mdi.h \
  E:\wxWidgets-3.0.2\include/wx/msw/mdi.h
 
-GenaUniversalApp.h:
+GenaUniversalMain.h:
 
-E:\wxWidgets-3.0.2\include/wx/app.h:
-
-E:\wxWidgets-3.0.2\include/wx/event.h:
+E:\wxWidgets-3.0.2\include/wx/wx.h:
 
 E:\wxWidgets-3.0.2\include/wx/defs.h:
 
@@ -840,11 +838,7 @@ E:\wxWidgets-3.0.2\include/wx/flags.h:
 
 E:\wxWidgets-3.0.2\include/wx/xti2.h:
 
-E:\wxWidgets-3.0.2\include/wx/clntdata.h:
-
-E:\wxWidgets-3.0.2\include/wx/hashmap.h:
-
-E:\wxWidgets-3.0.2\include/wx/gdicmn.h:
+E:\wxWidgets-3.0.2\include/wx/dynarray.h:
 
 E:\wxWidgets-3.0.2\include/wx/list.h:
 
@@ -860,23 +854,9 @@ E:\wxWidgets-3.0.2\include/wx/meta/pod.h:
 
 E:\wxWidgets-3.0.2\include/wx/meta/if.h:
 
-E:\wxWidgets-3.0.2\include/wx/math.h:
+E:\wxWidgets-3.0.2\include/wx/hash.h:
 
-D:/TDM-GCC-64/x86_64-w64-mingw32/include/math.h:
-
-D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/cmath:
-
-E:\wxWidgets-3.0.2\include/wx/cursor.h:
-
-E:\wxWidgets-3.0.2\include/wx/msw/cursor.h:
-
-E:\wxWidgets-3.0.2\include/wx/msw/gdiimage.h:
-
-E:\wxWidgets-3.0.2\include/wx/gdiobj.h:
-
-E:\wxWidgets-3.0.2\include/wx/utils.h:
-
-E:\wxWidgets-3.0.2\include/wx/filefn.h:
+E:\wxWidgets-3.0.2\include/wx/hashmap.h:
 
 E:\wxWidgets-3.0.2\include/wx/arrstr.h:
 
@@ -920,6 +900,46 @@ D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/bits/istream.tcc:
 
 D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/bits/stream_iterator.h:
 
+E:\wxWidgets-3.0.2\include/wx/intl.h:
+
+E:\wxWidgets-3.0.2\include/wx/translation.h:
+
+E:\wxWidgets-3.0.2\include/wx/language.h:
+
+E:\wxWidgets-3.0.2\include/wx/scopedptr.h:
+
+E:\wxWidgets-3.0.2\include/wx/checkeddelete.h:
+
+E:\wxWidgets-3.0.2\include/wx/log.h:
+
+E:\wxWidgets-3.0.2\include/wx/thread.h:
+
+E:\wxWidgets-3.0.2\include/wx/generic/logg.h:
+
+E:\wxWidgets-3.0.2\include/wx/event.h:
+
+E:\wxWidgets-3.0.2\include/wx/clntdata.h:
+
+E:\wxWidgets-3.0.2\include/wx/gdicmn.h:
+
+E:\wxWidgets-3.0.2\include/wx/math.h:
+
+D:/TDM-GCC-64/x86_64-w64-mingw32/include/math.h:
+
+D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/cmath:
+
+E:\wxWidgets-3.0.2\include/wx/cursor.h:
+
+E:\wxWidgets-3.0.2\include/wx/msw/cursor.h:
+
+E:\wxWidgets-3.0.2\include/wx/msw/gdiimage.h:
+
+E:\wxWidgets-3.0.2\include/wx/gdiobj.h:
+
+E:\wxWidgets-3.0.2\include/wx/utils.h:
+
+E:\wxWidgets-3.0.2\include/wx/filefn.h:
+
 D:/TDM-GCC-64/x86_64-w64-mingw32/include/sys/stat.h:
 
 D:/TDM-GCC-64/x86_64-w64-mingw32/include/fcntl.h:
@@ -938,10 +958,6 @@ D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/limits:
 
 E:\wxWidgets-3.0.2\include/wx/platinfo.h:
 
-E:\wxWidgets-3.0.2\include/wx/dynarray.h:
-
-E:\wxWidgets-3.0.2\include/wx/thread.h:
-
 E:\wxWidgets-3.0.2\include/wx/tracker.h:
 
 E:\wxWidgets-3.0.2\include/wx/typeinfo.h:
@@ -959,6 +975,8 @@ E:\wxWidgets-3.0.2\include/wx/variant.h:
 E:\wxWidgets-3.0.2\include/wx/meta/convertible.h:
 
 E:\wxWidgets-3.0.2\include/wx/meta/removeref.h:
+
+E:\wxWidgets-3.0.2\include/wx/app.h:
 
 E:\wxWidgets-3.0.2\include/wx/eventfilter.h:
 
@@ -1310,20 +1328,6 @@ D:/TDM-GCC-64/x86_64-w64-mingw32/include/mcx.h:
 
 D:/TDM-GCC-64/x86_64-w64-mingw32/include/imm.h:
 
-E:\wxWidgets-3.0.2\include/wx/intl.h:
-
-E:\wxWidgets-3.0.2\include/wx/translation.h:
-
-E:\wxWidgets-3.0.2\include/wx/language.h:
-
-E:\wxWidgets-3.0.2\include/wx/scopedptr.h:
-
-E:\wxWidgets-3.0.2\include/wx/checkeddelete.h:
-
-E:\wxWidgets-3.0.2\include/wx/log.h:
-
-E:\wxWidgets-3.0.2\include/wx/generic/logg.h:
-
 E:\wxWidgets-3.0.2\include/wx/msw/app.h:
 
 E:\wxWidgets-3.0.2\include/wx/icon.h:
@@ -1331,12 +1335,6 @@ E:\wxWidgets-3.0.2\include/wx/icon.h:
 E:\wxWidgets-3.0.2\include/wx/iconloc.h:
 
 E:\wxWidgets-3.0.2\include/wx/msw/icon.h:
-
-GenaUniversalMain.h:
-
-E:\wxWidgets-3.0.2\include/wx/wx.h:
-
-E:\wxWidgets-3.0.2\include/wx/hash.h:
 
 E:\wxWidgets-3.0.2\include/wx/stream.h:
 
