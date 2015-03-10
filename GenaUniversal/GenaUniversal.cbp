@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;" />
+		<Option virtualFolders="GUI\;judge\;judge\File\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -76,11 +76,19 @@
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
 		</Linker>
+		<Unit filename="File.cpp">
+			<Option virtualFolder="judge/File/" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="File.h">
+			<Option virtualFolder="judge/File/" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="FileGroup.cpp">
-			<Option virtualFolder="judge/" />
+			<Option virtualFolder="judge/File/" />
 		</Unit>
 		<Unit filename="FileGroup.h">
-			<Option virtualFolder="judge/" />
+			<Option virtualFolder="judge/File/" />
 		</Unit>
 		<Unit filename="GenaUniversalApp.cpp">
 			<Option virtualFolder="GUI/" />

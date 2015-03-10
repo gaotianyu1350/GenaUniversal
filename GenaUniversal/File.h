@@ -22,9 +22,20 @@ public:
     // Get Information
     std::string getName();
 
+    // Maintain File
+    bool setFile(FILE*);
+    bool deleteFile(FILE*);
+
+    // Get File
+    FILE* getFile();
+    bool hasFile();
+
 private:
     // Information
     std::string strName;
+
+    // File
+    FILE *myFile;
 };
 
 #endif // FILE_H_INCLUDED
