@@ -6,6 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="GUI\;judge\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -75,14 +76,25 @@
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
 		</Linker>
-		<Unit filename="GenaUniversalApp.cpp" />
-		<Unit filename="GenaUniversalApp.h" />
-		<Unit filename="GenaUniversalMain.cpp" />
-		<Unit filename="GenaUniversalMain.h" />
+		<Unit filename="GenaUniversalApp.cpp">
+			<Option virtualFolder="GUI/" />
+		</Unit>
+		<Unit filename="GenaUniversalApp.h">
+			<Option virtualFolder="GUI/" />
+		</Unit>
+		<Unit filename="GenaUniversalMain.cpp">
+			<Option virtualFolder="GUI/" />
+		</Unit>
+		<Unit filename="GenaUniversalMain.h">
+			<Option virtualFolder="GUI/" />
+		</Unit>
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
+			<Option virtualFolder="GUI/" />
 		</Unit>
-		<Unit filename="wxsmith/GenaUniversalframe.wxs" />
+		<Unit filename="wxsmith/GenaUniversalframe.wxs">
+			<Option virtualFolder="GUI/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
