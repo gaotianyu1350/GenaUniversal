@@ -6,8 +6,8 @@
  * Copyright: VL (Vincent Gao, Liangjs)
  **************************************************************/
 
-#ifndef FILEGROUP_H_INCLUDED
-#define FILEGROUP_H_INCLUDED
+#ifndef FILEGROUP_H
+#define FILEGROUP_H
 
 #include "File.h"
 
@@ -53,4 +53,4 @@ private:
     std::map<int, File*> mapFile;
 };
 
-#endif // FILEGROUP_H_INCLUDED
+#endif // FILEGROUP_H

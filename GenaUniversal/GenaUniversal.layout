@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+<<<<<<< HEAD
 	<File name="FileGroup.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="723" topLine="24" />
+=======
+	<File name="GenaUniversalMain.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="553" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="resource.rc" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="59" topLine="0" />
+>>>>>>> 9bf05d638b0f4825328fbf30776202eb55fc0466
 		</Cursor>
 	</File>
 	<File name="GenaUniversalApp.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -11,6 +22,7 @@
 			<Cursor1 position="438" topLine="0" />
 		</Cursor>
 	</File>
+<<<<<<< HEAD
 	<File name="File.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="478" topLine="0" />
@@ -22,6 +34,14 @@
 		</Cursor>
 	</File>
 	<File name="GenaUniversalMain.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+	<File name="FileGroup.h" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="353" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="GenaUniversalMain.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> 9bf05d638b0f4825328fbf30776202eb55fc0466
 		<Cursor>
 			<Cursor1 position="485" topLine="0" />
 		</Cursor>
@@ -31,19 +51,27 @@
 			<Cursor1 position="538" topLine="0" />
 		</Cursor>
 	</File>
+<<<<<<< HEAD
 	<File name="GenaUniversalMain.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+	<File name="GenaUniversalApp.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> 9bf05d638b0f4825328fbf30776202eb55fc0466
 		<Cursor>
-			<Cursor1 position="553" topLine="0" />
+			<Cursor1 position="538" topLine="0" />
 		</Cursor>
 	</File>
+<<<<<<< HEAD
 	<File name="File.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="679" topLine="3" />
 		</Cursor>
 	</File>
 	<File name="resource.rc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+	<File name="runner_linux.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> 9bf05d638b0f4825328fbf30776202eb55fc0466
 		<Cursor>
-			<Cursor1 position="59" topLine="0" />
+			<Cursor1 position="3392" topLine="135" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
