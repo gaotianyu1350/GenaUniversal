@@ -11,4 +11,18 @@
 
 #include "File.h"
 
+File::File()
+{
+}
+
+void File::setName(std::string newName)
+{
+    strName = newName;
+}
+
+std::string File::getName()
+{
+    return strName;
+}
+
 #endif // FILE_CPP_INCLUDED

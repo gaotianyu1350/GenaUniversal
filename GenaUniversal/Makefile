@@ -13,14 +13,22 @@ RESOURCE = resource.rc
 DIR_DEBUG = bin\Debug
 DIROBJ_DEBUG = obj\Debug
 BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
-OBJ_DEBUG = $(DIROBJ_DEBUG)\GenaUniversalApp.o $(DIROBJ_DEBUG)\GenaUniversalMain.o
+
+OBJ_DEBUG = $(DIROBJ_DEBUG)\GenaUniversalApp.o $(DIROBJ_DEBUG)\GenaUniversalMain.o $(DIROBJ_DEBUG)\File.o $(DIROBJ_DEBUG)\FileGroup.o
+
 RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
 $(RES_DEBUG): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
+
 $(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\FileGroup.o: FileGroup.cpp
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\File.o: File.cpp
+	g++ -c -o $@ $(CPPDEPS) $< -g
+
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
@@ -36,14 +44,22 @@ cleanDebug:
 DIR_RELEASE = bin\Release
 DIROBJ_RELEASE = obj\Release
 BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
-OBJ_RELEASE = $(DIROBJ_RELEASE)\GenaUniversalApp.o $(DIROBJ_RELEASE)\GenaUniversalMain.o
+
+OBJ_RELEASE = $(DIROBJ_RELEASE)\GenaUniversalApp.o $(DIROBJ_RELEASE)\GenaUniversalMain.o $(DIROBJ_RELEASE)\FileGroup.o $(DIROBJ_RELEASE)\File.o
+
 RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
 $(RES_RELEASE): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
+	
 $(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\File.o: File.cpp
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\FileGroup.o: FileGroup.cpp
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+	
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
 $(DIR_RELEASE):

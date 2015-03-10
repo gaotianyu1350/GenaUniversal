@@ -9,14 +9,28 @@
 #ifndef FILEGROUP_H_INCLUDED
 #define FILEGROUP_H_INCLUDED
 
+#include "File.h"
+
 #include <vector>
+#include <string>
+#include <cstdio>
 
 class FileGroup
 {
 public:
     FileGroup();
+
+    // Set Information
+    void setName(std::string);
+
+    // Get Information
+    std::string getName();
 private:
-    vector<
+    // Information
+    std::string strName;
+
+    std::vector<FileGroup> vecFileGroup;
+    std::vector<File> vecFile;
 };
 
 #endif // FILEGROUP_H_INCLUDED

@@ -8,3 +8,20 @@
 
 #include "FileGroup.h"
 
+FileGroup::FileGroup()
+{
+}
+
+// Set Information
+
+void FileGroup::setName(std::string newName)
+{
+    strName = newName;
+}
+
+// Get Information
+
+std::string FileGroup::getName()
+{
+    return strName;
+}
