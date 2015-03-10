@@ -42,6 +42,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 }
 
 //(*IdInit(GenaUniversalFrame)
+const long GenaUniversalFrame::ID_BUTTON1 = wxNewId();
 const long GenaUniversalFrame::idMenuQuit = wxNewId();
 const long GenaUniversalFrame::idMenuAbout = wxNewId();
 const long GenaUniversalFrame::ID_STATUSBAR1 = wxNewId();
@@ -62,6 +63,7 @@ GenaUniversalFrame::GenaUniversalFrame(wxWindow* parent,wxWindowID id)
     wxMenu* Menu2;
 
     Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
+    Button1 = new wxButton(this, ID_BUTTON1, _("Label"), wxPoint(160,192), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
     MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);

@@ -12,6 +12,7 @@
 
 //(*Headers(GenaUniversalFrame)
 #include <wx/menu.h>
+#include <wx/button.h>
 #include <wx/frame.h>
 #include <wx/statusbr.h>
 //*)
@@ -31,12 +32,14 @@ class GenaUniversalFrame: public wxFrame
         //*)
 
         //(*Identifiers(GenaUniversalFrame)
+        static const long ID_BUTTON1;
         static const long idMenuQuit;
         static const long idMenuAbout;
         static const long ID_STATUSBAR1;
         //*)
 
         //(*Declarations(GenaUniversalFrame)
+        wxButton* Button1;
         wxStatusBar* StatusBar1;
         //*)
 
