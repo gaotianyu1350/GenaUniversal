@@ -1,36 +1,30 @@
 /***************************************************************
- * Name:      FileGroup.h
- * Purpose:   Defines File Group Class
+ * Name:      File.h
+ * Purpose:   Defines File Class
  * Author:    VL (Vincent Gao, Liangjs)
  * Created:   2015-03-10
  * Copyright: VL (Vincent Gao, Liangjs)
  **************************************************************/
 
-#ifndef FILEGROUP_H
-#define FILEGROUP_H
+#ifndef FILE_H_INCLUDED
+#define FILE_H_INCLUDED
 
-#include "File.h"
-
-#include <vector>
 #include <string>
 #include <cstdio>
 
-class FileGroup
-{
+class File {
 public:
-    FileGroup();
+    File();
 
     // Set Information
     void setName(std::string);
 
     // Get Information
     std::string getName();
+
 private:
     // Information
     std::string strName;
-
-    std::vector<FileGroup> vecFileGroup;
-    std::vector<File> vecFile;
 };
 
-#endif // FILEGROUP_H
+#endif // FILE_H_INCLUDED

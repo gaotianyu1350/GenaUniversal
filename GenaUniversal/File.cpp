@@ -1,27 +1,28 @@
 /***************************************************************
- * Name:      FileGroup.cpp
- * Purpose:   Code for File Group Class
+ * Name:      File.cpp
+ * Purpose:   Code for File Class
  * Author:    VL (Vincent Gao, Liangjs)
  * Created:   2015-03-10
  * Copyright: VL (Vincent Gao, Liangjs)
  **************************************************************/
 
-#include "FileGroup.h"
+#ifndef FILE_CPP_INCLUDED
+#define FILE_CPP_INCLUDED
 
-FileGroup::FileGroup()
+#include "File.h"
+
+File::File()
 {
 }
 
-// Set Information
-
-void FileGroup::setName(std::string newName)
+void File::setName(std::string newName)
 {
     strName = newName;
 }
 
-// Get Information
-
-std::string FileGroup::getName()
+std::string File::getName()
 {
     return strName;
 }
+
+#endif // FILE_CPP_INCLUDED
