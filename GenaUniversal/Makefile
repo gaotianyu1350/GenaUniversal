@@ -9,19 +9,23 @@ DEFINES = -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -DNOPCH
 WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wall -Wno-ctor-dtor-privacy -std=gnu++11
 
 RESOURCE = resource.rc
+SRC_RUNNER = runner_win.c
+RUNNER = runner_win.exe
 
 DIR_DEBUG = bin\Debug
 DIROBJ_DEBUG = obj\Debug
 BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
 OBJ_DEBUG = $(DIROBJ_DEBUG)\GenaUniversalApp.o $(DIROBJ_DEBUG)\GenaUniversalMain.o
 RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
+$(DIR_DEBUG)\$(RUNNER): $(SRC_RUNNER)
+	gcc $< -o $@ -static -O2 -lpsapi
 $(RES_DEBUG): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
 $(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
+$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\$(RUNNER)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
 	-if not exist $(DIR_DEBUG) mkdir $(DIR_DEBUG)
@@ -38,13 +42,15 @@ DIROBJ_RELEASE = obj\Release
 BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
 OBJ_RELEASE = $(DIROBJ_RELEASE)\GenaUniversalApp.o $(DIROBJ_RELEASE)\GenaUniversalMain.o
 RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
+$(DIR_RELEASE)\$(RUNNER): $(SRC_RUNNER)
+	gcc $< -o $@ -static -O2 -lpsapi
 $(RES_RELEASE): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
 $(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
+$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\$(RUNNER)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
 $(DIR_RELEASE):
 	-if not exist $(DIR_RELEASE) mkdir $(DIR_RELEASE)
