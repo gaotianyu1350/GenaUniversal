@@ -18,14 +18,16 @@
 
 class FileGroup
 {
+    using namespace std;
+
 public:
     FileGroup();
 
     // Set Information
-    void setName(std::string);
+    void setName(string);
 
     // Get Information
-    std::string getName();
+    string getName();
 
     // Maintain FileGroups and Files
     bool addFileGroup(int, FileGroup*);
@@ -46,11 +48,11 @@ public:
 
 private:
     // Information
-    std::string strName;
+    string strName;
 
     // FileGroups and Files;
-    std::map<int, FileGroup*> mapFileGroup;
-    std::map<int, File*> mapFile;
+    map<int, FileGroup*> mapFileGroup;
+    map<int, File*> mapFile;
 };
 
 #endif // FILEGROUP_H
