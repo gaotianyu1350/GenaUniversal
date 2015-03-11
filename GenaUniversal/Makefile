@@ -20,7 +20,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\GenaUniversalMain.o \
 	$(DIROBJ_DEBUG)\File.o \
 	$(DIROBJ_DEBUG)\FileGroup.o \
-	$(DIROBJ_DEBUG)\TempFile.o
+	$(DIROBJ_DEBUG)\TempFile.o \
+	$(DIROBJ_DEBUG)\FileManager.o
 RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
 $(DIR_DEBUG)\runner:
 	-if not exist $@ mkdir $@
@@ -37,7 +38,9 @@ $(DIROBJ_DEBUG)\FileGroup.o: FileGroup.cpp FileGroup.h
 $(DIROBJ_DEBUG)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\TempFile.o: TempFile.cpp TempFile.h
-	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\runner\$(RUNNER)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
@@ -57,7 +60,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\GenaUniversalMain.o \
 	$(DIROBJ_RELEASE)\FileGroup.o \
 	$(DIROBJ_RELEASE)\File.o \
-	$(DIROBJ_RELEASE)\TempFile.o
+	$(DIROBJ_RELEASE)\TempFile.o \
+	$(DIROBJ_RELEASE)\FileManager.o
 RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
 $(DIR_RELEASE)\runner:
 	-if not exist $@ mkdir $@
@@ -74,7 +78,9 @@ $(DIROBJ_RELEASE)\File.o: File.cpp File.h
 $(DIROBJ_RELEASE)\FileGroup.o: FileGroup.cpp FileGroup.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\TempFile.o: TempFile.cpp TempFile.h
-	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\FileManager.o: FileManager.cpp FileManager.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\runner\$(RUNNER)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
 $(DIR_RELEASE):

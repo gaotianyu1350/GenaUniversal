@@ -7,6 +7,7 @@
  **************************************************************/
 
 #include "TempFile.h"
+#include "FileManager.h"
 #include <cstdlib>
 #include <ctime>
 #include <unistd.h>
@@ -31,11 +32,7 @@ std::string TempFile::GetTempFile(const std::string &prefix, const std::string &
     std::string ans;
     do
     {
-#ifdef WIN32
-        ans = "tmp\\";
-#else
-        ans = "tmp/";
-#endif
+        ans = std::string("tmp") + FileManager::sep;
         ans += prefix;
         for (int i = 0; i < 10; ++i)
             ans += charrec[rand() % (26 * 2 + 10)];

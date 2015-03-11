@@ -42,7 +42,7 @@ bool FileGroup::addFile(int idx, File *newFile)
 
 bool FileGroup::deleteFileGroup(int idx)
 {
-    map<int, FileGroup*>::iterator p = mapFileGroup.find(idx);
+    std::map<int, FileGroup*>::iterator p = mapFileGroup.find(idx);
     if (p == mapFileGroup.end())
     {
         return false;
@@ -56,7 +56,7 @@ bool FileGroup::deleteFileGroup(int idx)
 
 bool FileGroup::deleteFile(int idx)
 {
-    map<int, File*>::iterator p = mapFile.find(idx);
+    std::map<int, File*>::iterator p = mapFile.find(idx);
     if (p == mapFile.end())
     {
         return false;
@@ -108,14 +108,14 @@ bool FileGroup::hasFile(int idx)
 
 // Set Information
 
-void FileGroup::setName(string newName)
+void FileGroup::setName(const std::string &newName)
 {
     strName = newName;
 }
 
 // Get Information
 
-string FileGroup::getName()
+std::string FileGroup::getName()
 {
     return strName;
 }

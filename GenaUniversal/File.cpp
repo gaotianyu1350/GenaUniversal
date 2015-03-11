@@ -15,12 +15,12 @@ File::File()
 {
 }
 
-void File::setName(string newName)
+void File::setName(const std::string &newName)
 {
     strName = newName;
 }
 
-string File::getName()
+std::string File::getName()
 {
     return strName;
 }

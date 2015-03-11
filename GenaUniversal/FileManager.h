@@ -9,10 +9,18 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include <string>
+
 class FileManager
 {
 public:
-    static void rmdir_recursive(const char *dir);
+#ifdef WIN32
+    static const char sep = '\\';
+#else
+    static const char sep = '/';
+#endif
+    static bool isdir(const std::string &path);
+    static void rmdir_recursive(const std::string &dir);
 };
 
 #endif // FILEMANAGER_H

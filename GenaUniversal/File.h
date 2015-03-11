@@ -14,16 +14,14 @@
 
 class File
 {
-    using namespace std;
-
 public:
     File();
 
     // Set Information
-    void setName(string);
+    void setName(const std::string &);
 
     // Get Information
-    string getName();
+    std::string getName();
 
     // Maintain File
     bool setFile(FILE*);
@@ -35,7 +33,7 @@ public:
 
 private:
     // Information
-    string strName;
+    std::string strName;
 
     // File
     FILE *myFile;
