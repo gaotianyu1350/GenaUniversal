@@ -28,29 +28,29 @@ public:
     std::string getName();
 
     // Maintain FileGroups and Files
-    bool addFileGroup(int, FileGroup*);
-    bool addFile(int, File*);
+    bool addFileGroup(const std::string&, FileGroup*);
+    bool addFile(const std::string&, File*);
 
-    bool deleteFileGroup(int);
-    bool deleteFile(int);
+    bool deleteFileGroup(const std::string&);
+    bool deleteFile(const std::string&);
 
     // Get FileGroups and Files;
-    FileGroup* getFileGroup(int);
-    File* getFile(int);
+    FileGroup* getFileGroup(const std::string&);
+    File* getFile(const std::string&);
 
     int countFileGroups();
     int countFiles();
 
-    bool hasFileGroup(int);
-    bool hasFile(int);
+    bool hasFileGroup(const std::string&);
+    bool hasFile(const std::string&);
 
 private:
     // Information
     std::string strName;
 
     // FileGroups and Files;
-    std::map<int, FileGroup*> mapFileGroup;
-    std::map<int, File*> mapFile;
+    std::map<std::string, FileGroup*> mapFileGroup;
+    std::map<std::string, File*> mapFile;
 };
 
 #endif // FILEGROUP_H

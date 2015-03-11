@@ -14,7 +14,7 @@ FileGroup::FileGroup()
 
 // Maintain FileGroups ans Files
 
-bool FileGroup::addFileGroup(int idx, FileGroup *newFileGroup)
+bool FileGroup::addFileGroup(const std::string& idx, FileGroup *newFileGroup)
 {
     bool notExist;
 
@@ -27,7 +27,7 @@ bool FileGroup::addFileGroup(int idx, FileGroup *newFileGroup)
     return notExist;
 }
 
-bool FileGroup::addFile(int idx, File *newFile)
+bool FileGroup::addFile(const std::string& idx, File *newFile)
 {
     bool notExist;
 
@@ -40,9 +40,9 @@ bool FileGroup::addFile(int idx, File *newFile)
     return notExist;
 }
 
-bool FileGroup::deleteFileGroup(int idx)
+bool FileGroup::deleteFileGroup(const std::string& idx)
 {
-    std::map<int, FileGroup*>::iterator p = mapFileGroup.find(idx);
+    std::map<std::string, FileGroup*>::iterator p = mapFileGroup.find(idx);
     if (p == mapFileGroup.end())
     {
         return false;
@@ -54,9 +54,9 @@ bool FileGroup::deleteFileGroup(int idx)
     }
 }
 
-bool FileGroup::deleteFile(int idx)
+bool FileGroup::deleteFile(const std::string& idx)
 {
-    std::map<int, File*>::iterator p = mapFile.find(idx);
+    std::map<std::string, File*>::iterator p = mapFile.find(idx);
     if (p == mapFile.end())
     {
         return false;
@@ -70,7 +70,7 @@ bool FileGroup::deleteFile(int idx)
 
 // Get FileGroups and Files
 
-FileGroup* FileGroup::getFileGroup(int idx)
+FileGroup* FileGroup::getFileGroup(const std::string& idx)
 {
     if (!mapFileGroup.count(idx))
         return NULL;
@@ -78,7 +78,7 @@ FileGroup* FileGroup::getFileGroup(int idx)
         return mapFileGroup[idx];
 }
 
-File* FileGroup::getFile(int idx)
+File* FileGroup::getFile(const std::string& idx)
 {
     if (!mapFile.count(idx))
         return NULL;
@@ -96,12 +96,12 @@ int FileGroup::countFiles()
     return mapFile.size();
 }
 
-bool FileGroup::hasFileGroup(int idx)
+bool FileGroup::hasFileGroup(const std::string& idx)
 {
     return mapFileGroup.count(idx);
 }
 
-bool FileGroup::hasFile(int idx)
+bool FileGroup::hasFile(const std::string& idx)
 {
     return mapFile.count(idx);
 }
