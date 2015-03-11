@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;judge\runner\;judge\FileManager\;" />
+		<Option virtualFolders="GUI\;judge\;judge\runner\;judge\FileManager\;judge\SharedLibrary\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -111,6 +111,12 @@
 		</Unit>
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
+		<Unit filename="library.cpp">
+			<Option virtualFolder="judge/SharedLibrary/" />
+		</Unit>
+		<Unit filename="library.h">
+			<Option virtualFolder="judge/SharedLibrary/" />
 		</Unit>
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
