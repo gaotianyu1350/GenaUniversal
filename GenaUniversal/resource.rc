@@ -1,3 +1,3 @@
-GenaIcon ICON "wx/msw/std.ico"
+GenaIcon ICON "gena.ico"
 
 #include "wx/msw/wx.rc"

@@ -6,8 +6,8 @@
  * Copyright: VL (Vincent Gao, Liangjs)
  **************************************************************/
 
-#ifndef FILE_H_INCLUDED
-#define FILE_H_INCLUDED
+#ifndef FILE_H
+#define FILE_H
 
 #include <string>
 #include <cstdio>
@@ -18,7 +18,7 @@ public:
     File();
 
     // Set Information
-    void setName(const std::string &);
+    void setName(const std::string&);
 
     // Get Information
     std::string getName();
@@ -39,4 +39,4 @@ private:
     FILE *myFile;
 };
 
-#endif // FILE_H_INCLUDED
+#endif // FILE_H

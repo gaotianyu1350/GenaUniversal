@@ -116,12 +116,6 @@
 			<Option compilerVar="WINDRES" />
 			<Option virtualFolder="GUI/" />
 		</Unit>
-		<Unit filename="runner.cpp">
-			<Option virtualFolder="judge/runner/" />
-		</Unit>
-		<Unit filename="runner.h">
-			<Option virtualFolder="judge/runner/" />
-		</Unit>
 		<Unit filename="runner_linux.c">
 			<Option compilerVar="CC" />
 			<Option link="0" />
