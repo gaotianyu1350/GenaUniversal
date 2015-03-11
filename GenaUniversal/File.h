@@ -15,28 +15,48 @@
 class File
 {
 public:
+#ifdef WIN32
+    static const char sep = '\\';
+#else
+    static const char sep = '/';
+#endif
+    static const char dot = '.';
+
     File();
 
     // Set Information
-    void setName(const std::string&);
+    void setStrName(const std::string&);
 
     // Get Information
-    std::string getName();
+    std::string getStrName();
 
     // Maintain File
-    bool setFile(FILE*);
-    bool deleteFile(FILE*);
+    bool setFile(std::string&);
+    bool setFile(File*);
+
+    bool deleteFile();
+    bool createFile();
+
+    bool setFileName(std::string&);
+    bool moveFile(std::string&);
+    bool moveFileTo(std::string&);
+
+    bool rmDir();
 
     // Get File
-    FILE* getFile();
-    bool hasFile();
+    bool isExist();
+    bool isDir();
+
+    std::string getAbsPath();
+    std::string getFileName();
+    std::string getExt();
 
 private:
     // Information
     std::string strName;
 
     // File
-    FILE *myFile;
+    std::string absPath;
 };
 
 #endif // FILE_H

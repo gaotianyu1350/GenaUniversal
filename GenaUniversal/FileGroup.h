@@ -22,10 +22,10 @@ public:
     FileGroup();
 
     // Set Information
-    void setName(const std::string&);
+    void setStrName(const std::string&);
 
     // Get Information
-    std::string getName();
+    std::string getStrName();
 
     // Maintain FileGroups and Files
     bool addFileGroup(const std::string&, FileGroup*);
