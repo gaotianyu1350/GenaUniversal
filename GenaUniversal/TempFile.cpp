@@ -21,8 +21,7 @@ void TempFile::InitTempFile()
 
 void TempFile::ClearTempDir()
 {
-    if (access("tmp", F_OK) == 0)
-        rmdir("tmp"); //
+    FileManager::rmdir_recursive("tmp");
 }
 
 std::string TempFile::GetTempFile(const std::string &prefix, const std::string &suffix)

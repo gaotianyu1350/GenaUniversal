@@ -7,3 +7,12 @@
  **************************************************************/
 
 #include "FileManager.h"
+#include <dirent.h>
+
+void FileManager::rmdir_recursive(const char *dir)
+{
+    DIR *dirp = opendir(dir);
+    if (dirp == NULL)
+        return;
+
+}

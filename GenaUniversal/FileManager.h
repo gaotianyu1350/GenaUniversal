@@ -9,5 +9,10 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+class FileManager
+{
+public:
+    static void rmdir_recursive(const char *dir);
+};
 
 #endif // FILEMANAGER_H

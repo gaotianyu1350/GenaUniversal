@@ -18,4 +18,6 @@ public:
     virtual int OnExit();
 };
 
+wxString GetWorkDirectory();
+
 #endif // GENAUNIVERSALAPP_H
