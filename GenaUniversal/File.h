@@ -12,19 +12,33 @@
 #include <string>
 #include <cstdio>
 
-class File {
+class File
+{
+    using namespace std;
+
 public:
     File();
 
     // Set Information
-    void setName(std::string);
+    void setName(string);
 
     // Get Information
-    std::string getName();
+    string getName();
+
+    // Maintain File
+    bool setFile(FILE*);
+    bool deleteFile(FILE*);
+
+    // Get File
+    FILE* getFile();
+    bool hasFile();
 
 private:
     // Information
-    std::string strName;
+    string strName;
+
+    // File
+    FILE *myFile;
 };
 
 #endif // FILE_H_INCLUDED

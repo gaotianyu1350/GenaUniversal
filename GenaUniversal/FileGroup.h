@@ -12,25 +12,47 @@
 #include "File.h"
 
 #include <vector>
+#include <map>
 #include <string>
 #include <cstdio>
 
 class FileGroup
 {
+    using namespace std;
+
 public:
     FileGroup();
 
     // Set Information
-    void setName(std::string);
+    void setName(string);
 
     // Get Information
-    std::string getName();
+    string getName();
+
+    // Maintain FileGroups and Files
+    bool addFileGroup(int, FileGroup*);
+    bool addFile(int, File);
+
+    bool deleteFileGroup(int);
+    bool deleteFile(int);
+
+    // Get FileGroups and Files;
+    FileGroup* getFileGroup(int);
+    File* getFile(int);
+
+    int countFileGroups();
+    int countFiles();
+
+    bool hasFileGroup(int);
+    bool hasFile(int);
+
 private:
     // Information
-    std::string strName;
+    string strName;
 
-    std::vector<FileGroup> vecFileGroup;
-    std::vector<File> vecFile;
+    // FileGroups and Files;
+    map<int, FileGroup*> mapFileGroup;
+    map<int, File*> mapFile;
 };
 
 #endif // FILEGROUP_H

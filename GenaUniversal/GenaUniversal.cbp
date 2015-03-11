@@ -6,7 +6,15 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+<<<<<<< HEAD
 		<Option virtualFolders="GUI\;judge\;judge\runner\;judge\FileManager\;" />
+=======
+<<<<<<< HEAD
+		<Option virtualFolders="GUI\;judge\;judge\File\;" />
+=======
+		<Option virtualFolders="GUI\;judge\;judge\runner\;" />
+>>>>>>> 9bf05d638b0f4825328fbf30776202eb55fc0466
+>>>>>>> origin/master
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -77,6 +85,7 @@
 			<Add library="libodbc32.a" />
 		</Linker>
 		<Unit filename="File.cpp">
+<<<<<<< HEAD
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
 		<Unit filename="File.h">
@@ -87,6 +96,20 @@
 		</Unit>
 		<Unit filename="FileGroup.h">
 			<Option virtualFolder="judge/FileManager/" />
+=======
+			<Option virtualFolder="judge/File/" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="File.h">
+			<Option virtualFolder="judge/File/" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="FileGroup.cpp">
+			<Option virtualFolder="judge/File/" />
+		</Unit>
+		<Unit filename="FileGroup.h">
+			<Option virtualFolder="judge/File/" />
+>>>>>>> origin/master
 		</Unit>
 		<Unit filename="FileManager.cpp" />
 		<Unit filename="FileManager.h" />
