@@ -10,6 +10,7 @@
 #define FILE_H
 
 #include "FileManager.h"
+#include <direct.h>
 #include <io.h>
 #include <string>
 #include <cstdio>
@@ -52,17 +53,19 @@ public:
     bool isExist();
     bool isDir();
 
+    std::string getPath();
     std::string getAbsPath();
     std::string getFileName();
     std::string getExt();
     std::string getDir();
+    std::string getAbsDir();
 
 private:
     // Information
     std::string strName;
 
     // File
-    std::string absPath;
+    std::string path;
 };
 
 #endif // FILE_H
