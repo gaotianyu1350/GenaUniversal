@@ -58,9 +58,7 @@ bool FileGroup::deleteFile(const std::string& idx)
 {
     std::map<std::string, File*>::iterator p = mapFile.find(idx);
     if (p == mapFile.end())
-    {
         return false;
-    }
     else
     {
         mapFile.erase(p);

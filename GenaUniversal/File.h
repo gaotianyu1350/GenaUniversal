@@ -11,7 +11,6 @@
 
 #include "FileManager.h"
 #include <direct.h>
-#include <io.h>
 #include <string>
 #include <cstdio>
 
