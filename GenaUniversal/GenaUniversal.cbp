@@ -106,17 +106,17 @@
 		<Unit filename="GenaUniversalMain.h">
 			<Option virtualFolder="GUI/" />
 		</Unit>
+		<Unit filename="Library.cpp">
+			<Option virtualFolder="judge/SharedLibrary/" />
+		</Unit>
+		<Unit filename="Library.h">
+			<Option virtualFolder="judge/SharedLibrary/" />
+		</Unit>
 		<Unit filename="TempFile.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
-		</Unit>
-		<Unit filename="library.cpp">
-			<Option virtualFolder="judge/SharedLibrary/" />
-		</Unit>
-		<Unit filename="library.h">
-			<Option virtualFolder="judge/SharedLibrary/" />
 		</Unit>
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
