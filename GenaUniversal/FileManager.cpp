@@ -43,3 +43,35 @@ void FileManager::rmdir_recursive(const std::string &dir)
     closedir(dirp);
     rmdir(dir.c_str());
 }
+
+bool FileManager::isabsdir(const std::string &path)
+{
+#ifdef WIN32
+    if (path.length() < 3)
+        return false;
+    if (!(path[0] >= 'A' && path[0] <= 'Z' || path[0] >= 'a' && path[0] <= 'z'))
+        return false;
+    if (path[1] != ':')
+        return false;
+    if (path[2] != sep)
+        return false;
+    return true;
+#else
+    if (path.length() < 1)
+        return false;
+    if (path[0] != sep)
+        return false;
+    else
+        return true;
+#endif
+}
+
+std::string FileManager::getcurabsdir()
+{
+    char s[1000];
+    getcwd(s, 990);
+    std::string tmp(s);
+    if (*tmp.rbegin() != sep)
+        tmp += sep;
+    return tmp;
+}

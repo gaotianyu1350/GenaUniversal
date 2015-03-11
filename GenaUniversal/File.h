@@ -9,34 +9,63 @@
 #ifndef FILE_H
 #define FILE_H
 
+#include "FileManager.h"
+#include <direct.h>
+#include <io.h>
 #include <string>
 #include <cstdio>
 
 class File
 {
 public:
+#ifdef WIN32
+    static const char sep = '\\';
+#else
+    static const char sep = '/';
+#endif
+    static const char dot = '.';
+
     File();
+    File(const std::string&);
+    File(const char*);
 
     // Set Information
-    void setName(const std::string&);
+    void setStrName(const std::string&);
 
     // Get Information
-    std::string getName();
+    std::string getStrName();
 
     // Maintain File
-    bool setFile(FILE*);
-    bool deleteFile(FILE*);
+    bool setFile(const std::string&);
+    bool setFile(const char*);
+    bool setFile(File*);
+
+    bool deleteFile();
+    bool createFile();
+
+    bool setFileName(const std::string&);
+    bool moveFile(const std::string&);
+    bool moveFileTo(const std::string&);
+
+    bool rmDir();
 
     // Get File
-    FILE* getFile();
-    bool hasFile();
+    bool isExist();
+    bool isDir();
+
+    std::string getPath();
+    std::string getAbsPath();
+    std::string getFileName();
+    std::string getExt();
+    std::string getDir();
+    std::string getAbsDir();
 
 private:
     // Information
     std::string strName;
 
     // File
-    FILE *myFile;
+    std::string path;
 };
 
 #endif // FILE_H

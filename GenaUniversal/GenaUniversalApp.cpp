@@ -8,7 +8,6 @@
 
 #include "GenaUniversalApp.h"
 #include "GenaUniversalMain.h"
-#include "TempFile.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <iostream>

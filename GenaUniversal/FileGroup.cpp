@@ -108,14 +108,14 @@ bool FileGroup::hasFile(const std::string& idx)
 
 // Set Information
 
-void FileGroup::setName(const std::string &newName)
+void FileGroup::setStrName(const std::string &newName)
 {
     strName = newName;
 }
 
 // Get Information
 
-std::string FileGroup::getName()
+std::string FileGroup::getStrName()
 {
     return strName;
 }

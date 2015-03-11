@@ -8,6 +8,8 @@
 #ifndef GENAUNIVERSALMAIN_H
 #define GENAUNIVERSALMAIN_H
 
+#include "TempFile.h"
+#include "File.h"
 #include <wx/wx.h>
 
 class GenaUniversalFrame: public wxFrame
