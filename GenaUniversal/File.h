@@ -33,12 +33,11 @@ public:
     void setStrName(const std::string&);
 
     // Get Information
-    std::string getStrName();
+    std::string getStrName() const;
 
     // Maintain File
     bool setFile(const std::string&);
-    bool setFile(const char*);
-    bool setFile(File*);
+    bool setFile(const File &);
 
     bool deleteFile();
     bool createFile();
@@ -50,15 +49,15 @@ public:
     bool rmDir();
 
     // Get File
-    bool isExist();
-    bool isDir();
+    bool exist() const;
+    bool isDir() const;
 
-    std::string getPath();
-    std::string getAbsPath();
-    std::string getFileName();
-    std::string getExt();
-    std::string getDir();
-    std::string getAbsDir();
+    std::string getPath() const;
+    std::string getAbsPath() const;
+    std::string getFileName() const;
+    std::string getExt() const;
+    std::string getDir() const;
+    std::string getAbsDir() const;
 
 private:
     // Information

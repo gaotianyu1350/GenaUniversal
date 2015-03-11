@@ -20,9 +20,14 @@ public:
     static const char sep = '/';
 #endif
     static bool isdir(const std::string &path);
-    static void rmdir_recursive(const std::string &dir);
-    static bool isabsdir(const std::string &path);
+    static bool isfile(const std::string &path);
+    static bool rmdir_recursive(const std::string &dir);
+    static bool isabspath(const std::string &path);
     static std::string getcurabsdir();
+    static std::string getdir(const std::string &path);
+    static std::string getext(const std::string &path);
+    static std::string getabspath(const std::string &path);
+    static std::string getfilename(const std::string &path);
 };
 
 #endif // FILEMANAGER_H

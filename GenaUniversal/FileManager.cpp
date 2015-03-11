@@ -19,12 +19,20 @@ bool FileManager::isdir(const std::string &path)
     return S_ISDIR(info.st_mode);
 }
 
-void FileManager::rmdir_recursive(const std::string &dir)
+bool FileManager::isfile(const std::string &path)
 {
+    return access(path.c_str(), F_OK) && !isdir(path);
+}
+
+bool FileManager::rmdir_recursive(const std::string &dir)
+{
+    if (isfile(dir))
+        return remove(dir.c_str()) == 0;
     DIR *dirp = opendir(dir.c_str());
     if (dirp == NULL)
-        return;
+        return false;
     dirent *direntp;
+    bool ans = true;
     while (direntp = readdir(dirp))
     {
         if (strcmp(direntp->d_name, ".") == 0)
@@ -36,33 +44,34 @@ void FileManager::rmdir_recursive(const std::string &dir)
             path += sep;
         path += direntp->d_name;
         if (isdir(path))
-            rmdir_recursive(path);
+        {
+            if (!rmdir_recursive(path))
+                ans = false;
+        }
         else
-            remove(path.c_str());
+        {
+            if (remove(path.c_str()))
+                ans = false;
+        }
     }
     closedir(dirp);
-    rmdir(dir.c_str());
+    if (rmdir(dir.c_str()))
+        ans = false;
+    return ans;
 }
 
-bool FileManager::isabsdir(const std::string &path)
+bool FileManager::isabspath(const std::string &path)
 {
 #ifdef WIN32
     if (path.length() < 3)
         return false;
     if (!(path[0] >= 'A' && path[0] <= 'Z' || path[0] >= 'a' && path[0] <= 'z'))
         return false;
-    if (path[1] != ':')
-        return false;
-    if (path[2] != sep)
-        return false;
-    return true;
+    return path[1] == ':' && path[2] == sep;
 #else
     if (path.length() < 1)
         return false;
-    if (path[0] != sep)
-        return false;
-    else
-        return true;
+    return path[0] == sep;
 #endif
 }
 
@@ -74,4 +83,38 @@ std::string FileManager::getcurabsdir()
     if (*tmp.rbegin() != sep)
         tmp += sep;
     return tmp;
+}
+
+std::string FileManager::getdir(const std::string &path)
+{
+    std::string::size_type pos = path.rfind(sep);
+    if (pos == std::string::npos)
+        return std::string(".") + sep;
+    else
+        return path.substr(0, pos + 1);
+}
+
+std::string FileManager::getabspath(const std::string &path)
+{
+    if (isabspath(path))
+        return path;
+    return getcurabsdir() + path;
+}
+
+std::string FileManager::getext(const std::string &path)
+{
+    for (int i = path.length() - 1; i > 0; --i)
+        if (path[i] == FileManager::sep)
+            return "";
+        else if (path[i] == '.')
+            return path.substr(i + 1);
+    return "";
+}
+
+std::string FileManager::getfilename(const std::string &path)
+{
+    std::string::size_type pos = path.rfind(sep);
+    if (pos == std::string::npos)
+        pos = -1;
+    return path.substr(pos + 1, path.length() - pos - 1);
 }

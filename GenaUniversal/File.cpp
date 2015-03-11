@@ -11,16 +11,9 @@
 
 #include "File.h"
 
-File::File()
-{
-}
+File::File() {}
 
 File::File(const std::string &newFile)
-{
-    path = newFile;
-}
-
-File::File(const char *newFile)
 {
     path = newFile;
 }
@@ -34,7 +27,7 @@ void File::setStrName(const std::string &newName)
 
 // Get Information
 
-std::string File::getStrName()
+std::string File::getStrName() const
 {
     return strName;
 }
@@ -46,28 +39,23 @@ bool File::setFile(const std::string &newFile)
     path = newFile;
 }
 
-bool File::setFile(File *newFile)
+bool File::setFile(const File &newFile)
 {
-    path = newFile->getPath();
-    strName = newFile->getStrName();
+    path = newFile.getPath();
+    strName = newFile.getStrName();
 }
 
 bool File::deleteFile()
 {
-    if (!isExist())
+    if (!exist())
         return true;
-
-    if (remove(path.c_str()) != 0)
-        return false;
-    else
-        return true;
+    return remove(path.c_str()) == 0;
 }
 
 bool File::createFile()
 {
-    if (isExist())
+    if (exist())
         return true;
-
     FILE *p = fopen(path.c_str(), "w");
     if (p == NULL) return false;
     fclose(p);
@@ -76,36 +64,28 @@ bool File::createFile()
 
 bool File::setFileName(const std::string &newName)
 {
-    if (!isExist())
-        return false;
-
-    int pos = path.rfind(sep);
-    if (pos == std::string::npos)
-        pos = -1;
-    if (rename(path.c_str(), (path.substr(0, pos + 1) + newName).c_str()) != 0)
-        return false;
-    path = path.substr(0, pos + 1);
-    path += newName;
-    return true;
+    return moveFile(getDir() + newName);
 }
 
 bool File::moveFile(const std::string &newPath)
 {
-    if (!isExist())
+    if (!exist())
         return false;
-    if (*newPath.rbegin() == sep)
-        return false;
+    if (FileManager::isdir(newPath))
+        return moveFileTo(newPath);
     if (rename(path.c_str(), newPath.c_str()) != 0)
         return false;
     else
+    {
+        path = newPath;
         return true;
+    }
 }
 
 bool File::moveFileTo(const std::string &newDir)
 {
-    if (!isDir())
+    if (!FileManager::isdir(newDir))
         return false;
-
     std::string newPath;
     if (*newDir.rbegin() == sep)
         newPath = newDir + getFileName();
@@ -121,13 +101,12 @@ bool File::rmDir()
 {
     if (!isDir())
         return false;
-    FileManager::rmdir_recursive(path);
-    return true;
+    return FileManager::rmdir_recursive(path);
 }
 
 // Get File
 
-bool File::isExist()
+bool File::exist() const
 {
     if (access(path.c_str(), 0) != 0)
         return false;
@@ -135,62 +114,42 @@ bool File::isExist()
         return true;
 }
 
-bool File::isDir()
+bool File::isDir() const
 {
     return FileManager::isdir(path);
 }
 
-std::string File::getAbsPath()
+std::string File::getAbsPath() const
 {
-    if (FileManager::isabsdir(path))
+    if (FileManager::isabspath(path))
         return path;
     else
         return FileManager::getcurabsdir() + path;
 }
 
-std::string File::getPath()
+std::string File::getPath() const
 {
     return path;
 }
 
-std::string File::getFileName()
+std::string File::getFileName() const
 {
-    int pos = path.rfind(sep);
-    if (pos == std::string::npos)
-        pos = -1;
-    return path.substr(pos + 1, path.length() - pos - 1);
+    return FileManager::getfilename(path);
 }
 
-std::string File::getExt()
+std::string File::getExt() const
 {
-    int pos = path.rfind(dot);
-    if (pos == std::string::npos)
-        return std::string("");
-    return path.substr(pos + 1, path.length() - pos - 1);
+    return FileManager::getext(path);
 }
 
-std::string File::getDir()
+std::string File::getDir() const
 {
-    int pos = path.rfind(sep);
-    if (pos == std::string::npos)
-        return std::string("");
-    else
-        return path.substr(0, pos + 1);
+    return FileManager::getdir(path);
 }
 
-std::string File::getAbsDir()
+std::string File::getAbsDir() const
 {
-    std::string tmp;
-    int pos = path.rfind(sep);
-    if (pos == std::string::npos)
-        tmp = std::string("");
-    else
-        tmp = path.substr(0, pos + 1);
-
-    if (FileManager::isabsdir(tmp))
-        return tmp;
-    else
-        return FileManager::getcurabsdir() + tmp;
+    return FileManager::getabspath(FileManager::getdir(path));
 }
 
 #endif // FILE_CPP_INCLUDED
