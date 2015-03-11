@@ -25,7 +25,8 @@ public:
     static const char dot = '.';
 
     File();
-    File(std::string&);
+    File(const std::string&);
+    File(const char*);
 
     // Set Information
     void setStrName(const std::string&);
@@ -34,15 +35,16 @@ public:
     std::string getStrName();
 
     // Maintain File
-    bool setFile(std::string&);
+    bool setFile(const std::string&);
+    bool setFile(const char*);
     bool setFile(File*);
 
     bool deleteFile();
     bool createFile();
 
-    bool setFileName(std::string&);
-    bool moveFile(std::string&);
-    bool moveFileTo(std::string&);
+    bool setFileName(const std::string&);
+    bool moveFile(const std::string&);
+    bool moveFileTo(const std::string&);
 
     bool rmDir();
 
@@ -53,6 +55,7 @@ public:
     std::string getAbsPath();
     std::string getFileName();
     std::string getExt();
+    std::string getDir();
 
 private:
     // Information

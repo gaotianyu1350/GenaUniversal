@@ -15,7 +15,12 @@ File::File()
 {
 }
 
-File::File(std::string &newFile)
+File::File(const std::string &newFile)
+{
+    absPath = newFile;
+}
+
+File::File(const char *newFile)
 {
     absPath = newFile;
 }
@@ -36,7 +41,7 @@ std::string File::getStrName()
 
 // Maintain File
 
-bool File::setFile(std::string &newFile)
+bool File::setFile(const std::string &newFile)
 {
     absPath = newFile;
 }
@@ -69,7 +74,7 @@ bool File::createFile()
     return true;
 }
 
-bool File::setFileName(std::string &newName)
+bool File::setFileName(const std::string &newName)
 {
     if (!isExist())
         return false;
@@ -77,14 +82,14 @@ bool File::setFileName(std::string &newName)
     int pos = absPath.rfind(sep);
     if (pos == std::string::npos)
         return false;
-    if (rename(absPath.c_str(), newName.c_str()) != 0)
+    if (rename(absPath.c_str(), (absPath.substr(0, pos + 1) + newName).c_str()) != 0)
         return false;
     absPath = absPath.substr(0, pos + 1);
     absPath += newName;
     return true;
 }
 
-bool File::moveFile(std::string &newPath)
+bool File::moveFile(const std::string &newPath)
 {
     if (!isExist())
         return false;
@@ -96,7 +101,7 @@ bool File::moveFile(std::string &newPath)
         return true;
 }
 
-bool File::moveFileTo(std::string &newDir)
+bool File::moveFileTo(const std::string &newDir)
 {
     if (!isExist())
         return false;
@@ -154,6 +159,15 @@ std::string File::getExt()
     if (pos == std::string::npos)
         return std::string("");
     return absPath.substr(pos + 1, absPath.length() - pos - 1);
+}
+
+std::string File::getDir()
+{
+    int pos = absPath.rfind(sep);
+    if (pos == std::string::npos)
+        return std::string("");
+    else
+        return absPath.substr(0, pos + 1);
 }
 
 #endif // FILE_CPP_INCLUDED
