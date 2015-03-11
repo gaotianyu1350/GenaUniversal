@@ -25,6 +25,7 @@ public:
     static const char dot = '.';
 
     File();
+    File(std::string&);
 
     // Set Information
     void setStrName(const std::string&);

@@ -15,6 +15,11 @@ File::File()
 {
 }
 
+File::File(std::string &newFile)
+{
+    absPath = newFile;
+}
+
 // Set Information
 
 void File::setStrName(const std::string &newName)
