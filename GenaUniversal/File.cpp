@@ -111,13 +111,13 @@ bool File::rmDir()
 {
     if (!isDir())
         return false;
-    FileManager.rmdir_recursive(absPath);
+    FileManager::rmdir_recursive(absPath);
     return true;
 }
 
 // Get File
 
-bool isExist()
+bool File::isExist()
 {
     if (access(absPath.c_str(), 0) != 0)
         return false;
@@ -125,17 +125,17 @@ bool isExist()
         return true;
 }
 
-bool isDir()
+bool File::isDir()
 {
-    return FileManager.isdir(absPath);
+    return FileManager::isdir(absPath);
 }
 
-std::string getAbsPath()
+std::string File::getAbsPath()
 {
     return absPath;
 }
 
-std::string getFileName()
+std::string File::getFileName()
 {
     int pos = absPath.rfind(sep);
     if (pos == std::string::npos)
@@ -143,7 +143,7 @@ std::string getFileName()
     return absPath.substr(pos + 1, absPath.length() - pos - 1);
 }
 
-std::string getExt()
+std::string File::getExt()
 {
     int pos = absPath.rfind(dot);
     if (pos == std::string::npos)

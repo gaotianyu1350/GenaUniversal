@@ -9,6 +9,8 @@
 #ifndef FILE_H
 #define FILE_H
 
+#include "FileManager.h"
+#include <io.h>
 #include <string>
 #include <cstdio>
 
