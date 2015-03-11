@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;judge\runner\;" />
+		<Option virtualFolders="GUI\;judge\;judge\runner\;judge\FileManager\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -76,12 +76,20 @@
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
 		</Linker>
+		<Unit filename="File.cpp">
+			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
+		<Unit filename="File.h">
+			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
 		<Unit filename="FileGroup.cpp">
-			<Option virtualFolder="judge/" />
+			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
 		<Unit filename="FileGroup.h">
-			<Option virtualFolder="judge/" />
+			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
+		<Unit filename="FileManager.cpp" />
+		<Unit filename="FileManager.h" />
 		<Unit filename="GenaUniversalApp.cpp">
 			<Option virtualFolder="GUI/" />
 		</Unit>
@@ -94,9 +102,21 @@
 		<Unit filename="GenaUniversalMain.h">
 			<Option virtualFolder="GUI/" />
 		</Unit>
+		<Unit filename="TempFile.cpp">
+			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
+		<Unit filename="TempFile.h">
+			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 			<Option virtualFolder="GUI/" />
+		</Unit>
+		<Unit filename="runner.cpp">
+			<Option virtualFolder="judge/runner/" />
+		</Unit>
+		<Unit filename="runner.h">
+			<Option virtualFolder="judge/runner/" />
 		</Unit>
 		<Unit filename="runner_linux.c">
 			<Option compilerVar="CC" />

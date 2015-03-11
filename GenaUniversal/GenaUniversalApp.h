@@ -15,6 +15,7 @@ class GenaUniversalApp : public wxApp
 {
 public:
     virtual bool OnInit();
+    virtual int OnExit();
 };
 
 #endif // GENAUNIVERSALAPP_H

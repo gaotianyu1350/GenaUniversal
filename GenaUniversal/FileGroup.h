@@ -1,6 +1,6 @@
 /***************************************************************
  * Name:      FileGroup.h
- * Purpose:   Defines File Group Class
+ * Purpose:   Defines FileGroup Class
  * Author:    VL (Vincent Gao, Liangjs)
  * Created:   2015-03-10
  * Copyright: VL (Vincent Gao, Liangjs)

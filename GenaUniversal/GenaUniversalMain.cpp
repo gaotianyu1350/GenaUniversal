@@ -13,7 +13,7 @@ END_EVENT_TABLE()
 
 GenaUniversalFrame::GenaUniversalFrame(wxWindow *parent, wxWindowID id)
 {
-    Create(parent, id, "GenaUniversal", wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE);
+    Create(parent, id, wxT("GenaUniversal"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE);
     SetIcon(wxICON(GenaIcon));
 }
 

@@ -15,69 +15,75 @@ RUNNER = runner_win.exe
 DIR_DEBUG = bin\Debug
 DIROBJ_DEBUG = obj\Debug
 BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
-
-OBJ_DEBUG = $(DIROBJ_DEBUG)\GenaUniversalApp.o $(DIROBJ_DEBUG)\GenaUniversalMain.o $(DIROBJ_DEBUG)\File.o $(DIROBJ_DEBUG)\FileGroup.o
-
+OBJ_DEBUG = \
+	$(DIROBJ_DEBUG)\GenaUniversalApp.o \
+	$(DIROBJ_DEBUG)\GenaUniversalMain.o \
+	$(DIROBJ_DEBUG)\File.o \
+	$(DIROBJ_DEBUG)\FileGroup.o \
+	$(DIROBJ_DEBUG)\TempFile.o
 RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
-$(DIR_DEBUG)\$(RUNNER): $(SRC_RUNNER)
-	gcc $< -o $@ -static -O2 -lpsapi
+$(DIR_DEBUG)\runner:
+	-if not exist $@ mkdir $@
+$(DIR_DEBUG)\runner\$(RUNNER): $(DIR_DEBUG)\runner $(SRC_RUNNER)
+	gcc $(SRC_RUNNER) -o $@ -static -O2 -lpsapi
 $(RES_DEBUG): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
-
-$(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp
+$(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp
+$(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\$(RUNNER)
-$(DIROBJ_DEBUG)\FileGroup.o: FileGroup.cpp
+$(DIROBJ_DEBUG)\FileGroup.o: FileGroup.cpp FileGroup.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)\File.o: File.cpp
+$(DIROBJ_DEBUG)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
-
-$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
+$(DIROBJ_DEBUG)\TempFile.o: TempFile.cpp TempFile.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\runner\$(RUNNER)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
-	-if not exist $(DIR_DEBUG) mkdir $(DIR_DEBUG)
+	-if not exist $@ mkdir $@
 $(DIROBJ_DEBUG):
-	-if not exist $(DIROBJ_DEBUG) mkdir $(DIROBJ_DEBUG)
+	-if not exist $@ mkdir $@
 Debug: $(DIR_DEBUG) $(DIROBJ_DEBUG) $(BIN_DEBUG)
 cleanDebug:
 	-if exist $(DIROBJ_DEBUG)\*.o del $(DIROBJ_DEBUG)\*.o
 	-if exist $(DIROBJ_DEBUG)\*.d del $(DIROBJ_DEBUG)\*.d
-	-if exist $(BIN_DEBUG) del $(BIN_DEBUG)
 
 DIR_RELEASE = bin\Release
 DIROBJ_RELEASE = obj\Release
 BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
-
-OBJ_RELEASE = $(DIROBJ_RELEASE)\GenaUniversalApp.o $(DIROBJ_RELEASE)\GenaUniversalMain.o $(DIROBJ_RELEASE)\FileGroup.o $(DIROBJ_RELEASE)\File.o
-
+OBJ_RELEASE = \
+	$(DIROBJ_RELEASE)\GenaUniversalApp.o \
+	$(DIROBJ_RELEASE)\GenaUniversalMain.o \
+	$(DIROBJ_RELEASE)\FileGroup.o \
+	$(DIROBJ_RELEASE)\File.o \
+	$(DIROBJ_RELEASE)\TempFile.o
 RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
-$(DIR_RELEASE)\$(RUNNER): $(SRC_RUNNER)
-	gcc $< -o $@ -static -O2 -lpsapi
+$(DIR_RELEASE)\runner:
+	-if not exist $@ mkdir $@
+$(DIR_RELEASE)\runner\$(RUNNER): $(DIR_RELEASE)\runner $(SRC_RUNNER)
+	gcc $(SRC_RUNNER) -o $@ -static -O2 -lpsapi
 $(RES_RELEASE): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
-	
-$(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp
+$(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp
+$(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\$(RUNNER)
-$(DIROBJ_RELEASE)\File.o: File.cpp
+$(DIROBJ_RELEASE)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\FileGroup.o: FileGroup.cpp
+$(DIROBJ_RELEASE)\FileGroup.o: FileGroup.cpp FileGroup.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
-	
-$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
+$(DIROBJ_RELEASE)\TempFile.o: TempFile.cpp TempFile.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\runner\$(RUNNER)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
 $(DIR_RELEASE):
-	-if not exist $(DIR_RELEASE) mkdir $(DIR_RELEASE)
+	-if not exist $@ mkdir $@
 $(DIROBJ_RELEASE):
-	-if not exist $(DIROBJ_RELEASE) mkdir $(DIROBJ_RELEASE)
+	-if not exist $@ mkdir $@
 Release: $(DIR_RELEASE) $(DIROBJ_RELEASE) $(BIN_RELEASE)
 cleanRelease:
 	-if exist $(DIROBJ_RELEASE)\*.o del $(DIROBJ_RELEASE)\*.o
 	-if exist $(DIROBJ_RELEASE)\*.d del $(DIROBJ_RELEASE)\*.d
-	-if exist $(BIN_RELEASE) del $(BIN_RELEASE)
 
 .PHONY: Debug Release cleanDebug cleanRelease
