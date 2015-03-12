@@ -25,7 +25,7 @@ public:
     void setStrName(const std::string&);
 
     // Get Information
-    std::string getStrName();
+    std::string getStrName() const;
 
     // Maintain FileGroups and Files
     bool addFileGroup(const std::string&, FileGroup*);
@@ -38,11 +38,11 @@ public:
     FileGroup* getFileGroup(const std::string&);
     File* getFile(const std::string&);
 
-    int countFileGroups();
-    int countFiles();
+    int countFileGroups() const;
+    int countFiles() const;
 
-    bool hasFileGroup(const std::string&);
-    bool hasFile(const std::string&);
+    bool hasFileGroup(const std::string&) const;
+    bool hasFile(const std::string&) const;
 
 private:
     // Information

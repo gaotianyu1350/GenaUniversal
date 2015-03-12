@@ -44,9 +44,7 @@ bool FileGroup::deleteFileGroup(const std::string& idx)
 {
     std::map<std::string, FileGroup*>::iterator p = mapFileGroup.find(idx);
     if (p == mapFileGroup.end())
-    {
         return false;
-    }
     else
     {
         mapFileGroup.erase(p);
@@ -84,22 +82,22 @@ File* FileGroup::getFile(const std::string& idx)
         return mapFile[idx];
 }
 
-int FileGroup::countFileGroups()
+int FileGroup::countFileGroups() const
 {
     return mapFileGroup.size();
 }
 
-int FileGroup::countFiles()
+int FileGroup::countFiles() const
 {
     return mapFile.size();
 }
 
-bool FileGroup::hasFileGroup(const std::string& idx)
+bool FileGroup::hasFileGroup(const std::string& idx) const
 {
     return mapFileGroup.count(idx);
 }
 
-bool FileGroup::hasFile(const std::string& idx)
+bool FileGroup::hasFile(const std::string& idx) const
 {
     return mapFile.count(idx);
 }
@@ -113,7 +111,7 @@ void FileGroup::setStrName(const std::string &newName)
 
 // Get Information
 
-std::string FileGroup::getStrName()
+std::string FileGroup::getStrName() const
 {
     return strName;
 }
