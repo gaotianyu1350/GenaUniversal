@@ -1,12 +1,3 @@
-/***************************************************************
- * Name:      Library.h
- * Purpose:   Defines Library Class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-10
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
-
 #ifndef LIBRARY_H
 #define LIBRARY_H
 
