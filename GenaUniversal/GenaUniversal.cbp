@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\runner\;judge\FileManager\;" />
+		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\runner\;judge\FileManager\;judge\sdk\templete\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -82,6 +82,12 @@
 		<Unit filename="Contest.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="Contest_OI.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Contest_OI.h">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
 		<Unit filename="File.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
@@ -124,6 +130,12 @@
 		<Unit filename="Player.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="Player_OI.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Player_OI.h">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
 		<Unit filename="Point.cpp">
 			<Option virtualFolder="judge/sdk/" />
 			<Option target="&lt;{~None~}&gt;" />
@@ -131,11 +143,23 @@
 		<Unit filename="Point.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="Point_Normal.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Point_Normal.h">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
 		<Unit filename="Problem.cpp">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="Problem.h">
 			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Problem_Normal.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Problem_Normal.h">
+			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="TempFile.cpp">
 			<Option virtualFolder="judge/FileManager/" />
