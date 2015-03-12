@@ -118,8 +118,12 @@
 		<Unit filename="Library.h">
 			<Option virtualFolder="judge/SharedLibrary/" />
 		</Unit>
-		<Unit filename="Player.cpp" />
-		<Unit filename="Player.h" />
+		<Unit filename="Player.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Player.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
 		<Unit filename="Point.cpp">
 			<Option virtualFolder="judge/sdk/" />
 			<Option target="&lt;{~None~}&gt;" />
