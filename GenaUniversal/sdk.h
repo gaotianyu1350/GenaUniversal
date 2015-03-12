@@ -11,10 +11,9 @@
 class judgeMessage
 {
 public:
-    judgeMessage(int, std::string&);
-    int getViewType();
-    std::string
-    getString();
+    judgeMessage(int viewType, const std::string &message);
+    int getViewType() const;
+    std::string getString() const;
 
 private:
     int viewType;
@@ -32,19 +31,19 @@ typedef std::vector<std::string> vecTitle;
 class sdk
 {
 public:
-    sdk(bool*, qMs*, FileGroup*);
+    sdk(const bool *flag, qMs *queueMessage, const FileGroup *fg);
     ~sdk();
 
     virtual void run() = 0;
     virtual void onStop() = 0;
     bool isStop();
-    void pushMessage(int, std::string&);
-
-    FileGroup *fg;
+    void pushMessage(int viewType, const std::string &message);
 
 protected:
-    bool *flagStop;
+    const bool *flagStop;
     qMs *queueMessage;
+    const FileGroup *fg;
+
 };
 
 #endif // SDK_H

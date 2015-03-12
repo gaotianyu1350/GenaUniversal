@@ -6,7 +6,7 @@
 class Contest : public sdk
 {
 public:
-    Contest(bool*, qMs*, FileGroup*);
+    Contest(const bool *flag, qMs *queueMessage, const FileGroup *fg);
     ~Contest();
 
     virtual void run() = 0;

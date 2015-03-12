@@ -1,26 +1,26 @@
 #include "sdk.h"
 
-judgeMessage::judgeMessage(int _viewType, std::string &_message)
+judgeMessage::judgeMessage(int viewType, const std::string &message)
 {
-    viewType = _viewType;
-    message = _message;
+    this->viewType = viewType;
+    this->message = message;
 }
 
-int judgeMessage::getViewType()
+int judgeMessage::getViewType() const
 {
     return viewType;
 }
 
-std::string judgeMessage::getString()
+std::string judgeMessage::getString() const
 {
     return message;
 }
 
-sdk::sdk(bool *_flag, qMs* _queueMessage, FileGroup *_fg)
+sdk::sdk(const bool *flag, qMs* queueMessage, const FileGroup *fg)
 {
-    flagStop = _flag;
-    fg = _fg;
-    queueMessage = _queueMessage;
+    flagStop = flag;
+    this->fg = fg;
+    this->queueMessage = queueMessage;
 }
 
 sdk::~sdk()
@@ -32,8 +32,8 @@ bool sdk::isStop()
     return *flagStop;
 }
 
-void sdk::pushMessage(int _viewType, std::string &_message)
+void sdk::pushMessage(int viewType, const std::string &message)
 {
-    queueMessage->push(jMs(_viewType, _message));
+    queueMessage->push(jMs(viewType, message));
 }
 

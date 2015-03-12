@@ -1,11 +1,3 @@
-/***************************************************************
- * Name:      Library.cpp
- * Purpose:   Code for Library Class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-10
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
 #include "Library.h"
 
 Library::Library() {}
