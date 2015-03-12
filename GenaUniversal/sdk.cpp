@@ -37,7 +37,7 @@ void sdk::pushMessage(int viewType, const std::string &message)
     queueMessage->push(jMs(viewType, message));
 }
 
-void sdk::addSon(const sdk *_son)
+void sdk::addSon(sdk *son)
 {
-    son.push_back(_son);
+    this->son.push_back(son);
 }
