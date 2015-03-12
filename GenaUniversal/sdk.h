@@ -38,12 +38,13 @@ public:
     virtual void onStop() = 0;
     bool isStop();
     void pushMessage(int viewType, const std::string &message);
+    void addSon(const sdk*);
 
 protected:
     const bool *flagStop;
     qMs *queueMessage;
     const FileGroup *fg;
-
+    std::vector<const sdk*> son;
 };
 
 #endif // SDK_H
