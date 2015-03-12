@@ -18,7 +18,6 @@ public:
 protected:
     vecTable info;
     vecTitle infoTitle;
-
 };
 
 #endif // CONTEST_H
