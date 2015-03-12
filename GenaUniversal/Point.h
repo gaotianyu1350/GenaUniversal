@@ -6,7 +6,7 @@
 class Point : public sdk
 {
 public:
-    Point(bool*, qMs*, FileGroup*);
+    Point(const bool *flag, qMs* queueMessage, const FileGroup *fg);
     ~Point();
 
     virtual void run() = 0;

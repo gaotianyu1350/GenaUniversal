@@ -6,7 +6,7 @@
 class Player : public sdk
 {
 public:
-    Player(bool*, qMs*, FileGroup*);
+    Player(const bool *flag, qMs* queueMessage, const FileGroup *fg);
     ~Player();
 
     virtual void run() = 0;

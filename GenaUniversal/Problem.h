@@ -6,7 +6,7 @@
 class Problem : public sdk
 {
 public:
-    Problem(bool*, qMs*, FileGroup*);
+    Problem(const bool *flag, qMs* queueMessage, const FileGroup *fg);
     ~Problem();
 
     virtual void run() = 0;

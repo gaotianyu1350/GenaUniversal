@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(bool *_flag, qMs* _queueMessage, FileGroup *_fg) : sdk(_flag, _queueMessage, _fg)
+Player::Player(const bool *flag, qMs* queueMessage, const FileGroup *fg) : sdk(flag, queueMessage, fg)
 {
 }
 
