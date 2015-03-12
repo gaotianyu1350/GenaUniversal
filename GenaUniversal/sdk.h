@@ -27,7 +27,7 @@ typedef std::queue<judgeMessage> qMs;
 typedef std::pair<int, std::string> infoPair;
 typedef std::map<std::string, infoPair> mapRow;
 typedef std::vector<mapRow> vecTable;
-typedef std::vector<infoPair> vecTitle;
+typedef std::vector<std::string> vecTitle;
 
 class sdk
 {
