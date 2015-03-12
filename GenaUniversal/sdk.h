@@ -8,4 +8,18 @@
 #include "FileManager.h"
 #include "TempFile.h"
 
+class sdk;
+{
+public:
+    sdk();
+    ~sdk();
+
+    virtual void run(FileGroup*);
+    virtual void onStop();
+    bool isStop();
+
+protected:
+    bool *flagStop;
+};
+
 #endif // SDK_H

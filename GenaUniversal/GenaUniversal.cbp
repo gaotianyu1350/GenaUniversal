@@ -76,6 +76,12 @@
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
 		</Linker>
+		<Unit filename="Contest.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Contest.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
 		<Unit filename="File.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
@@ -112,6 +118,19 @@
 		<Unit filename="Library.h">
 			<Option virtualFolder="judge/SharedLibrary/" />
 		</Unit>
+		<Unit filename="Point.cpp">
+			<Option virtualFolder="judge/sdk/" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Point.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Problem.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Problem.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
 		<Unit filename="TempFile.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
@@ -133,6 +152,9 @@
 			<Option link="0" />
 			<Option virtualFolder="judge/runner/" />
 			<Option compiler="gcc" use="1" buildCommand="$compiler $file -o runner_win -O2 -lpsapi -static" />
+		</Unit>
+		<Unit filename="sdk.cpp">
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="sdk.h">
 			<Option virtualFolder="judge/sdk/" />
