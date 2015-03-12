@@ -1,6 +1,7 @@
 #include "Contest.h"
 
-Contest::Contest(bool *_flag, qMs* _queueMessage, FileGroup *_fg) : sdk(_flag, _queueMessage, _fg)
+Contest::Contest(const bool *flag, qMs* queueMessage, const FileGroup *fg)
+    : sdk(flag, queueMessage, fg)
 {
 }
 
