@@ -1,13 +1,13 @@
-#ifndef PROBLEM_H
-#define PROBLEM_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "sdk.h"
 
-class Problem : public sdk
+class Player : public sdk
 {
 public:
-    Problem(bool*, qMs*, FileGroup*);
-    ~Problem();
+    Player(bool*, qMs*, FileGroup*);
+    ~Player();
 
     virtual void run() = 0;
     virtual void onStop() = 0;
@@ -16,7 +16,6 @@ public:
 
 protected:
     mapRow info;
-
 };
 
-#endif // PROBLEM_H
+#endif // PLAYER_H

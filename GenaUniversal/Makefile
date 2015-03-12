@@ -21,7 +21,12 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\File.o \
 	$(DIROBJ_DEBUG)\FileGroup.o \
 	$(DIROBJ_DEBUG)\TempFile.o \
-	$(DIROBJ_DEBUG)\FileManager.o
+	$(DIROBJ_DEBUG)\FileManager.o \
+	$(DIROBJ_DEBUG)\sdk.o \
+	$(DIROBJ_DEBUG)\Contest.o \
+	$(DIROBJ_DEBUG)\Player.o \
+	$(DIROBJ_DEBUG)\Problem.o \
+	$(DIROBJ_DEBUG)\Point.o
 RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
 $(DIR_DEBUG)\runner:
 	-if not exist $@ mkdir $@
@@ -41,6 +46,18 @@ $(DIROBJ_DEBUG)\TempFile.o: TempFile.cpp TempFile.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\sdk.o: sdk.cpp sdk.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\Contest.o: Contest.cpp Contest.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\Player.o: Player.cpp Player.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\Problem.o: Problem.cpp Problem.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\Point.o: Point.cpp Point.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
+
+	
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\runner\$(RUNNER)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
@@ -61,7 +78,12 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\FileGroup.o \
 	$(DIROBJ_RELEASE)\File.o \
 	$(DIROBJ_RELEASE)\TempFile.o \
-	$(DIROBJ_RELEASE)\FileManager.o
+	$(DIROBJ_RELEASE)\FileManager.o \
+	$(DIROBJ_RELEASE)\sdk.o \
+	$(DIROBJ_RELEASE)\Contest.o \
+	$(DIROBJ_RELEASE)\Player.o \
+	$(DIROBJ_RELEASE)\Problem.o \
+	$(DIROBJ_RELEASE)\Point.o
 RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
 $(DIR_RELEASE)\runner:
 	-if not exist $@ mkdir $@
@@ -79,8 +101,16 @@ $(DIROBJ_RELEASE)\FileGroup.o: FileGroup.cpp FileGroup.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\TempFile.o: TempFile.cpp TempFile.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\FileManager.o: FileManager.cpp FileManager.h
-	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_RELEASE)\sdk.o: sdk.cpp sdk.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\Contest.o: Contest.cpp Contest.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\Player.o: Player.cpp Player.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\Problem.o: Problem.cpp Problem.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\Point.o: Point.cpp Point.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\runner\$(RUNNER)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
 $(DIR_RELEASE):
