@@ -20,23 +20,22 @@ class FileGroup
 {
 public:
     FileGroup();
+    FileGroup(const std::string &name);
 
-    // Set Information
-    void setStrName(const std::string&);
-
-    // Get Information
+    void setStrName(const std::string &newName);
     std::string getStrName() const;
 
     // Maintain FileGroups and Files
     bool addFileGroup(const std::string&, FileGroup*);
     bool addFile(const std::string&, File*);
-
     bool deleteFileGroup(const std::string&);
     bool deleteFile(const std::string&);
 
     // Get FileGroups and Files;
     FileGroup* getFileGroup(const std::string&);
     File* getFile(const std::string&);
+    std::map<std::string, FileGroup*> &getAllFileGroup();
+    std::map<std::string, File*> &getAllFile();
 
     int countFileGroups() const;
     int countFiles() const;

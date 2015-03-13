@@ -12,6 +12,11 @@ FileGroup::FileGroup()
 {
 }
 
+FileGroup::FileGroup(const std::string &name)
+{
+    setStrName(name);
+}
+
 // Maintain FileGroups ans Files
 
 bool FileGroup::addFileGroup(const std::string& idx, FileGroup *newFileGroup)
@@ -80,6 +85,15 @@ File* FileGroup::getFile(const std::string& idx)
         return NULL;
     else
         return mapFile[idx];
+}
+
+std::map<std::string, FileGroup*> &FileGroup::getAllFileGroup()
+{
+    return mapFileGroup;
+}
+std::map<std::string, File*> &FileGroup::getAllFile()
+{
+    return mapFile;
 }
 
 int FileGroup::countFileGroups() const

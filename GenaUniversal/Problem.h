@@ -2,15 +2,16 @@
 #define PROBLEM_H
 
 #include "sdk.h"
+#include "Point.h"
 
 class Problem : public sdk
 {
 public:
-    Problem(const bool *flag, qMs* queueMessage, const FileGroup *fg);
+    Problem(const bool *flag, qMs* queueMessage, FileGroup *fg);
     ~Problem();
 
     virtual void run() = 0;
-    virtual void onStop() = 0;
+    void onStop();
 
     mapRow& getInfo();
 

@@ -31,20 +31,18 @@ typedef std::vector<std::string> vecTitle;
 class sdk
 {
 public:
-    sdk(const bool *flag, qMs *queueMessage, const FileGroup *fg);
+    sdk(const bool *flag, qMs *queueMessage, FileGroup *fg);
     ~sdk();
 
     virtual void run() = 0;
-    virtual void onStop() = 0;
+    void onStop();
     bool isStop();
     void pushMessage(int viewType, const std::string &message);
-    void addSon(sdk *son);
 
 protected:
     const bool *flagStop;
     qMs *queueMessage;
-    const FileGroup *fg;
-    std::vector<sdk*> son;
+    FileGroup *fg;
 };
 
 #endif // SDK_H

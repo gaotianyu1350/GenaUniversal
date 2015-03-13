@@ -82,10 +82,7 @@
 		<Unit filename="Contest.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="Contest_OI.cpp">
-			<Option virtualFolder="judge/sdk/templete/" />
-		</Unit>
-		<Unit filename="Contest_OI.h">
+		<Unit filename="Contest_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="File.cpp">
@@ -130,10 +127,7 @@
 		<Unit filename="Player.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="Player_OI.cpp">
-			<Option virtualFolder="judge/sdk/templete/" />
-		</Unit>
-		<Unit filename="Player_OI.h">
+		<Unit filename="Player_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="Point.cpp">
@@ -146,9 +140,6 @@
 		<Unit filename="Point_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
-		<Unit filename="Point_Normal.h">
-			<Option virtualFolder="judge/sdk/templete/" />
-		</Unit>
 		<Unit filename="Problem.cpp">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
@@ -156,9 +147,6 @@
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="Problem_Normal.cpp">
-			<Option virtualFolder="judge/sdk/templete/" />
-		</Unit>
-		<Unit filename="Problem_Normal.h">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="TempFile.cpp">

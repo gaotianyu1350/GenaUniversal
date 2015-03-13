@@ -1,7 +1,12 @@
 #include "Point.h"
 
-Point::Point(const bool *flag, qMs* queueMessage, const FileGroup *fg) : sdk(flag, queueMessage, fg)
+Point::Point(const bool *flag, qMs* queueMessage, FileGroup *fg) : sdk(flag, queueMessage, fg)
 {
+}
+
+void Point::onStop()
+{
+    sdk::onStop();
 }
 
 Point::~Point()

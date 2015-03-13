@@ -2,15 +2,16 @@
 #define PLAYER_H
 
 #include "sdk.h"
+#include "Problem.h"
 
 class Player : public sdk
 {
 public:
-    Player(const bool *flag, qMs* queueMessage, const FileGroup *fg);
+    Player(const bool *flag, qMs* queueMessage, FileGroup *fg);
     ~Player();
 
     virtual void run() = 0;
-    virtual void onStop() = 0;
+    void onStop();
 
     mapRow& getInfo();
 

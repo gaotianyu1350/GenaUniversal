@@ -26,7 +26,6 @@ public:
 
     File();
     File(const std::string&);
-    File(const char*);
 
     // Set Information
     void setStrName(const std::string&);

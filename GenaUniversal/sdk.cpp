@@ -16,7 +16,7 @@ std::string judgeMessage::getString() const
     return message;
 }
 
-sdk::sdk(const bool *flag, qMs* queueMessage, const FileGroup *fg)
+sdk::sdk(const bool *flag, qMs* queueMessage, FileGroup *fg)
 {
     flagStop = flag;
     this->fg = fg;
@@ -32,12 +32,12 @@ bool sdk::isStop()
     return *flagStop;
 }
 
+void sdk::onStop()
+{
+    pushMessage(0, "Terminated");
+}
+
 void sdk::pushMessage(int viewType, const std::string &message)
 {
     queueMessage->push(jMs(viewType, message));
-}
-
-void sdk::addSon(sdk *son)
-{
-    this->son.push_back(son);
 }
