@@ -39,6 +39,7 @@ extern "C"
                 addInfo(i->first, pinfo["score"]);
                 score += pinfo["score"].first;
             }
+            addInfo("score", infoPair(score, ""));
             char tmp[30];
             sprintf(tmp, "%d", score);
             pushMessage(0, fg->getStrName() + " total score " + tmp);
