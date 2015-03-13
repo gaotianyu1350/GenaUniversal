@@ -5,7 +5,7 @@ using namespace std;
 extern "C"
 {
     class Point_Normal : public Point
-    {   
+    {
         Point_Normal(const bool *flag, qMs* queueMessage, FileGroup *fg)
             : Point(flag, queueMessage, fg)
         {
@@ -15,14 +15,14 @@ extern "C"
         {
         }
 
-        void run() 
+        void run()
         {
             // Compile
 
             // Run
 
             // Compare
-            
-        }        
+
+        }
     };
 }
