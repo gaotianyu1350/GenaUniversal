@@ -14,6 +14,7 @@ public:
     void onStop();
 
     mapRow& getInfo();
+    void addInfo(const std::string &symbol, const infoPair &info);
 
 protected:
     mapRow info;

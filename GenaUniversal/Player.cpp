@@ -17,3 +17,8 @@ mapRow& Player::getInfo()
 {
     return info;
 }
+
+void Player::addInfo(const std::string &symbol, const infoPair &info)
+{
+    this->info[symbol] = info;
+}
