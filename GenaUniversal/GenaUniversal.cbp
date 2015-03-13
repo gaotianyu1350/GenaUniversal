@@ -155,6 +155,12 @@
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
+		<Unit filename="Tool.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Tool.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 			<Option virtualFolder="GUI/" />
