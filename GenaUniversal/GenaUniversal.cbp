@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\runner\;judge\FileManager\;judge\sdk\templete\;judge\setting\;" />
+		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\runner\;judge\FileManager\;judge\sdk\templete\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -86,16 +86,16 @@
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="File.cpp">
-			<Option virtualFolder="judge/setting/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="File.h">
-			<Option virtualFolder="judge/setting/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="FileGroup.cpp">
-			<Option virtualFolder="judge/setting/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="FileGroup.h">
-			<Option virtualFolder="judge/setting/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="FileManager.cpp">
 			<Option virtualFolder="judge/FileManager/" />
@@ -149,6 +149,18 @@
 		<Unit filename="Problem_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
+		<Unit filename="Result.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Result.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Setting.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Setting.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
 		<Unit filename="TempFile.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
@@ -182,12 +194,6 @@
 		</Unit>
 		<Unit filename="sdk.h">
 			<Option virtualFolder="judge/sdk/" />
-		</Unit>
-		<Unit filename="setting.cpp">
-			<Option virtualFolder="judge/setting/" />
-		</Unit>
-		<Unit filename="setting.h">
-			<Option virtualFolder="judge/setting/" />
 		</Unit>
 		<Unit filename="wxsmith/GenaUniversalframe.wxs">
 			<Option virtualFolder="GUI/" />

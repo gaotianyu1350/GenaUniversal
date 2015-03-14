@@ -1,78 +1,78 @@
-#include "setting.h"
+#include "Setting.h"
 #include <stdexcept>
 
-setting_data::setting_data()
+Setting_data::Setting_data()
 {
     is = INT;
     IntData = 0;
 }
 
-setting_data::setting_data(int data)
+Setting_data::Setting_data(int data)
 {
     is = INT;
     IntData = data;
 }
 
-setting_data::setting_data(const std::string &data)
+Setting_data::Setting_data(const std::string &data)
 {
     is = STR;
     StrData = data;
 }
 
-setting_data::setting_data(File *data)
+Setting_data::Setting_data(File *data)
 {
     is = FIL;
     FileData = data;
 }
 
-setting_data::setting_data(setting *data)
+Setting_data::Setting_data(Setting *data)
 {
     is = SET;
     SetData = data;
 }
 
-setting_data::setting_data(const setting_data &data)
+Setting_data::Setting_data(const Setting_data &data)
 {
     is = INT;
     CopyUnion(data);
 }
 
-setting_data::~setting_data()
+Setting_data::~Setting_data()
 {
     using std::string;
     if (is == STR)
         StrData.~string();
 }
 
-setting_data::operator int()
+Setting_data::operator int()
 {
     if (is != INT)
-        throw std::logic_error("error usage of union in setting_data");
+        throw std::logic_error("error usage of union in Setting_data");
     return IntData;
 }
 
-setting_data::operator std::string()
+Setting_data::operator std::string()
 {
     if (is != STR)
-        throw std::logic_error("error usage of union in setting_data");
+        throw std::logic_error("error usage of union in Setting_data");
     return StrData;
 }
 
-setting_data::operator File*()
+Setting_data::operator File*()
 {
     if (is != FIL)
-        throw std::logic_error("error usage of union in setting_data");
+        throw std::logic_error("error usage of union in Setting_data");
     return FileData;
 }
 
-setting_data::operator setting*()
+Setting_data::operator Setting*()
 {
     if (is != SET)
-        throw std::logic_error("error usage of union in setting_data");
+        throw std::logic_error("error usage of union in Setting_data");
     return SetData;
 }
 
-setting_data setting_data::operator= (int data)
+Setting_data Setting_data::operator= (int data)
 {
     using std::string;
     if (is == STR)
@@ -82,7 +82,7 @@ setting_data setting_data::operator= (int data)
     return *this;
 }
 
-setting_data setting_data::operator= (const std::string &data)
+Setting_data Setting_data::operator= (const std::string &data)
 {
     if (is == STR)
         StrData = data;
@@ -92,7 +92,7 @@ setting_data setting_data::operator= (const std::string &data)
     return *this;
 }
 
-setting_data setting_data::operator= (File *data)
+Setting_data Setting_data::operator= (File *data)
 {
     using std::string;
     if (is == STR)
@@ -102,7 +102,7 @@ setting_data setting_data::operator= (File *data)
     return *this;
 }
 
-setting_data setting_data::operator= (setting *data)
+Setting_data Setting_data::operator= (Setting *data)
 {
     using std::string;
     if (is == STR)
@@ -112,13 +112,13 @@ setting_data setting_data::operator= (setting *data)
     return *this;
 }
 
-setting_data setting_data::operator =(const setting_data &data)
+Setting_data Setting_data::operator =(const Setting_data &data)
 {
     CopyUnion(data);
     return *this;
 }
 
-void setting_data::CopyUnion(const setting_data &data)
+void Setting_data::CopyUnion(const Setting_data &data)
 {
     using std::string;
     if (is == STR && data.is == STR)
@@ -129,35 +129,43 @@ void setting_data::CopyUnion(const setting_data &data)
             StrData.~string();
         switch (data.is)
         {
-        case INT: IntData = data.IntData; break;
-        case STR: new(&StrData) string(data.StrData); break;
-        case FIL: FileData = data.FileData; break;
-        case SET: SetData = data.SetData; break;
+        case INT:
+            IntData = data.IntData;
+            break;
+        case STR:
+            new(&StrData) string(data.StrData);
+            break;
+        case FIL:
+            FileData = data.FileData;
+            break;
+        case SET:
+            SetData = data.SetData;
+            break;
         }
         is = data.is;
     }
 }
 
-setting::setting()
+Setting::Setting()
 {
 }
 
-setting::setting(const std::string &name)
+Setting::Setting(const std::string &name)
 {
     setName(name);
 }
 
-void setting::setName(const std::string &name)
+void Setting::setName(const std::string &name)
 {
     this->name = name;
 }
 
-void setting::setItem(const std::string &idx, const setting_data &val)
+void Setting::setItem(const std::string &idx, const Setting_data &val)
 {
     data[idx] = val;
 }
 
-setting_data &setting::getItem(const std::string &idx)
+Setting_data &Setting::getItem(const std::string &idx)
 {
     return data[idx];
 }
