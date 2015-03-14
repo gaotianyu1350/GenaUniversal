@@ -21,10 +21,25 @@ extern "C"
         {
             Point::onStop();
         }
+    
+		Point_Normal *get(const bool *flag, qMs *queueMessage, FileGroup *fg)
+		{
+			return new Point_Normal(flag, queueMessage, fg);
+		}
+    
+		~Point_Normal()
+        {
+        }
+
+        void run()
+        {
+            // Compile
+
+            // Run
+
+            // Compare
+
+        }
     };
 
-    Point_Normal *get(const bool *flag, qMs *queueMessage, FileGroup *fg)
-    {
-        return new Point_Normal(flag, queueMessage, fg);
-    }
 }
