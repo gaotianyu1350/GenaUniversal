@@ -1,54 +1,54 @@
-#ifndef SETTING_H
-#define SETTING_H
+#ifndef Setting_H
+#define Setting_H
 
 #include <string>
 #include <map>
 #include "File.h"
 
-class setting;
+class Setting;
 
-class setting_data
+class Setting_data
 {
 public:
-    setting_data();
-    setting_data(int data);
-    setting_data(const std::string &data);
-    setting_data(File *data);
-    setting_data(setting *data);
-    setting_data(const setting_data &data);
-    ~setting_data();
+    Setting_data();
+    Setting_data(int data);
+    Setting_data(const std::string &data);
+    Setting_data(File *data);
+    Setting_data(Setting *data);
+    Setting_data(const Setting_data &data);
+    ~Setting_data();
     operator int();
     operator std::string();
     operator File*();
-    operator setting*();
-    setting_data operator =(int data);
-    setting_data operator =(const std::string &data);
-    setting_data operator =(File *data);
-    setting_data operator =(setting *data);
-    setting_data operator =(const setting_data &data);
+    operator Setting*();
+    Setting_data operator =(int data);
+    Setting_data operator =(const std::string &data);
+    Setting_data operator =(File *data);
+    Setting_data operator =(Setting *data);
+    Setting_data operator =(const Setting_data &data);
 private:
     union
     {
         int IntData;
         std::string StrData;
         File *FileData;
-        setting *SetData;
+        Setting *SetData;
     };
     enum {INT, STR, FIL, SET} is;
-    void CopyUnion(const setting_data &dat);
+    void CopyUnion(const Setting_data &dat);
 };
 
-class setting
+class Setting
 {
 public:
-    setting();
-    setting(const std::string &name);
+    Setting();
+    Setting(const std::string &name);
     void setName(const std::string &name);
-    void setItem(const std::string &idx, const setting_data &val);
-    setting_data &getItem(const std::string &idx);
+    void setItem(const std::string &idx, const Setting_data &val);
+    Setting_data &getItem(const std::string &idx);
 private:
-    std::map<std::string, setting_data> data;
+    std::map<std::string, Setting_data> data;
     std::string name;
 };
 
-#endif // SETTING_H
+#endif // Setting_H

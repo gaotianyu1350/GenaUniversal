@@ -20,7 +20,8 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)\FileGroup.o \
 	$(DIROBJ_DEBUG)\TempFile.o \
 	$(DIROBJ_DEBUG)\FileManager.o \
-	$(DIROBJ_DEBUG)\setting.o \
+	$(DIROBJ_DEBUG)\Setting.o \
+	$(DIROBJ_DEBUG)\Result.o \
 	$(DIROBJ_DEBUG)\sdk.o \
 	$(DIROBJ_DEBUG)\Contest.o \
 	$(DIROBJ_DEBUG)\Player.o \
@@ -53,7 +54,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\FileGroup.o \
 	$(DIROBJ_DEBUG)\TempFile.o \
 	$(DIROBJ_DEBUG)\FileManager.o \
-	$(DIROBJ_DEBUG)\setting.o \
+	$(DIROBJ_DEBUG)\Setting.o \
+	$(DIROBJ_DEBUG)\Result.o \
 	$(DIROBJ_DEBUG)\sdk.o \
 	$(DIROBJ_DEBUG)\Contest.o \
 	$(DIROBJ_DEBUG)\Player.o \
@@ -78,7 +80,9 @@ $(DIROBJ_DEBUG)\TempFile.o: TempFile.cpp TempFile.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)\setting.o: setting.cpp setting.h
+$(DIROBJ_DEBUG)\Setting.o: Setting.cpp Setting.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\Result.o: Result.cpp Result.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\sdk.o: sdk.cpp sdk.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
@@ -110,7 +114,8 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)\FileGroup.o \
 	$(DIROBJ_RELEASE)\TempFile.o \
 	$(DIROBJ_RELEASE)\FileManager.o \
-	$(DIROBJ_RELEASE)\setting.o \
+	$(DIROBJ_RELEASE)\Setting.o \
+	$(DIROBJ_RELEASE)\Result.o \
 	$(DIROBJ_RELEASE)\sdk.o \
 	$(DIROBJ_RELEASE)\Contest.o \
 	$(DIROBJ_RELEASE)\Player.o \
@@ -143,7 +148,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\File.o \
 	$(DIROBJ_RELEASE)\TempFile.o \
 	$(DIROBJ_RELEASE)\FileManager.o \
-	$(DIROBJ_RELEASE)\setting.o \
+	$(DIROBJ_RELEASE)\Setting.o \
+	$(DIROBJ_RELEASE)\Result.o \
 	$(DIROBJ_RELEASE)\sdk.o \
 	$(DIROBJ_RELEASE)\Contest.o \
 	$(DIROBJ_RELEASE)\Player.o \
@@ -169,7 +175,9 @@ $(DIROBJ_RELEASE)\TempFile.o: TempFile.cpp TempFile.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\setting.o: setting.cpp setting.h
+$(DIROBJ_RELEASE)\Setting.o: Setting.cpp Setting.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\Result.o: Result.cpp Result.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\sdk.o: sdk.cpp sdk.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
