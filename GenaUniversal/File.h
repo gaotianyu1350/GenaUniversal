@@ -25,24 +25,24 @@ public:
     static const char dot = '.';
 
     File();
-    File(const std::string&);
+    File(const std::string &file);
 
     // Set Information
-    void setStrName(const std::string&);
+    void setStrName(const std::string &newName);
 
     // Get Information
     std::string getStrName() const;
 
     // Maintain File
-    bool setFile(const std::string&);
-    bool setFile(const File &);
+    bool setFile(const std::string &newFile);
+    bool setFile(const File &newFile);
 
     bool deleteFile();
     bool createFile();
 
-    bool setFileName(const std::string&);
-    bool moveFile(const std::string&);
-    bool moveFileTo(const std::string&);
+    bool setFileName(const std::string &newName);
+    bool moveFile(const std::string &newPath);
+    bool moveFileTo(const std::string &newDir);
 
     bool rmDir();
 
