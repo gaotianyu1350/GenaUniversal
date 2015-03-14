@@ -1,6 +1,7 @@
 #include "Point.h"
 
-Point::Point(const bool *flag, qMs* queueMessage, FileGroup *fg) : sdk(flag, queueMessage, fg)
+Point::Point(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+    : sdk(flag, queueMessage, setting, result)
 {
 }
 
@@ -11,9 +12,4 @@ void Point::onStop()
 
 Point::~Point()
 {
-}
-
-mapRow& Point::getInfo()
-{
-    return info;
 }

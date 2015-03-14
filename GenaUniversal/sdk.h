@@ -3,7 +3,8 @@
 
 #include <bits/stdc++.h>
 #include "Library.h"
-#include "FileGroup.h"
+#include "Result.h"
+#include "Setting.h"
 #include "File.h"
 #include "FileManager.h"
 #include "TempFile.h"
@@ -23,15 +24,10 @@ private:
 typedef judgeMessage jMs;
 typedef std::queue<judgeMessage> qMs;
 
-typedef std::pair<int, std::string> infoPair;
-typedef std::map<std::string, infoPair> mapRow;
-typedef std::vector<mapRow> vecTable;
-typedef std::vector<std::string> vecTitle;
-
 class sdk
 {
 public:
-    sdk(const bool *flag, qMs *queueMessage, FileGroup *fg);
+    sdk(const bool *flag, qMs *queueMessage, Setting *setting, Result *result);
     ~sdk();
 
     virtual void run() = 0;
@@ -42,7 +38,8 @@ public:
 protected:
     const bool *flagStop;
     qMs *queueMessage;
-    FileGroup *fg;
+    Setting *setting;
+    Result *result;
 };
 
 #endif // SDK_H

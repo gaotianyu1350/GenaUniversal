@@ -1,6 +1,7 @@
 #include "Problem.h"
 
-Problem::Problem(const bool *flag, qMs* queueMessage, FileGroup *fg) : sdk(flag, queueMessage, fg)
+Problem::Problem(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+    : sdk(flag, queueMessage, setting, result)
 {
 }
 
@@ -11,9 +12,4 @@ void Problem::onStop()
 
 Problem::~Problem()
 {
-}
-
-mapRow& Problem::getInfo()
-{
-    return info;
 }

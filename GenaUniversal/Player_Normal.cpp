@@ -7,15 +7,14 @@ extern "C"
     class Player_Normal : public Player
     {
     public:
-        Player_Normal(const bool *flag, qMs *queueMessage, FileGroup *fg)
-            : Player(flag, queueMessage, fg)
+        Player_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+            : Player(flag, queueMessage, setting, result)
         {
-            addInfo("name", infoPair(0, fg->getStrName()));
         }
 
         virtual void run()
         {
-            FileGroup *src = fg->getFileGroup("source");
+            /*FileGroup *src = fg->getFileGroup("source");
             FileGroup *data = fg->getFileGroup("data");
             map<string, FileGroup*> &sgroup = src->getAllFileGroup();
             map<string, FileGroup*> &dgroup = data->getAllFileGroup();
@@ -42,7 +41,7 @@ extern "C"
             addInfo("score", infoPair(score, ""));
             char tmp[30];
             sprintf(tmp, "%d", score);
-            pushMessage(0, fg->getStrName() + " total score " + tmp);
+            pushMessage(0, fg->getStrName() + " total score " + tmp);*/
         }
 
         virtual void onStop()
@@ -51,8 +50,8 @@ extern "C"
         }
     };
 
-    Player_Normal *get(const bool *flag, qMs *queueMessage, FileGroup *fg)
+    Player_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
     {
-        return new Player_Normal(flag, queueMessage, fg);
+        return new Player_Normal(flag, queueMessage, setting, result);
     }
 }

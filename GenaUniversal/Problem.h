@@ -7,17 +7,11 @@
 class Problem : public sdk
 {
 public:
-    Problem(const bool *flag, qMs* queueMessage, FileGroup *fg);
+    Problem(const bool *flag, qMs *queueMessage, Setting *setting, Result *result);
     ~Problem();
 
     virtual void run() = 0;
-    void onStop();
-
-    mapRow& getInfo();
-
-protected:
-    mapRow info;
-
+    virtual void onStop();
 };
 
 #endif // PROBLEM_H

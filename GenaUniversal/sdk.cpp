@@ -16,11 +16,12 @@ std::string judgeMessage::getString() const
     return message;
 }
 
-sdk::sdk(const bool *flag, qMs* queueMessage, FileGroup *fg)
+sdk::sdk(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
 {
     flagStop = flag;
-    this->fg = fg;
     this->queueMessage = queueMessage;
+    this->setting = setting;
+    this->result = result;
 }
 
 sdk::~sdk()

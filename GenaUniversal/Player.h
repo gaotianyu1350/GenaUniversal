@@ -7,17 +7,11 @@
 class Player : public sdk
 {
 public:
-    Player(const bool *flag, qMs* queueMessage, FileGroup *fg);
+    Player(const bool *flag, qMs *queueMessage, Setting *setting, Result *result);
     ~Player();
 
     virtual void run() = 0;
-    void onStop();
-
-    mapRow& getInfo();
-    void addInfo(const std::string &symbol, const infoPair &info);
-
-protected:
-    mapRow info;
+    virtual void onStop();
 };
 
 #endif // PLAYER_H

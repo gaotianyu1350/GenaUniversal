@@ -7,13 +7,13 @@ extern "C"
     class Contest_Normal : public Contest
     {
     public:
-        Contest_Normal(const bool *flag, qMs *queueMessage, FileGroup *fg)
-            : Contest(flag, queueMessage, fg)
+        Contest_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+            : Contest(flag, queueMessage, setting, result)
         {
         }
         virtual void run()
         {
-            FileGroup *players = fg->getFileGroup("player");
+            /*FileGroup *players = fg->getFileGroup("player");
             FileGroup *data = fg->getFileGroup("data");
             map<string, FileGroup*> &pgroup = players->getAllFileGroup();
             map<string, FileGroup*> &dgroup = data->getAllFileGroup();
@@ -42,15 +42,15 @@ extern "C"
                 player->run();
                 addInfo(player->getInfo());
             }
-            pushMessage(0, "Contest judgement finished");
+            pushMessage(0, "Contest judgement finished");*/
         }
         virtual void onStop()
         {
             Contest::onStop();
         }
     };
-    Contest_Normal *get(const bool *flag, qMs *queueMessage, FileGroup *fg)
+    Contest_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
     {
-        return new Contest_Normal(flag, queueMessage, fg);
+        return new Contest_Normal(flag, queueMessage, setting, result);
     }
 }
