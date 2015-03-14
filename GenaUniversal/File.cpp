@@ -13,9 +13,9 @@
 
 File::File() {}
 
-File::File(const std::string &newFile)
+File::File(const std::string &file)
 {
-    path = newFile;
+    setFile(file);
 }
 
 // Set Information
