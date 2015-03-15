@@ -32,7 +32,6 @@ public:
 
     std::string getStrName() const;
 
-    // Maintain File
     bool setFile(const std::string &newFile);
     bool setFile(const File &newFile);
 
