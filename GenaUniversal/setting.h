@@ -44,11 +44,51 @@ public:
     Setting();
     Setting(const std::string &name);
     void setName(const std::string &name);
+    std::string getName();
     void setItem(const std::string &idx, const Setting_data &val);
     Setting_data &getItem(const std::string &idx);
+    std::map<std::string, Setting_data> &getAllItems();
 private:
     std::map<std::string, Setting_data> data;
     std::string name;
 };
+
+/***************************************************************
+ * Setting_total
+ * |
+ * -- player
+ * |  |
+ * |  -- zky
+ * |  |  |
+ * |  |  -- *.cpp
+ * |  |  |
+ * |  |  -- *.c
+ * |  |  |
+ * |  |  -- ...
+ * |  |
+ * |  -- zjj
+ * |  |  |
+ * |  |  -- *.cpp
+ * |  |  |
+ * |  |  -- *.c
+ * |  |  |
+ * |  |  -- ...
+ * |  |
+ * |  -- ...
+ * |
+ * -- data
+ * |  |
+ * |  -- matrix
+ * |  |  |
+ * |  |  -- ...
+ * |  |
+ * |  -- travel
+ * |  |  |
+ * |  |  -- ...
+ * |  |
+ * |  -- ...
+ * |
+ * ...
+ **************************************************************/
 
 #endif // Setting_H

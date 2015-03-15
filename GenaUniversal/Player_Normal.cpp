@@ -14,6 +14,8 @@ extern "C"
 
         virtual void run()
         {
+            Setting *players = setting->getItem("player");
+            Setting *data = setting->getItem("data");
             /*FileGroup *src = fg->getFileGroup("source");
             FileGroup *data = fg->getFileGroup("data");
             map<string, FileGroup*> &sgroup = src->getAllFileGroup();

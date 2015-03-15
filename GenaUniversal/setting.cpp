@@ -160,6 +160,11 @@ void Setting::setName(const std::string &name)
     this->name = name;
 }
 
+std::string Setting::getName()
+{
+    return name;
+}
+
 void Setting::setItem(const std::string &idx, const Setting_data &val)
 {
     data[idx] = val;
@@ -168,4 +173,9 @@ void Setting::setItem(const std::string &idx, const Setting_data &val)
 Setting_data &Setting::getItem(const std::string &idx)
 {
     return data[idx];
+}
+
+std::map<std::string, Setting_data> &Setting::getAllItems()
+{
+    return data;
 }
