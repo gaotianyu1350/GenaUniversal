@@ -17,6 +17,9 @@ extern "C"
             Setting *source = setting->getItem("source");
             Setting *data = setting->getItem("data");
             map<string, Setting_data> probs = source->getAllItems();
+            Result *result_concrete;
+            result->setItem("concrete", result_concrete);
+            int total = 0;
             for (map<string, Setting_data>::iterator i = probs.begin(); i != probs.end(); ++i)
             {
                 if (isStop())
@@ -27,38 +30,18 @@ extern "C"
                 Library lib(data->getItem("Problem module"));
                 typedef Problem *(*GET)(const bool*, qMs*, Setting*, Result*);
                 GET getProb = (GET)lib.get("get");
-                Problem *prob;// = getProb();
-
+                ((Setting*)(i->second))->setItem("data", data->getItem(i->first));
+                Result *res = new Result(i->first);
+                Problem *prob = getProb(flagStop, queueMessage, i->second, res);
+                prob->run();
                 delete prob;
+                result_concrete->setItem(i->first, res);
+                total += res->getItem("total");
             }
-            /*FileGroup *src = fg->getFileGroup("source");
-            FileGroup *data = fg->getFileGroup("data");
-            map<string, FileGroup*> &sgroup = src->getAllFileGroup();
-            map<string, FileGroup*> &dgroup = data->getAllFileGroup();
-            int score = 0;
-            for (map<string, FileGroup*>::iterator i = dgroup.begin(); i != dgroup.end(); ++i)
-            {
-                if (isStop())
-                {
-                    onStop();
-                    return;
-                }
-                FileGroup fgForProblem(i->first);
-                Library lib("Problem_Normal.dll");
-                typedef Problem *(*GET)(const bool *flag, qMs *queueMessage, const FileGroup *fg);
-                GET getProblem = (GET)lib.get("get");
-                fgForProblem.addFileGroup("source", sgroup[i->first]);
-                fgForProblem.addFileGroup("data", i->second);
-                Problem *problem = getProblem(flagStop, queueMessage, &fgForProblem);
-                problem->run();
-                mapRow &pinfo = problem->getInfo();
-                addInfo(i->first, pinfo["score"]);
-                score += pinfo["score"].first;
-            }
-            addInfo("score", infoPair(score, ""));
+            result->setItem("total", total);
             char tmp[30];
-            sprintf(tmp, "%d", score);
-            pushMessage(0, fg->getStrName() + " total score " + tmp);*/
+            sprintf(tmp, "%d", total);
+            pushMessage(0, setting->getName() + " total score " + tmp);
         }
 
         virtual void onStop()
