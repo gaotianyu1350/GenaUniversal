@@ -5,7 +5,6 @@
  * Created:   2015-03-10
  * Copyright: VL (Vincent Gao, Liangjs)
  **************************************************************/
-//dev doubi
 #ifndef FILE_H
 #define FILE_H
 
