@@ -8,6 +8,7 @@
 #include "File.h"
 #include "FileManager.h"
 #include "TempFile.h"
+#include "mtProcess.h"
 
 class judgeMessage
 {
