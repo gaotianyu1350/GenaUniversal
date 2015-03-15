@@ -11,12 +11,13 @@ extern "C"
             : Contest(flag, queueMessage, setting, result)
         {
         }
+
         virtual void run()
         {
             Setting *data = setting->getItem("data");
             Setting *_player = setting->getItem("player");
             map<string, Setting_data> &players = _player->getAllItems();
-            Library lib("Player_Normal.dll");
+            Library lib(setting->getItem("Player module"));
             typedef Player *(*GET)(const bool*, qMs*, Setting*, Result*);
             GET getPlayer = (GET)lib.get("get");
             for (map<string, Setting_data>::iterator i = players.begin(); i != players.end(); ++i)
@@ -29,11 +30,13 @@ extern "C"
                 ((Setting*)(i->second))->setItem("data", data);
                 Result *res = new Result(i->first);
                 Player *player = getPlayer(flagStop, queueMessage, i->second, res);
+                player->run();
                 delete player;
                 result->setItem(i->first, res);
             }
             pushMessage(0, "Contest judgement finished");
         }
+
         virtual void onStop()
         {
             Contest::onStop();

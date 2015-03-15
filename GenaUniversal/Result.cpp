@@ -144,3 +144,7 @@ Result_data &Result::getItem(const std::string &idx)
     return data[idx];
 }
 
+bool Result::hasItem(const std::string &idx)
+{
+    return data.find(idx) != data.end();
+}
