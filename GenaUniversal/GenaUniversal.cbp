@@ -100,12 +100,6 @@
 		<Unit filename="File.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="FileGroup.cpp">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
-		<Unit filename="FileGroup.h">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
 		<Unit filename="FileManager.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
