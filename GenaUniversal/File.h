@@ -5,7 +5,6 @@
  * Created:   2015-03-10
  * Copyright: VL (Vincent Gao, Liangjs)
  **************************************************************/
-
 #ifndef FILE_H
 #define FILE_H
 
@@ -30,10 +29,8 @@ public:
     // Set Information
     void setStrName(const std::string &newName);
 
-    // Get Information
     std::string getStrName() const;
 
-    // Maintain File
     bool setFile(const std::string &newFile);
     bool setFile(const File &newFile);
 
@@ -46,7 +43,6 @@ public:
 
     bool rmDir();
 
-    // Get File
     bool exist() const;
     bool isDir() const;
 

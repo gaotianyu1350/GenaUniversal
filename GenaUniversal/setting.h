@@ -55,40 +55,23 @@ private:
 
 /***************************************************************
  * Setting_total
- *    player
- *       zky
- *          source
- *              matrix
- *                  matrix.cpp
- *
- *              travle
- *                  travle.cpp
- *              ...
- *
- *          data
- *              matrix
- *                  1
- *                      "in" matrix1.in
- *                      "out" matrix1.out
- *                  ...
- *
- *              travle
- *                  ...
- *
- *        ...
- *
- *    data
- *       matrix
- *          1
- *              "in" matrix1.in
- *              "out" matrix1.out
- *          ...
- *
- *       travel
- *          ...
- *
- *       ...
- *
+ * |
+ * -- player
+ * |  |
+ * |  -- zky
+ * |  |  |
+ * |  |  -- ...
+ * |  |
+ * |  -- ...
+ * |
+ * -- data
+ * |  |
+ * |  -- matrix
+ * |  |  |
+ * |  |  -- ...
+ * |  |
+ * |  -- ...
+ * |
  * ...
  **************************************************************/
 
