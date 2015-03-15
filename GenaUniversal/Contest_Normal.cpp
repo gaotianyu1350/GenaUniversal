@@ -13,36 +13,26 @@ extern "C"
         }
         virtual void run()
         {
-            /*FileGroup *players = fg->getFileGroup("player");
-            FileGroup *data = fg->getFileGroup("data");
-            map<string, FileGroup*> &pgroup = players->getAllFileGroup();
-            map<string, FileGroup*> &dgroup = data->getAllFileGroup();
-            addTitle("name");
-            addTitle("score");
-            for (map<string, FileGroup*>::iterator i = dgroup.begin(); i != dgroup.end(); ++i)
-                addTitle(i->first);
-            for (map<string, FileGroup*>::iterator i = pgroup.begin(); i != pgroup.end(); ++i)
+            Setting *data = setting->getItem("data");
+            Setting *_player = setting->getItem("player");
+            map<string, Setting_data> &players = _player->getAllItems();
+            Library lib("Player_Normal.dll");
+            typedef Player *(*GET)(const bool*, qMs*, Setting*, Result*);
+            GET getPlayer = (GET)lib.get("get");
+            for (map<string, Setting_data>::iterator i = players.begin(); i != players.end(); ++i)
             {
-                FileGroup fgForPlayer(i->first), src("source");
-                for (map<string, FileGroup*>::iterator i = dgroup.begin(); i != dgroup.end(); ++i)
+                if (isStop())
                 {
-                    if (isStop())
-                    {
-                        onStop();
-                        return;
-                    }
-                    src.addFileGroup(i->first, i->second);
+                    onStop();
+                    return;
                 }
-                Library lib("Player_Normal.dll");
-                typedef Player *(*GET)(const bool *flag, qMs *queueMessage, const FileGroup *fg);
-                GET getPlayer = (GET)lib.get("get");
-                fgForPlayer.addFileGroup("source", &src);
-                fgForPlayer.addFileGroup("data", data);
-                Player *player = getPlayer(flagStop, queueMessage, &fgForPlayer);
-                player->run();
-                addInfo(player->getInfo());
+                ((Setting*)(i->second))->setItem("data", data);
+                Result *res = new Result(i->first);
+                Player *player = getPlayer(flagStop, queueMessage, i->second, res);
+                delete player;
+                result->setItem(i->first, res);
             }
-            pushMessage(0, "Contest judgement finished");*/
+            pushMessage(0, "Contest judgement finished");
         }
         virtual void onStop()
         {
