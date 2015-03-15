@@ -28,9 +28,7 @@ extern "C"
 
         virtual void run()
         {
-            // Run
 
-            // Compare
 
         }
     };
