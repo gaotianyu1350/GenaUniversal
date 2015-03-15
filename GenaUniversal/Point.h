@@ -6,17 +6,11 @@
 class Point : public sdk
 {
 public:
-    Point(const bool *flag, qMs* queueMessage, FileGroup *fg);
+    Point(const bool *flag, qMs *queueMessage, Setting *setting, Result *result);
     ~Point();
 
     virtual void run() = 0;
-    void onStop();
-
-    mapRow& getInfo();
-
-protected:
-    mapRow info;
-
+    virtual void onStop();
 };
 
 #endif // POINT_H

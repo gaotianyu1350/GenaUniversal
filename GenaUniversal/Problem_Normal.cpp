@@ -7,14 +7,14 @@ extern "C"
     class Problem_Normal : public Problem
     {
     public:
-        Problem_Normal(const bool *flag, qMs *queueMessage, FileGroup *fg)
-            : Problem(flag, queueMessage, fg)
+        Problem_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+            : Problem(flag, queueMessage, setting, result)
         {
         }
 
         virtual void run()
         {
-
+            //Compile
         }
 
         virtual void onStop()
@@ -23,8 +23,8 @@ extern "C"
         }
     };
 
-    Problem_Normal *get(const bool *flag, qMs *queueMessage, FileGroup *fg)
+    Problem_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
     {
-        return new Problem_Normal(flag, queueMessage, fg);
+        return new Problem_Normal(flag, queueMessage, setting, result);
     }
 }

@@ -7,34 +7,27 @@ extern "C"
     class Point_Normal : public Point
     {
     public:
-        Point_Normal(const bool *flag, qMs *queueMessage, FileGroup *fg)
-            : Point(flag, queueMessage, fg)
+        Point_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+            : Point(flag, queueMessage, setting, result)
         {
-        }
-
-        virtual void run()
-        {
-
         }
 
         virtual void onStop()
         {
             Point::onStop();
         }
-    
-		Point_Normal *get(const bool *flag, qMs *queueMessage, FileGroup *fg)
+
+		Point_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
 		{
-			return new Point_Normal(flag, queueMessage, fg);
+			return new Point_Normal(flag, queueMessage, setting, result);
 		}
-    
+
 		~Point_Normal()
         {
         }
 
-        void run()
+        virtual void run()
         {
-            // Compile
-
             // Run
 
             // Compare

@@ -86,16 +86,16 @@
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="File.cpp">
-			<Option virtualFolder="judge/FileManager/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="File.h">
-			<Option virtualFolder="judge/FileManager/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="FileGroup.cpp">
-			<Option virtualFolder="judge/FileManager/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="FileGroup.h">
-			<Option virtualFolder="judge/FileManager/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="FileManager.cpp">
 			<Option virtualFolder="judge/FileManager/" />
@@ -148,6 +148,18 @@
 		</Unit>
 		<Unit filename="Problem_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Result.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Result.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Setting.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Setting.h">
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="TempFile.cpp">
 			<Option virtualFolder="judge/FileManager/" />
