@@ -17,9 +17,8 @@ DIROBJ_DEBUG = obj\Debug
 DIR_PLUGIN_DEBUG = $(DIR_DEBUG)\plugin
 OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)\File.o \
-	$(DIROBJ_DEBUG)\FileGroup.o \
-	$(DIROBJ_DEBUG)\TempFile.o \
 	$(DIROBJ_DEBUG)\FileManager.o \
+	$(DIROBJ_DEBUG)\TempFile.o \
 	$(DIROBJ_DEBUG)\Setting.o \
 	$(DIROBJ_DEBUG)\Result.o \
 	$(DIROBJ_DEBUG)\sdk.o \
@@ -55,9 +54,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\GenaUniversalApp.o \
 	$(DIROBJ_DEBUG)\GenaUniversalMain.o \
 	$(DIROBJ_DEBUG)\File.o \
-	$(DIROBJ_DEBUG)\FileGroup.o \
-	$(DIROBJ_DEBUG)\TempFile.o \
 	$(DIROBJ_DEBUG)\FileManager.o \
+	$(DIROBJ_DEBUG)\TempFile.o \
 	$(DIROBJ_DEBUG)\Setting.o \
 	$(DIROBJ_DEBUG)\Result.o \
 	$(DIROBJ_DEBUG)\sdk.o \
@@ -77,13 +75,11 @@ $(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)\FileGroup.o: FileGroup.cpp FileGroup.h
+$(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\TempFile.o: TempFile.cpp TempFile.h
-	g++ -c -o $@ $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\Setting.o: Setting.cpp Setting.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
@@ -118,9 +114,8 @@ DIROBJ_RELEASE = obj\Release
 DIR_PLUGIN_RELEASE = $(DIR_RELEASE)\plugin
 OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)\File.o \
-	$(DIROBJ_RELEASE)\FileGroup.o \
-	$(DIROBJ_RELEASE)\TempFile.o \
 	$(DIROBJ_RELEASE)\FileManager.o \
+	$(DIROBJ_RELEASE)\TempFile.o \
 	$(DIROBJ_RELEASE)\Setting.o \
 	$(DIROBJ_RELEASE)\Result.o \
 	$(DIROBJ_RELEASE)\sdk.o \
@@ -155,10 +150,9 @@ BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
 OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\GenaUniversalApp.o \
 	$(DIROBJ_RELEASE)\GenaUniversalMain.o \
-	$(DIROBJ_RELEASE)\FileGroup.o \
+	$(DIROBJ_RELEASE)\FileManager.o \
 	$(DIROBJ_RELEASE)\File.o \
 	$(DIROBJ_RELEASE)\TempFile.o \
-	$(DIROBJ_RELEASE)\FileManager.o \
 	$(DIROBJ_RELEASE)\Setting.o \
 	$(DIROBJ_RELEASE)\Result.o \
 	$(DIROBJ_RELEASE)\sdk.o \
@@ -181,11 +175,9 @@ $(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\FileGroup.o: FileGroup.cpp FileGroup.h
+$(DIROBJ_RELEASE)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\TempFile.o: TempFile.cpp TempFile.h
-	g++ -c -o $@ $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\Setting.o: Setting.cpp Setting.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2

@@ -14,6 +14,23 @@ extern "C"
 
         virtual void run()
         {
+            Setting *source = setting->getItem("source");
+            Setting *data = setting->getItem("data");
+            map<string, Setting_data> probs = source->getAllItems();
+            for (map<string, Setting_data>::iterator i = probs.begin(); i != probs.end(); ++i)
+            {
+                if (isStop())
+                {
+                    onStop();
+                    return;
+                }
+                Library lib(data->getItem("Problem module"));
+                typedef Problem *(*GET)(const bool*, qMs*, Setting*, Result*);
+                GET getProb = (GET)lib.get("get");
+                Problem *prob;// = getProb();
+
+                delete prob;
+            }
             /*FileGroup *src = fg->getFileGroup("source");
             FileGroup *data = fg->getFileGroup("data");
             map<string, FileGroup*> &sgroup = src->getAllFileGroup();

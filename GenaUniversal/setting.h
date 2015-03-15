@@ -47,6 +47,7 @@ public:
     std::string getName();
     void setItem(const std::string &idx, const Setting_data &val);
     Setting_data &getItem(const std::string &idx);
+    bool hasItem(const std::string &idx);
     std::map<std::string, Setting_data> &getAllItems();
 private:
     std::map<std::string, Setting_data> data;

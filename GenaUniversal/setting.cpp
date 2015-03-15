@@ -175,6 +175,11 @@ Setting_data &Setting::getItem(const std::string &idx)
     return data[idx];
 }
 
+bool Setting::hasItem(const std::string &idx)
+{
+    return data.find(idx) != data.end();
+}
+
 std::map<std::string, Setting_data> &Setting::getAllItems()
 {
     return data;

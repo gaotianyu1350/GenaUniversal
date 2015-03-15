@@ -42,6 +42,7 @@ public:
     void setName(const std::string &name);
     void setItem(const std::string &idx, const Result_data &val);
     Result_data &getItem(const std::string &idx);
+    bool hasItem(const std::string &idx);
 private:
     std::map<std::string, Result_data> data;
     std::string name;
