@@ -76,13 +76,13 @@
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
 		</Linker>
-		<Unit filename="Compare.cpp">
+		<Unit filename="Compile.cpp">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="Compare.h">
+		<Unit filename="Compile.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="Compare_Normal.cpp">
+		<Unit filename="Compile_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="Contest.cpp">
@@ -170,10 +170,10 @@
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
-		<Unit filename="Tool.cpp">
+		<Unit filename="mtThread.cpp">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="Tool.h">
+		<Unit filename="mtThread.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="resource.rc">
