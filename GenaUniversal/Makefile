@@ -27,12 +27,14 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)\Player.o \
 	$(DIROBJ_DEBUG)\Problem.o \
 	$(DIROBJ_DEBUG)\Point.o \
-	$(DIROBJ_DEBUG)\Library.o
+	$(DIROBJ_DEBUG)\Library.o \
+	$(DIROBJ_DEBUG)\Compare.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)\Contest_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Player_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Problem_Normal.dll \
-	$(DIR_PLUGIN_DEBUG)\Point_Normal.dll
+	$(DIR_PLUGIN_DEBUG)\Point_Normal.dll \
+	$(DIR_PLUGIN_DEBUG)\Compare_Normal.dll
 $(DIR_PLUGIN_DEBUG):
 	-if not exist $@ mkdir $@
 $(DIROBJ_DEBUG)\Library.o: Library.cpp Library.h
@@ -44,6 +46,8 @@ $(DIR_PLUGIN_DEBUG)\Player_Normal.dll: Player_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 $(DIR_PLUGIN_DEBUG)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -std=gnu++11 -shared -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -std=gnu++11 -shared -o $@ -g
+$(DIR_PLUGIN_DEBUG)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -std=gnu++11 -shared -o $@ -g
 
 BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
@@ -60,7 +64,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\Contest.o \
 	$(DIROBJ_DEBUG)\Player.o \
 	$(DIROBJ_DEBUG)\Problem.o \
-	$(DIROBJ_DEBUG)\Point.o
+	$(DIROBJ_DEBUG)\Point.o \
+	$(DIROBJ_DEBUG)\Compare.o
 RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
 $(DIR_DEBUG)\runner:
 	-if not exist $@ mkdir $@
@@ -94,6 +99,8 @@ $(DIROBJ_DEBUG)\Problem.o: Problem.cpp Problem.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\Point.o: Point.cpp Point.h
 	g++ -c -o $@ $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\Compare.o: Compare.cpp Compare.h
+	g++ -c -o $@ $(CPPDEPS) $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\runner\$(RUNNER)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
@@ -121,12 +128,14 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)\Player.o \
 	$(DIROBJ_RELEASE)\Problem.o \
 	$(DIROBJ_RELEASE)\Point.o \
-	$(DIROBJ_RELEASE)\Library.o
+	$(DIROBJ_RELEASE)\Library.o \
+	$(DIROBJ_RELEASE)\Compare.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)\Contest_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Player_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Problem_Normal.dll \
-	$(DIR_PLUGIN_RELEASE)\Point_Normal.dll
+	$(DIR_PLUGIN_RELEASE)\Point_Normal.dll \
+	$(DIR_PLUGIN_RELEASE)\Compare_Normal.dll
 $(DIR_PLUGIN_RELEASE):
 	-if not exist $@ mkdir $@
 $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
@@ -138,6 +147,8 @@ $(DIR_PLUGIN_RELEASE)\Player_Normal.dll: Player_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 $(DIR_PLUGIN_RELEASE)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
+$(DIR_PLUGIN_RELEASE)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
 
 BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
@@ -155,7 +166,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\Player.o \
 	$(DIROBJ_RELEASE)\Problem.o \
 	$(DIROBJ_RELEASE)\Point.o \
-	$(DIROBJ_RELEASE)\Library.o
+	$(DIROBJ_RELEASE)\Library.o \
+	$(DIROBJ_RELEASE)\Compare.o
 RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
 $(DIR_RELEASE)\runner:
 	-if not exist $@ mkdir $@
@@ -188,6 +200,8 @@ $(DIROBJ_RELEASE)\Player.o: Player.cpp Player.h
 $(DIROBJ_RELEASE)\Problem.o: Problem.cpp Problem.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\Point.o: Point.cpp Point.h
+	g++ -c -o $@ $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\Compare.o: Compare.cpp Compare.h
 	g++ -c -o $@ $(CPPDEPS) $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\runner\$(RUNNER)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows

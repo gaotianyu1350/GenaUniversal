@@ -32,7 +32,7 @@ public:
     ~sdk();
 
     virtual void run() = 0;
-    void onStop();
+    virtual void onStop();
     bool isStop();
     void pushMessage(int viewType, const std::string &message);
 
