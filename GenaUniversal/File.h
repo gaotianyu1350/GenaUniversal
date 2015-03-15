@@ -30,7 +30,6 @@ public:
     // Set Information
     void setStrName(const std::string &newName);
 
-    // Get Information
     std::string getStrName() const;
 
     // Maintain File
@@ -46,7 +45,6 @@ public:
 
     bool rmDir();
 
-    // Get File
     bool exist() const;
     bool isDir() const;
 
