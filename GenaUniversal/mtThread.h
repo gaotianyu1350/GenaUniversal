@@ -1,5 +1,5 @@
-#ifndef MTPROCESS_H
-#define MTPROCESS_H
+#ifndef MTTHREAD_H
+#define MTTHREAD_H
 
 #include "sdk.h"
 
@@ -11,12 +11,12 @@
 
 typedef (void (*)(void *)) functionType;
 
-class mtProcess
+class mtThread
 {
 //#ifdef WIN32
 public:
-    mtProcess(functionType func, void *arg)
-    ~mtProcess()
+    mtThread(functionType func, void *arg)
+    ~mtThread()
 
     DWORD getExitCode()
     int isActive()
@@ -30,4 +30,4 @@ private:
 
 };
 
-#endif // MTPROCESS_H
+#endif // MTTHREAD_H

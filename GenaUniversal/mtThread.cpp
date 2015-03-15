@@ -1,28 +1,28 @@
-#include "mtProcess.h"
+#include "mtThread.h"
 
-mtProcess::mtProcess(functionType func, void *arg)
+mtThread::mtThread(functionType func, void *arg)
 {
     pThread = (HANDLE)_beginthread(fc, 0, arg);
 }
 
-mtProcess::~mtProcess()
+mtThread::~mtThread()
 {
     kill();
 }
 
-DWORD mtProcess::getExitCode()
+DWORD mtThread::getExitCode()
 {
     DWORD f;
     GetExitCodeProcess(hProcess, &f);
     return f;
 }
 
-int mtProcess::isActive()
+int mtThread::isActive()
 {
     return getExitCode() == STILL_ACTIVE;
 }
 
-void mtProcess::kill()
+void mtThread::kill()
 {
     if (isActive())
         TerminateProcess(hProcess, 4);
