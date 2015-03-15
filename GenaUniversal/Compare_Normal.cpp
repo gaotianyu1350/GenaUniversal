@@ -1,19 +1,19 @@
-#include "Contest.h"
+#include "Compare.h"
 
 using namespace std;
 
 extern "C"
 {
-    class Contest_Normal : public Contest
+    class Compare_Normal : public Compare
     {
     public:
-        Contest_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
-            : Contest(flag, queueMessage, setting, result)
+        Compare_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+            : Compare(flag, queueMessage, setting, result)
         {
         }
         virtual void run()
         {
-            Setting *data = setting->getItem("data");
+            /*Setting *data = setting->getItem("data");
             Setting *_player = setting->getItem("player");
             map<string, Setting_data> &players = _player->getAllItems();
             Library lib("Player_Normal.dll");
@@ -33,15 +33,15 @@ extern "C"
                 delete player;
                 result->setItem(i->first, res);
             }
-            pushMessage(0, "Contest judgement finished");
+            pushMessage(0, "Contest judgement finished");*/
         }
         virtual void onStop()
         {
-            Contest::onStop();
+            Compare::onStop();
         }
     };
-    Contest_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+    Compare_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
     {
-        return new Contest_Normal(flag, queueMessage, setting, result);
+        return new Compare_Normal(flag, queueMessage, setting, result);
     }
 }

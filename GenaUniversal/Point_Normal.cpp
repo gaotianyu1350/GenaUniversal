@@ -22,10 +22,6 @@ extern "C"
 			return new Point_Normal(flag, queueMessage, setting, result);
 		}
 
-		~Point_Normal()
-        {
-        }
-
         virtual void run()
         {
             // Run
