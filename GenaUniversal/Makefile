@@ -140,7 +140,7 @@ $(DIR_PLUGIN_RELEASE):
 $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $< -O2
 $(DIR_PLUGIN_RELEASE)\Contest_Normal.dll: Contest_Normal.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 $(CPPDEPS) -shared -o $@ -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Player_Normal.dll: Player_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_RELEASE)
