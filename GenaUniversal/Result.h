@@ -13,14 +13,17 @@ public:
     Result_data();
     Result_data(int data);
     Result_data(const std::string &data);
+    Result_data(const char *data);
     Result_data(Result *data);
     Result_data(const Result_data &data);
     ~Result_data();
     operator int();
     operator std::string();
+    operator char*();
     operator Result*();
     Result_data operator =(int data);
     Result_data operator =(const std::string &data);
+    Result_data operator =(const char *data);
     Result_data operator =(Result *data);
     Result_data operator =(const Result_data &data);
 private:

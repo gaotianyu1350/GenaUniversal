@@ -19,6 +19,12 @@ Result_data::Result_data(const std::string &data)
     StrData = data;
 }
 
+Result_data::Result_data(const char *data)
+{
+    is = STR;
+    StrData = data;
+}
+
 Result_data::Result_data(Result *data)
 {
     is = RES;
@@ -52,6 +58,14 @@ Result_data::operator std::string()
     return StrData;
 }
 
+
+Result_data::operator char*()
+{
+    if (is != STR)
+        throw std::logic_error("error usage of union in Result_data");
+    return StrData.c_str();
+}
+
 Result_data::operator Result*()
 {
     if (is != RES)
@@ -70,6 +84,16 @@ Result_data Result_data::operator= (int data)
 }
 
 Result_data Result_data::operator= (const std::string &data)
+{
+    if (is == STR)
+        StrData = data;
+    else
+        new(&StrData) std::string(data);
+    is = STR;
+    return *this;
+}
+
+Result_data Result_data::operator= (const char *data)
 {
     if (is == STR)
         StrData = data;
