@@ -82,8 +82,20 @@
 		<Unit filename="Compare.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="Compare_Float.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
 		<Unit filename="Compare_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Compare_Normal2.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
+		<Unit filename="Compile.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="Compile.h">
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="Compile_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />

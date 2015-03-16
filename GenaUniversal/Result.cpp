@@ -22,7 +22,7 @@ Result_data::Result_data(const std::string &data)
 Result_data::Result_data(const char *data)
 {
     is = STR;
-    StrData = data;
+    new(&StrData) std::string(data);
 }
 
 Result_data::Result_data(Result *data)
