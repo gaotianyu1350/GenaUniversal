@@ -27,6 +27,8 @@
 *.exe
 *.out
 *.app
+GenaUniversal
+runner_linux
 
 # =========================
 # Operating System Files
