@@ -91,12 +91,6 @@
 		<Unit filename="Compare_Normal2.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
-		<Unit filename="Compile.cpp">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
-		<Unit filename="Compile.h">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
 		<Unit filename="Compile_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
@@ -174,10 +168,10 @@
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="RunCompile.cpp">
-			<Option virtualFolder="judge/FileManager/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="RunCompile.h">
-			<Option virtualFolder="judge/FileManager/" />
+			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="Setting.cpp">
 			<Option virtualFolder="judge/sdk/" />

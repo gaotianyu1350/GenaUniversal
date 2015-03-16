@@ -6,9 +6,9 @@ WXINCLUDEDIR = $(WXDIR)\include
 SETUPDIR = $(WXLIBDIR)\mswu
 LIBS = -lwxmsw30u_core -lwxbase30u -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet
 DEFINES = -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -DNOPCH
-WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wall -Wno-ctor-dtor-privacy
+WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wno-ctor-dtor-privacy
 
-RESOURCE = resource.rc
+RESOURCE = GenaUniversal.rc
 SRC_RUNNER = runner_win.c
 RUNNER = runner_win.exe
 
@@ -70,7 +70,7 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\Point.o \
 	$(DIROBJ_DEBUG)\Compare.o \
 	$(DIROBJ_DEBUG)\RunCompile.o
-RES_DEBUG = $(DIROBJ_DEBUG)\resource.o
+RES_DEBUG = $(DIROBJ_DEBUG)\GenaUniversal.o
 $(DIR_DEBUG)\runner:
 	-if not exist $@ mkdir $@
 $(DIR_DEBUG)\runner\$(RUNNER): $(DIR_DEBUG)\runner $(SRC_RUNNER)
@@ -178,7 +178,7 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\Library.o \
 	$(DIROBJ_RELEASE)\Compare.o \
 	$(DIROBJ_RELEASE)\RunCompile.o
-RES_RELEASE = $(DIROBJ_RELEASE)\resource.o
+RES_RELEASE = $(DIROBJ_RELEASE)\GenaUniversal.o
 $(DIR_RELEASE)\runner:
 	-if not exist $@ mkdir $@
 $(DIR_RELEASE)\runner\$(RUNNER): $(DIR_RELEASE)\runner $(SRC_RUNNER)
