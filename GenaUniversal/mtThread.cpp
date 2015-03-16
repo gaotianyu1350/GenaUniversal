@@ -2,7 +2,7 @@
 
 mtThread::mtThread(functionType func, void *arg)
 {
-    pThread = (HANDLE)_beginthread(fc, 0, arg);
+    pThread = (HANDLE)_beginthread(func, 0, arg);
 }
 
 mtThread::~mtThread()

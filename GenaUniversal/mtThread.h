@@ -9,7 +9,7 @@
 #else
 #endif
 
-typedef void (*functionType)(void *);
+typedef void (*functionType)(void*);
 
 class mtThread
 {
