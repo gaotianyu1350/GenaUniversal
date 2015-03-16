@@ -22,7 +22,7 @@ Setting_data::Setting_data(const std::string &data)
 Setting_data::Setting_data(const char *data)
 {
     is = STR;
-    StrData = data;
+    new(&StrData) std::string(data);
 }
 
 Setting_data::Setting_data(File *data)
