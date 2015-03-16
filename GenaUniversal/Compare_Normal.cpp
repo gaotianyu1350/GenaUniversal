@@ -11,17 +11,14 @@ extern "C"
             : Compare(flag, queueMessage, setting, result)
         {
         }
-        void setFile(const string _OutFile, const string _AnsFile)
-        {
-            AnsFile = _AnsFile;
-            OutFile = _OutFile;
-        }
         virtual void run()
         {
+            AnsFile = setting->getItem("AnsFile").operator string();
+            OutFile = setting->getItem("OutFile").operator string();
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;
-            int WA=0;
+            int WA = 0;
             vector<string>vecans, vecout;
             if (fans == 0)
             {
@@ -46,13 +43,13 @@ extern "C"
             {
                 sprintf(str, "Wrong_Answer at %d", int(vecout.size()));
                 result->setItem("compare", str);
-                WA=1;
+                WA = 1;
             }
             else if (vecans.size() < vecout.size())
             {
                 sprintf(str, "Wrong_Answer at %d", int(vecans.size()));
                 result->setItem("compare", str);
-                WA=1;
+                WA = 1;
             }
             else
             {
@@ -62,7 +59,7 @@ extern "C"
                     {
                         sprintf(str, "Wrong_Answer at %d", i + 1);
                         result->setItem("compare", str);
-                        WA=1;
+                        WA = 1;
                         break;
                     }
                 }
@@ -75,15 +72,15 @@ extern "C"
             fout.clear();
             fout.open(OutFile.c_str());
             fans.open(AnsFile.c_str());
-            while(fans>>tmpstr)
+            while (fans >> tmpstr)
             {
                 vecans.push_back(tmpstr);
             }
-            while(fout>>tmpstr)
+            while (fout >> tmpstr)
             {
                 vecout.push_back(tmpstr);
             }
-            if(vecans==vecout&&WA)
+            if (vecans == vecout && WA)
             {
                 result->setItem("compare", "Presentation_Error");
             }

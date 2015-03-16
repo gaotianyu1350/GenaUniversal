@@ -7,22 +7,9 @@ extern "C"
     class Compare_Float : public Compare
     {
     public:
-        Compare_Float()
-        {
-            eps = 1e-6;
-        }
         Compare_Float(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
             : Compare(flag, queueMessage, setting, result)
         {
-        }
-        void setFile(const string _OutFile, const string _AnsFile)
-        {
-            AnsFile = _AnsFile;
-            OutFile = _OutFile;
-        }
-        void setEps(double _eps)
-        {
-            eps = _eps;
         }
         int dcmp(double x)
         {
@@ -30,6 +17,9 @@ extern "C"
         }
         virtual void run()
         {
+            AnsFile = setting->getItem("AnsFile").operator string();
+            OutFile = setting->getItem("OutFile").operator string();
+            sscanf((setting->getItem("Eps").operator string()).c_str(),"%lf",&eps);
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;
@@ -66,8 +56,7 @@ extern "C"
             }
             else
             {
-                vecans.clear();
-                vecout.clear();
+                vector<double>vecans,vecout;
                 fans.close();
                 fout.close();
                 fans.clear();
@@ -106,6 +95,7 @@ extern "C"
             Compare::onStop();
         }
     private:
+        string AnsFile,OutFile;
         double eps;
         char str[10];
     };
