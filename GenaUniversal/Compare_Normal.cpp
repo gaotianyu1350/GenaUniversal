@@ -43,13 +43,13 @@ extern "C"
             }
             if (vecans.size() > vecout.size())
             {
-                sprintf(str, "%d", int(vecout.size()));
-                result->setItem("compare", strcat("Wrong_Answer at ", str));
+                sprintf(str, "Wrong_Answer at %d", int(vecout.size()));
+                result->setItem("compare", str);
             }
             else if (vecans.size() < vecout.size())
             {
-                sprintf(str, "%d", int(vecans.size()));
-                result->setItem("compare", strcat("Wrong_Answer at ", str));
+                sprintf(str, "Wrong_Answer at %d", int(vecans.size()));
+                result->setItem("compare", str);
             }
             else
             {
@@ -57,8 +57,8 @@ extern "C"
                 {
                     if (vecans[i] != vecout[i])
                     {
-                        sprintf(str, "%d", i + 1);
-                        result->setItem("compare", strcat("Wrong_Answer at ", str));
+                        sprintf(str, "Wrong_Answer at %d", i + 1);
+                        result->setItem("compare", str);
                         break;
                     }
                 }
@@ -79,7 +79,7 @@ extern "C"
             {
                 vecout.push_back(tmpstr);
             }
-            if(vecans==vecout))
+            if(vecans==vecout)
             {
                 result->setItem("compare", "Presentation_Error");
             }

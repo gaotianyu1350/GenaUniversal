@@ -9,18 +9,18 @@
 #else
 #endif
 
-typedef (void (*)(void *)) functionType;
+typedef void (*functionType)(void *);
 
 class mtThread
 {
 //#ifdef WIN32
 public:
-    mtThread(functionType func, void *arg)
-    ~mtThread()
+    mtThread(functionType func, void *arg);
+    ~mtThread();
 
-    DWORD getExitCode()
-    int isActive()
-    void kill()
+    DWORD getExitCode();
+    int isActive();
+    void kill();
 
 private:
     HANDLE pThread;

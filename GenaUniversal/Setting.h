@@ -20,7 +20,7 @@ public:
     ~Setting_data();
     operator int();
     operator std::string();
-    operator char*();
+    operator const char*();
     operator File*();
     operator Setting*();
     Setting_data operator =(int data);

@@ -19,7 +19,7 @@ public:
     ~Result_data();
     operator int();
     operator std::string();
-    operator char*();
+    operator const char*();
     operator Result*();
     Result_data operator =(int data);
     Result_data operator =(const std::string &data);

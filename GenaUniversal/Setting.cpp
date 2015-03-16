@@ -64,7 +64,7 @@ Setting_data::operator std::string()
     return StrData;
 }
 
-Setting_data::operator char*()
+Setting_data::operator const char*()
 {
     if (is != STR)
         throw std::logic_error("error usage of union in Setting_data");

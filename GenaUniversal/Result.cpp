@@ -59,7 +59,7 @@ Result_data::operator std::string()
 }
 
 
-Result_data::operator char*()
+Result_data::operator const char*()
 {
     if (is != STR)
         throw std::logic_error("error usage of union in Result_data");
