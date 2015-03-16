@@ -7,8 +7,7 @@
 
 #include "GenaUniversalMain.h"
 
-
-BEGIN_EVENT_TABLE(GenaUniversalFrame, wxFrame)
+BEGIN_EVENT_TABLE(GenaUniversalFrame,wxFrame)
 END_EVENT_TABLE()
 
 GenaUniversalFrame::GenaUniversalFrame(wxWindow *parent, wxWindowID id)
