@@ -88,6 +88,9 @@
 		<Unit filename="Compare_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
+		<Unit filename="Compare_Normal2.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
 		<Unit filename="Compile.cpp">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
