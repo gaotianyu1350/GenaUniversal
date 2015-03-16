@@ -33,7 +33,8 @@ PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)\Player_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Problem_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Point_Normal.dll \
-	$(DIR_PLUGIN_DEBUG)\Compare_Normal.dll
+	$(DIR_PLUGIN_DEBUG)\Compare_Normal.dll \	
+	$(DIR_PLUGIN_DEBUG)\Compare_Float.dll
 $(DIR_PLUGIN_DEBUG):
 	-if not exist $@ mkdir $@
 $(DIROBJ_DEBUG)\Library.o: Library.cpp Library.h
