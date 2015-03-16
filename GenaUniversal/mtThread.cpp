@@ -10,10 +10,10 @@ mtThread::~mtThread()
     kill();
 }
 
-DWORD mtThread::getExitCode()
+int mtThread::getExitCode()
 {
     DWORD f;
-    GetExitCodeProcess(hProcess, &f);
+    GetExitCodeThread(hThread, &f);
     return f;
 }
 
@@ -25,6 +25,6 @@ int mtThread::isActive()
 void mtThread::kill()
 {
     if (isActive())
-        TerminateProcess(hProcess, 4);
+        TerminateThread(hThread, 1);
     _endthread();
 }

@@ -18,7 +18,7 @@ public:
     mtThread(functionType func, void *arg);
     ~mtThread();
 
-    DWORD getExitCode();
+    int getExitCode();
     int isActive();
     void kill();
 
