@@ -4,10 +4,14 @@ using namespace std;
 
 extern "C"
 {
-    class Compare_Normal : public Compare
+    class Compare_Float : public Compare
     {
     public:
-        Compare_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+        Compare_Float()
+        {
+            eps = 1e-6;
+        }
+        Compare_Float(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
             : Compare(flag, queueMessage, setting, result)
         {
         }
@@ -16,12 +20,20 @@ extern "C"
             AnsFile = _AnsFile;
             OutFile = _OutFile;
         }
+        void setEps(double _eps)
+        {
+            eps = _eps;
+        }
+        int dcmp(double x)
+        {
+            return (x > eps) - (x < eps);
+        }
         virtual void run()
         {
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;
-            int WA=0;
+            double tmpdb;
             vector<string>vecans, vecout;
             if (fans == 0)
             {
@@ -46,46 +58,46 @@ extern "C"
             {
                 sprintf(str, "Wrong_Answer at %d", int(vecout.size()));
                 result->setItem("compare", str);
-                WA=1;
             }
             else if (vecans.size() < vecout.size())
             {
                 sprintf(str, "Wrong_Answer at %d", int(vecans.size()));
                 result->setItem("compare", str);
-                WA=1;
             }
             else
             {
-                for (int i = 0 ; i < vecout.size() ; i++)
+                vecans.clear();
+                vecout.clear();
+                fans.close();
+                fout.close();
+                fans.clear();
+                fout.clear();
+                fout.open(OutFile.c_str());
+                fans.open(AnsFile.c_str());
+                while (fans >> tmpdb)
                 {
-                    if (vecans[i] != vecout[i])
+                    vecans.push_back(tmpdb);
+                }
+                while (fout >> tmpdb)
+                {
+                    vecout.push_back(tmpdb);
+                }
+                if (vecans.size() == vecout.size())
+                {
+                    for (int i = 0; i < vecans.size(); i++)
                     {
-                        sprintf(str, "Wrong_Answer at %d", i + 1);
-                        result->setItem("compare", str);
-                        WA=1;
-                        break;
+                        if (dcmp(vecans[i] - vecout[i]))
+                        {
+                            sprintf(str, "Wrong_Answer at %d", i + 1);
+                            result->setItem("compare", str);
+                        }
                     }
                 }
-            }
-            vecans.clear();
-            vecout.clear();
-            fans.close();
-            fout.close();
-            fans.clear();
-            fout.clear();
-            fout.open(OutFile.c_str());
-            fans.open(AnsFile.c_str());
-            while(fans>>tmpstr)
-            {
-                vecans.push_back(tmpstr);
-            }
-            while(fout>>tmpstr)
-            {
-                vecout.push_back(tmpstr);
-            }
-            if(vecans==vecout&&WA)
-            {
-                result->setItem("compare", "Presentation_Error");
+                else
+                {
+                    sprintf(str, "Wrong_Answer at %d", int(vecans.size()));
+                    result->setItem("compare", str);
+                }
             }
             pushMessage(0, "Compare finished");
         }
@@ -94,11 +106,11 @@ extern "C"
             Compare::onStop();
         }
     private:
-        string AnsFile, OutFile;
+        double eps;
         char str[10];
     };
-    Compare_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+    Compare_Float *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
     {
-        return new Compare_Normal(flag, queueMessage, setting, result);
+        return new Compare_Float(flag, queueMessage, setting, result);
     }
 }

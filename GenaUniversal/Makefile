@@ -48,6 +48,8 @@ $(DIR_PLUGIN_DEBUG)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -std=gnu++11 -shared -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -std=gnu++11 -shared -o $@ -g
+$(DIR_PLUGIN_DEBUG)\Compare_Float.dll: Compare_Float.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -std=gnu++11 -shared -o $@ -g
 
 BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
 OBJ_DEBUG = \
@@ -130,7 +132,8 @@ PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)\Player_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Problem_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Point_Normal.dll \
-	$(DIR_PLUGIN_RELEASE)\Compare_Normal.dll
+	$(DIR_PLUGIN_RELEASE)\Compare_Normal.dll \
+	$(DIR_PLUGIN_RELEASE)\Compare_Float.dll
 $(DIR_PLUGIN_RELEASE):
 	-if not exist $@ mkdir $@
 $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
@@ -144,6 +147,8 @@ $(DIR_PLUGIN_RELEASE)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_RELEAS
 $(DIR_PLUGIN_RELEASE)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
+$(DIR_PLUGIN_RELEASE)\Compare_Float.dll: Compare_Float.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -std=gnu++11 -shared -o $@ -O2
 
 BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
