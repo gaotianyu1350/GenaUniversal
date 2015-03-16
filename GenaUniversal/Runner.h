@@ -6,6 +6,12 @@
 #include <string>
 #include <vector>
 
+#ifdef WIN32
+#include <windows.h>
+#else
+#include <sys/types.h>
+#endif
+
 class Runner
 {
 public:
@@ -20,11 +26,11 @@ public:
     void setTime(unsigned time);
     void setMemory(unsigned memory);
     void run();
-    bool active() const;
-    int exitCode() const; //////////////////////////////////
-    unsigned timeUsed() const;
-    unsigned memoryUsed() const;
-    bool isOK() const;
+    bool active();
+    int exitCode();
+    unsigned timeUsed();
+    unsigned memoryUsed();
+    bool isOK();
 private:
     const bool *flagStop;
     File in, out, err;
@@ -37,8 +43,9 @@ private:
     int __exitcode;
     bool __haveexit;
 #ifdef WIN32
-    PROCESS_INFORMATION *pinfo
+    PROCESS_INFORMATION *pinfo;
     STARTUPINFO StartInfo;
+    char *__cmd;
     DWORD _exitcode();
     bool handleClosed;
     void closeAllHandle();

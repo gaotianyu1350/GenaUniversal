@@ -46,8 +46,7 @@ void Runner::setCommand(const std::vector<std::string> &command)
     cmd = command;
 }
 
-void Runner:
-addArg(const std::string &arg)
+void Runner::addArg(const std::string &arg)
 {
     cmd.push_back(arg);
 }
@@ -62,28 +61,28 @@ void Runner::setMemory(unsigned memory)
     this->memory = memory;
 }
 
-int Runner::exitCode() const
+int Runner::exitCode()
 {
     if (active() || !isOK())
         return 0;
     return __exitcode;
 }
 
-unsigned Runner::timeUsed() const
+unsigned Runner::timeUsed()
 {
     if (active() || !isOK())
         return 0;
     return utime;
 }
 
-unsigned Runner::memoryUsed() const
+unsigned Runner::memoryUsed()
 {
     if (active() || !isOK())
         return 0;
     return umemory;
 }
 
-bool Runner::isOK() const
+bool Runner::isOK()
 {
     if (active())
         return true;
@@ -92,24 +91,24 @@ bool Runner::isOK() const
 
 bool Runner::check()
 {
-    if (access(in.c_str(), R_OK))
+    if (access(in.getPath().c_str(), R_OK))
     {
         status = 2;
         return false;
     }
-    if (!FileManager::isdir(FileManager::getdir(out)))
+    if (!FileManager::isdir(out.getDir()))
     {
         status = 3;
         return false;
     }
-    if (access(out.c_str(), F_OK) == 0)
+    if (access(out.getPath().c_str(), F_OK) == 0)
     {
-        if (FileManager::isdir(out))
+        if (out.isDir())
         {
             status = 3;
             return false;
         }
-        else if (access(out.c_str(), W_OK))
+        else if (access(out.getPath().c_str(), W_OK))
         {
             status = 3;
             return false;
@@ -133,6 +132,7 @@ void Runner::closeAllHandle()
         CloseHandle(StartInfo.hStdOutput);
     CloseHandle(pinfo->hProcess);
     delete pinfo;
+    delete[] __cmd;
     handleClosed = true;
 }
 
@@ -143,7 +143,7 @@ void Runner::kill()
         TerminateProcess(pinfo->hProcess, 4);
         __haveexit = true;
     }
-    cloesAllHandle();
+    closeAllHandle();
 }
 
 bool Runner::active()
@@ -151,7 +151,7 @@ bool Runner::active()
     if (__haveexit)
         return false;
     __exitcode = _exitcode();
-    __haveexit = (__exitcode != STILL_ACTIVE)
+    __haveexit = (__exitcode != STILL_ACTIVE);
     return !__haveexit;
 }
 
@@ -166,12 +166,12 @@ void Runner::run()
 {
     if (!check())
     {
-        return;
         __haveexit = true;
+        return;
     }
-    if (fin != "!" && fin != in)
+    if (fin != "!" && fin != in.getPath())
     {
-        if (system(("copy \"" + in + "\" \"" + fin + "\" /Y >nul 2>&1").c_str()))
+        if (system(("copy \"" + in.getPath() + "\" \"" + fin + "\" /Y >nul 2>&1").c_str()))
         {
             status = 2;
             __haveexit = true;
@@ -187,32 +187,34 @@ void Runner::run()
     StartInfo.cb = sizeof(STARTUPINFO);
     StartInfo.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
     StartInfo.wShowWindow = SW_HIDE;
-    hErrorFile = CreateFile(err, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    hErrorFile = CreateFile(err.getPath().c_str(), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     StartInfo.hStdError = hErrorFile;
     if (fin == "!")
     {
-        hInputFile = CreateFile(in, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        hInputFile = CreateFile(in.getPath().c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
         StartInfo.hStdInput = hInputFile;
     }
     if (fout == "!")
     {
-        hOutFile = CreateFile(out, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        hOutFile = CreateFile(out.getPath().c_str(), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
         StartInfo.hStdOutput = hOutFile;
     }
     std::string cmdline;
     for (std::vector<std::string>::iterator i = cmd.begin(); i != cmd.end(); ++i)
         cmdline += "\"" + *i + "\" ";
+    __cmd = new char[cmdline.length() * 2];
+    strcpy(__cmd, cmdline.c_str());
     timeb times, timet;
     CreateProcess
     (
         NULL,
-        cmdline.c_str(),
+        __cmd,
         NULL,
         NULL,
         TRUE,
         CREATE_NO_WINDOW,
         NULL,
-        FileManager::getdir(*cmd.begin()),
+        FileManager::getdir(*cmd.begin()).c_str(),
         &StartInfo,
         pinfo
     );
@@ -227,7 +229,7 @@ void Runner::run()
         }
         PROCESS_MEMORY_COUNTERS pmc;
         GetProcessMemoryInfo(pinfo->hProcess, &pmc, sizeof(pmc));
-        umemory = max(umemory, (unsigned)(pmc.PeakWorkingSetSize / 1024));
+        umemory = std::max(umemory, (unsigned)(pmc.PeakWorkingSetSize / 1024));
         ftime(&timet);
         utime = (timet.time - times.time) * 1000 + (timet.millitm - times.millitm);
         if (umemory > memory || utime > time)
@@ -239,11 +241,11 @@ void Runner::run()
     closeAllHandle();
     ftime(&timet);
     utime = (timet.time - times.time) * 1000 + (timet.millitm - times.millitm);
-    if (fout != "!" && fout != out)
+    if (fout != "!" && fout != out.getPath())
     {
         if (!FileManager::isfile(fout))
             out.createFile();
-        else if (system(("copy \"" + fout "\" \"" + out + "\" /Y >nul 2>&1").c_str()))
+        else if (system(("copy \"" + fout + "\" \"" + out.getPath() + "\" /Y >nul 2>&1").c_str()))
         {
             status = 3;
             return;

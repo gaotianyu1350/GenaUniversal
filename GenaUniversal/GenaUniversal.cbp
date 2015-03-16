@@ -104,10 +104,10 @@
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
 		<Unit filename="File.cpp">
-			<Option virtualFolder="judge/sdk/" />
+			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
 		<Unit filename="File.h">
-			<Option virtualFolder="judge/sdk/" />
+			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
 		<Unit filename="FileManager.cpp">
 			<Option virtualFolder="judge/FileManager/" />
