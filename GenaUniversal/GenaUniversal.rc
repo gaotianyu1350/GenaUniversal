@@ -1,0 +1,4 @@
+aaaaaaaa ICON "GenaIcon.ico"
+GenaIcon ICON "GenaIcon.ico"
+
+#include "wx/msw/wx.rc"

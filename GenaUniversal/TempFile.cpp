@@ -16,7 +16,11 @@
 void TempFile::InitTempFile()
 {
     ClearTempDir();
+#ifdef WIN32
     mkdir("tmp");
+#else
+    system("mkdir -p tmp");
+#endif
     srand(time(0));
 }
 

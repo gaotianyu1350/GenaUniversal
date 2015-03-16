@@ -6,7 +6,7 @@
  **************************************************************/
 
 #include "GenaUniversalMain.h"
-
+#include "GenaIcon.xpm"
 
 BEGIN_EVENT_TABLE(GenaUniversalFrame, wxFrame)
 END_EVENT_TABLE()
