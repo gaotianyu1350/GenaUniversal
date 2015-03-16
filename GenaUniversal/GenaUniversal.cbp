@@ -85,12 +85,6 @@
 		<Unit filename="Compare_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
-		<Unit filename="Compile.cpp">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
-		<Unit filename="Compile.h">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
 		<Unit filename="Compile_Normal.cpp">
 			<Option virtualFolder="judge/sdk/templete/" />
 		</Unit>
@@ -167,6 +161,12 @@
 		<Unit filename="Result.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="RunCompile.cpp">
+			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
+		<Unit filename="RunCompile.h">
+			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
 		<Unit filename="Setting.cpp">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
@@ -178,12 +178,6 @@
 		</Unit>
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
-		</Unit>
-		<Unit filename="mtThread.cpp">
-			<Option virtualFolder="judge/sdk/" />
-		</Unit>
-		<Unit filename="mtThread.h">
-			<Option virtualFolder="judge/sdk/" />
 		</Unit>
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
