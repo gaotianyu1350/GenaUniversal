@@ -108,7 +108,6 @@ void check()
     if (access(out, F_OK) == 0)
     {
         if (isdir(out))
-
         {
             printf("3\n");
             fclose(stdout);

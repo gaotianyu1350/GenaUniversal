@@ -52,6 +52,7 @@ public:
     std::string getExt() const;
     std::string getDir() const;
     std::string getAbsDir() const;
+    int getSize() const;
 
 private:
     // Information

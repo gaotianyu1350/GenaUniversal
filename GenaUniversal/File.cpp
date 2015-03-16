@@ -152,4 +152,9 @@ std::string File::getAbsDir() const
     return FileManager::getabspath(FileManager::getdir(path));
 }
 
+int File::getSize() const
+{
+    return FileManager::getfilesize(path);
+}
+
 #endif // FILE_CPP_INCLUDED

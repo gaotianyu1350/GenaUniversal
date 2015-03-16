@@ -1,1 +1,9 @@
 runner numcmd cmd[0] cmd[1] ... cmd[n-1] fin fout in out err time memory stop log
+
+ExitCode
+Time	-1
+Memory	-1
+
+-1	kill
+2	in error
+3	out error
