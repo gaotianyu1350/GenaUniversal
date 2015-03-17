@@ -22,13 +22,15 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)/Point.o \
 	$(DIROBJ_DEBUG)/Library.o \
 	$(DIROBJ_DEBUG)/Compare.o \
-	$(DIROBJ_DEBUG)/Runner.o
+	$(DIROBJ_DEBUG)/Runner.o \
+	$(DIROBJ_DEBUG)/RunCompile.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)/libContest_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libPlayer_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libProblem_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libPoint_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libCompare_Normal.so \
+	$(DIR_PLUGIN_DEBUG)/libCompare_Normal2.so \
 	$(DIR_PLUGIN_DEBUG)/libCompare_Float.so
 $(DIR_PLUGIN_DEBUG):
 	mkdir -p $@
@@ -41,6 +43,8 @@ $(DIR_PLUGIN_DEBUG)/libProblem_Normal.so: Problem_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 $(DIR_PLUGIN_DEBUG)/libPoint_Normal.so: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
+$(DIR_PLUGIN_DEBUG)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
@@ -60,7 +64,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/Problem.o \
 	$(DIROBJ_DEBUG)/Point.o \
 	$(DIROBJ_DEBUG)/Compare.o \
-	$(DIROBJ_DEBUG)/Runner.o
+	$(DIROBJ_DEBUG)/Runner.o \
+	$(DIROBJ_DEBUG)/RunCompile.o
 $(DIR_DEBUG)/runner:
 	mkdir -p $@
 $(DIR_DEBUG)/runner/$(RUNNER): $(DIR_DEBUG)/runner $(SRC_RUNNER)
@@ -95,6 +100,8 @@ $(DIROBJ_DEBUG)/Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
+$(DIROBJ_DEBUG)/RunCompile.o: RunCompile.cpp RunCompile.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(DIR_DEBUG)/runner/$(RUNNER)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(LIBS)
 $(DIR_DEBUG):
@@ -123,13 +130,15 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)/Point.o \
 	$(DIROBJ_RELEASE)/Library.o \
 	$(DIROBJ_RELEASE)/Compare.o \
-	$(DIROBJ_RELEASE)/Runner.o
+	$(DIROBJ_RELEASE)/Runner.o \
+	$(DIROBJ_RELEASE)/RunCompile.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)/libContest_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libPlayer_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libProblem_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libPoint_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libCompare_Normal.so \
+	$(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so \
 	$(DIR_PLUGIN_RELEASE)/libCompare_Float.so
 $(DIR_PLUGIN_RELEASE):
 	mkdir -p $@
@@ -142,6 +151,8 @@ $(DIR_PLUGIN_RELEASE)/libProblem_Normal.so: Problem_Normal.cpp $(OBJ_PLUGIN_RELE
 $(DIR_PLUGIN_RELEASE)/libPoint_Normal.so: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+$(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
@@ -162,7 +173,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/Point.o \
 	$(DIROBJ_RELEASE)/Library.o \
 	$(DIROBJ_RELEASE)/Compare.o \
-	$(DIROBJ_RELEASE)/Runner.o
+	$(DIROBJ_RELEASE)/Runner.o \
+	$(DIROBJ_RELEASE)/RunCompile.o
 $(DIR_RELEASE)/runner:
 	mkdir -p $@
 $(DIR_RELEASE)/runner/$(RUNNER): $(DIR_RELEASE)/runner $(SRC_RUNNER)
@@ -196,6 +208,8 @@ $(DIROBJ_RELEASE)/Compare.o: Compare.cpp Compare.h
 $(DIROBJ_RELEASE)/Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Runner.o: Runner.cpp Runner.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)/RunCompile.o: RunCompile.cpp RunCompile.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(DIR_RELEASE)/runner/$(RUNNER)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(LIBS)
