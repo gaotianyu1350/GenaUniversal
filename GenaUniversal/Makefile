@@ -10,8 +10,6 @@ WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wno-
 DLLDEPS = -std=gnu++11 -fPIC -shared -lpsapi
 
 RESOURCE = GenaUniversal.rc
-SRC_RUNNER = runner_win.c
-RUNNER = runner_win.exe
 
 DIR_DEBUG = bin\Debug
 DIROBJ_DEBUG = obj\Debug
@@ -74,10 +72,6 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\RunCompile.o \
 	$(DIROBJ_DEBUG)\Runner.o
 RES_DEBUG = $(DIROBJ_DEBUG)\GenaUniversal.o
-$(DIR_DEBUG)\runner:
-	-if not exist $@ mkdir $@
-$(DIR_DEBUG)\runner\$(RUNNER): $(DIR_DEBUG)\runner $(SRC_RUNNER)
-	gcc $(SRC_RUNNER) -o $@ -static -O2 -lpsapi
 $(RES_DEBUG): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
 $(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
@@ -112,7 +106,7 @@ $(DIROBJ_DEBUG)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)\Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
-$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG) $(DIR_DEBUG)\runner\$(RUNNER)
+$(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
 	-if not exist $@ mkdir $@
@@ -186,10 +180,6 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\RunCompile.o \
 	$(DIROBJ_RELEASE)\Runner.o
 RES_RELEASE = $(DIROBJ_RELEASE)\GenaUniversal.o
-$(DIR_RELEASE)\runner:
-	-if not exist $@ mkdir $@
-$(DIR_RELEASE)\runner\$(RUNNER): $(DIR_RELEASE)\runner $(SRC_RUNNER)
-	gcc $(SRC_RUNNER) -o $@ -static -O2 -lpsapi
 $(RES_RELEASE): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
 $(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
@@ -224,7 +214,7 @@ $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)\Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
-$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE) $(DIR_RELEASE)\runner\$(RUNNER)
+$(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
 $(DIR_RELEASE):
 	-if not exist $@ mkdir $@

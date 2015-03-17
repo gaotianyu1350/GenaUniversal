@@ -5,6 +5,7 @@
 #include "FileManager.h"
 #include <string>
 #include <vector>
+#include <unistd.h>
 
 #ifdef WIN32
 #include <windows.h>
@@ -52,6 +53,10 @@ private:
 #else
     pid_t pid;
     int _exitcode();
+    unsigned _getmemory();
+    char **__cmd;
+    bool disposed;
+    void dispose();
 #endif
 };
 

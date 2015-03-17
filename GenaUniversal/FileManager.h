@@ -16,8 +16,10 @@ class FileManager
 public:
 #ifdef WIN32
     static const char sep = '\\';
+    static constexpr char nul[] = "nul";
 #else
     static const char sep = '/';
+    static constexpr char nul[] = "/dev/null";
 #endif
     static bool isdir(const std::string &path);
     static bool isfile(const std::string &path);
