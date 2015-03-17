@@ -30,7 +30,7 @@ public:
     int exitCode();
     unsigned timeUsed();
     unsigned memoryUsed();
-    bool isOK();
+    int getStatus(); // 0 : ok, -1 : kill, 2 : in error, 3 : out error
 private:
     const bool *flagStop;
     File in, out, err;

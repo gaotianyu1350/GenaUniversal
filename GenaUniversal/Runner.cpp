@@ -5,6 +5,7 @@
 #include <sys/timeb.h>
 #include <dirent.h>
 #include <algorithm>
+#include <stdexcept>
 
 Runner::Runner(const bool *flag)
 {
@@ -63,30 +64,28 @@ void Runner::setMemory(unsigned memory)
 
 int Runner::exitCode()
 {
-    if (active() || !isOK())
+    if (active() || getStatus())
         return 0;
     return __exitcode;
 }
 
 unsigned Runner::timeUsed()
 {
-    if (active() || !isOK())
+    if (active() || getStatus())
         return 0;
     return utime;
 }
 
 unsigned Runner::memoryUsed()
 {
-    if (active() || !isOK())
+    if (active() || getStatus())
         return 0;
     return umemory;
 }
 
-bool Runner::isOK()
+int Runner::getStatus()
 {
-    if (active())
-        return true;
-    return status == 0;
+    return status;
 }
 
 bool Runner::check()
@@ -142,6 +141,7 @@ void Runner::kill()
     {
         TerminateProcess(pinfo->hProcess, 4);
         __haveexit = true;
+		__exitcode = 0;
     }
     closeAllHandle();
 }
@@ -164,6 +164,8 @@ DWORD Runner::_exitcode()
 
 void Runner::run()
 {
+    if (__haveexit)
+       throw std::logic_error("You can only use runner once.");
     if (!check())
     {
         __haveexit = true;
