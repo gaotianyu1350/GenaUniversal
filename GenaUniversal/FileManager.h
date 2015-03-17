@@ -16,8 +16,10 @@ class FileManager
 public:
 #ifdef WIN32
     static const char sep = '\\';
+    static constexpr char nul[] = "nul";
 #else
     static const char sep = '/';
+    static constexpr char nul[] = "/dev/null";
 #endif
     static bool isdir(const std::string &path);
     static bool isfile(const std::string &path);
@@ -28,6 +30,7 @@ public:
     static std::string getext(const std::string &path);
     static std::string getabspath(const std::string &path);
     static std::string getfilename(const std::string &path);
+    static int getfilesize(const std::string &path);
 };
 
 #endif // FILEMANAGER_H

@@ -6,8 +6,11 @@
  **************************************************************/
 
 #include "GenaUniversalMain.h"
+#ifndef WIN32
+#include "GenaIcon.xpm"
+#endif
 
-BEGIN_EVENT_TABLE(GenaUniversalFrame,wxFrame)
+BEGIN_EVENT_TABLE(GenaUniversalFrame, wxFrame)
 END_EVENT_TABLE()
 
 GenaUniversalFrame::GenaUniversalFrame(wxWindow *parent, wxWindowID id)

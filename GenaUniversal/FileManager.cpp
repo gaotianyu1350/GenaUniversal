@@ -12,6 +12,8 @@
 #include <sys/stat.h>
 #include <cstring>
 
+constexpr char FileManager::nul[];
+
 bool FileManager::isdir(const std::string &path)
 {
     struct stat info;
@@ -117,4 +119,13 @@ std::string FileManager::getfilename(const std::string &path)
     if (pos == std::string::npos)
         pos = -1;
     return path.substr(pos + 1, path.length() - pos - 1);
+}
+
+int FileManager::getfilesize(const std::string &path)
+{
+    if (!isfile(path))
+        return 0;
+    struct stat info;
+    stat(path.c_str(), &info);
+    return info.st_size;
 }
