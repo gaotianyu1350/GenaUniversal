@@ -9,9 +9,9 @@
 #define FILE_H
 
 #include "FileManager.h"
+#include <direct.h>
 #include <string>
 #include <cstdio>
-#include <unistd.h>
 
 class File
 {
@@ -52,6 +52,7 @@ public:
     std::string getExt() const;
     std::string getDir() const;
     std::string getAbsDir() const;
+    int getSize() const;
 
 private:
     // Information

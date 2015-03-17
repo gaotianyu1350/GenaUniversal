@@ -28,6 +28,7 @@ public:
     static std::string getext(const std::string &path);
     static std::string getabspath(const std::string &path);
     static std::string getfilename(const std::string &path);
+    static int getfilesize(const std::string &path);
 };
 
 #endif // FILEMANAGER_H
