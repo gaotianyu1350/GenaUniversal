@@ -8,6 +8,7 @@
 
 #include "GenaUniversalApp.h"
 #include "GenaUniversalMain.h"
+#include "SettingTreeFrame.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <iostream>
@@ -23,13 +24,18 @@ wxString GetWorkDirectory()
 
 bool GenaUniversalApp::OnInit()
 {
+    if (!wxApp::OnInit())
+        return false;
     wxString cwd = GetWorkDirectory();
     wxFileName::SetCwd(cwd);
     wxSetWorkingDirectory(cwd);
     chdir(cwd.c_str());
     TempFile::InitTempFile();
 
-    GenaUniversalFrame *Frame = new GenaUniversalFrame(NULL);
+    /*GenaUniversalFrame *Frame = new GenaUniversalFrame(NULL);
+    Frame->Show();
+    SetTopWindow(Frame);*/
+    SettingTreeFrame *Frame = new SettingTreeFrame(NULL, wxID_ANY);
     Frame->Show();
     SetTopWindow(Frame);
     return wxOK;

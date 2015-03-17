@@ -13,13 +13,13 @@ extern "C"
         }
         int dcmp(double x)
         {
-            return (x > eps) - (x < eps);
+            return (x > eps) - (x < -eps);
         }
         virtual void run()
         {
-            AnsFile = setting->getItem("AnsFile").operator string();
-            OutFile = setting->getItem("OutFile").operator string();
-            sscanf((setting->getItem("Eps").operator string()).c_str(),"%lf",&eps);
+            AnsFile = setting->getItem("AnsFile").operator string&();
+            OutFile = setting->getItem("OutFile").operator string&();
+            sscanf((setting->getItem("Eps").operator string&()).c_str(),"%lf",&eps);
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;

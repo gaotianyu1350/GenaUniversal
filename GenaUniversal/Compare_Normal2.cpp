@@ -13,8 +13,8 @@ extern "C"
         }
         virtual void run()
         {
-            AnsFile = setting->getItem("AnsFile").operator string();
-            OutFile = setting->getItem("OutFile").operator string();
+            AnsFile = setting->getItem("AnsFile").operator string&();
+            OutFile = setting->getItem("OutFile").operator string&();
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;

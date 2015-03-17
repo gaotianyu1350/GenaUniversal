@@ -4,7 +4,7 @@ WXDIR = E:\wxWidgets-3.0.2
 WXLIBDIR = $(WXDIR)\lib\gcc_lib
 WXINCLUDEDIR = $(WXDIR)\include
 SETUPDIR = $(WXLIBDIR)\mswu
-LIBS = -lwxmsw30u_core -lwxbase30u -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet -lpsapi
+LIBS = -lwxmsw30u_core -lwxbase30u -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lwxmsw30u_gl -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet -lpsapi
 DEFINES = -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -DNOPCH
 WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wno-ctor-dtor-privacy
 DLLDEPS = -std=gnu++11 -fPIC -shared -lpsapi
@@ -58,6 +58,7 @@ BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
 OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\GenaUniversalApp.o \
 	$(DIROBJ_DEBUG)\GenaUniversalMain.o \
+	$(DIROBJ_DEBUG)\SettingTreeFrame.o \
 	$(DIROBJ_DEBUG)\File.o \
 	$(DIROBJ_DEBUG)\FileManager.o \
 	$(DIROBJ_DEBUG)\TempFile.o \
@@ -77,6 +78,8 @@ $(RES_DEBUG): $(RESOURCE)
 $(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)\SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -165,6 +168,7 @@ BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
 OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\GenaUniversalApp.o \
 	$(DIROBJ_RELEASE)\GenaUniversalMain.o \
+	$(DIROBJ_RELEASE)\SettingTreeFrame.o \
 	$(DIROBJ_RELEASE)\FileManager.o \
 	$(DIROBJ_RELEASE)\File.o \
 	$(DIROBJ_RELEASE)\TempFile.o \
@@ -185,6 +189,8 @@ $(RES_RELEASE): $(RESOURCE)
 $(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)\SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
