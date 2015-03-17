@@ -9,7 +9,6 @@
 #define FILE_H
 
 #include "FileManager.h"
-#include <direct.h>
 #include <string>
 #include <cstdio>
 
