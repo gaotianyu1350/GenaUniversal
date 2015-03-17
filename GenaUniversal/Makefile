@@ -27,7 +27,7 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)\Point.o \
 	$(DIROBJ_DEBUG)\Library.o \
 	$(DIROBJ_DEBUG)\Compare.o \
-	$(DIROBJ_DEBUG)\RunCompile.o \
+	$(DIROBJ_DEBUG)\RunCmd.o \
 	$(DIROBJ_DEBUG)\Runner.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)\Contest_Normal.dll \
@@ -70,7 +70,7 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\Problem.o \
 	$(DIROBJ_DEBUG)\Point.o \
 	$(DIROBJ_DEBUG)\Compare.o \
-	$(DIROBJ_DEBUG)\RunCompile.o \
+	$(DIROBJ_DEBUG)\RunCmd.o \
 	$(DIROBJ_DEBUG)\Runner.o
 RES_DEBUG = $(DIROBJ_DEBUG)\GenaUniversal.o
 $(RES_DEBUG): $(RESOURCE)
@@ -103,7 +103,7 @@ $(DIROBJ_DEBUG)\Point.o: Point.cpp Point.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)\Compare.o: Compare.cpp Compare.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
-$(DIROBJ_DEBUG)\RunCompile.o: RunCompile.cpp RunCompile.h
+$(DIROBJ_DEBUG)\RunCmd.o: RunCmd.cpp RunCmd.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -137,7 +137,7 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)\Point.o \
 	$(DIROBJ_RELEASE)\Library.o \
 	$(DIROBJ_RELEASE)\Compare.o \
-	$(DIROBJ_RELEASE)\RunCompile.o \
+	$(DIROBJ_RELEASE)\RunCmd.o \
 	$(DIROBJ_RELEASE)\Runner.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)\Contest_Normal.dll \
@@ -181,7 +181,7 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\Point.o \
 	$(DIROBJ_RELEASE)\Library.o \
 	$(DIROBJ_RELEASE)\Compare.o \
-	$(DIROBJ_RELEASE)\RunCompile.o \
+	$(DIROBJ_RELEASE)\RunCmd.o \
 	$(DIROBJ_RELEASE)\Runner.o
 RES_RELEASE = $(DIROBJ_RELEASE)\GenaUniversal.o
 $(RES_RELEASE): $(RESOURCE)
@@ -214,7 +214,7 @@ $(DIROBJ_RELEASE)\Point.o: Point.cpp Point.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)\Compare.o: Compare.cpp Compare.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
-$(DIROBJ_RELEASE)\RunCompile.o: RunCompile.cpp RunCompile.h
+$(DIROBJ_RELEASE)\RunCmd.o: RunCmd.cpp RunCmd.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2

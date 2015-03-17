@@ -38,6 +38,7 @@ bool GenaUniversalApp::OnInit()
     SettingTreeFrame *Frame = new SettingTreeFrame(NULL, wxID_ANY);
     Frame->Show();
     SetTopWindow(Frame);
+
     return wxOK;
 }
 

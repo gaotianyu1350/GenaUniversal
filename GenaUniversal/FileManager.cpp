@@ -17,7 +17,10 @@ constexpr char FileManager::nul[];
 bool FileManager::isdir(const std::string &path)
 {
     struct stat info;
-    stat(path.c_str(), &info);
+    if (path.length() && *path.rbegin() == sep)
+        stat(path.substr(0, path.length() - 1).c_str(), &info);
+    else
+        stat(path.c_str(), &info);
     return S_ISDIR(info.st_mode);
 }
 
