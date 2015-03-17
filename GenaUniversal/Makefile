@@ -4,7 +4,7 @@ WXDIR = E:\wxWidgets-3.0.2
 WXLIBDIR = $(WXDIR)\lib\gcc_lib
 WXINCLUDEDIR = $(WXDIR)\include
 SETUPDIR = $(WXLIBDIR)\mswu
-LIBS = -lwxmsw30u_core -lwxbase30u -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lwxmsw30u_gl -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet -lpsapi
+LIBS = -lwxmsw30u_core -lwxbase30u -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lwxmsw30u_gl -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet -lpsapi -lopengl32 -lglu32
 DEFINES = -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -DNOPCH
 WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wno-ctor-dtor-privacy
 DLLDEPS = -std=gnu++11 -fPIC -shared -lpsapi
