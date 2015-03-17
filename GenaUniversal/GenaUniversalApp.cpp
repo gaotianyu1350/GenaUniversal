@@ -32,6 +32,7 @@ bool GenaUniversalApp::OnInit()
     GenaUniversalFrame *Frame = new GenaUniversalFrame(NULL);
     Frame->Show();
     SetTopWindow(Frame);
+
     return wxOK;
 }
 
