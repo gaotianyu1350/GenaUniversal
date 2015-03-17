@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\FileManager\;judge\sdk\templete\;judge\Runner\;" />
+		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\FileManager\;judge\sdk\templete\;judge\Runner\;GUI\TreeView\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -115,6 +115,10 @@
 		<Unit filename="FileManager.h">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
+		<Unit filename="GenaUniversal.rc">
+			<Option compilerVar="WINDRES" />
+			<Option virtualFolder="GUI/" />
+		</Unit>
 		<Unit filename="GenaUniversalApp.cpp">
 			<Option virtualFolder="GUI/" />
 		</Unit>
@@ -185,15 +189,17 @@
 		<Unit filename="Setting.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="SettingTreeFrame.cpp">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
+		<Unit filename="SettingTreeFrame.h">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
 		<Unit filename="TempFile.cpp">
 			<Option virtualFolder="judge/FileManager/" />
 		</Unit>
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
-		</Unit>
-		<Unit filename="resource.rc">
-			<Option compilerVar="WINDRES" />
-			<Option virtualFolder="GUI/" />
 		</Unit>
 		<Unit filename="sdk.cpp">
 			<Option virtualFolder="judge/sdk/" />
