@@ -2,8 +2,10 @@
 #define RUNCOMPILE_H
 
 #include "Runner.h"
+#include "TempFile.h"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 class RunCmd
 {
@@ -12,15 +14,13 @@ public:
     void setCommand(const std::vector<std::string> &command);
     void addArg(const std::string &arg);
     void run();
+    bool active();
     void getOutput(std::string &output);
 
 private:
     const bool *flag;
     Runner *runner;
-    std::string strOutFile;
-
-    bool isStop();
-    void onStop();
+    std::string strOutFile, strErrFile;
 };
 
 #endif // RUNCOMPILE_H
