@@ -10,6 +10,7 @@
 #define FILE_CPP_INCLUDED
 
 #include "File.h"
+#include <unistd.h>
 
 File::File() {}
 
@@ -108,7 +109,7 @@ bool File::rmDir()
 
 bool File::exist() const
 {
-    if (access(path.c_str(), 0) != 0)
+    if (access(path.c_str(), F_OK) != 0)
         return false;
     else
         return true;

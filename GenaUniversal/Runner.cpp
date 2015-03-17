@@ -116,7 +116,7 @@ bool Runner::check()
     return true;
 }
 
-//#ifdef WIN32
+#ifdef WIN32
 #include <windows.h>
 #include <psapi.h>
 
@@ -255,5 +255,5 @@ void Runner::run()
     }
 }
 
-//#else
-//#endif
+#else
+#endif

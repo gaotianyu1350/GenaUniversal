@@ -10,6 +10,7 @@
 #include <windows.h>
 #else
 #include <sys/types.h>
+#include <unistd.h>
 #endif
 
 class Runner
