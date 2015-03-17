@@ -1,5 +1,5 @@
 /* XPM */
-static const char *GenaIcon_xpm[] = {
+static const char * const GenaIcon_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "512 512 138 2",
 "   c #3B4652",

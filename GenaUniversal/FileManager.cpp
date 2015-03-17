@@ -12,6 +12,8 @@
 #include <sys/stat.h>
 #include <cstring>
 
+constexpr char FileManager::nul[];
+
 bool FileManager::isdir(const std::string &path)
 {
     struct stat info;

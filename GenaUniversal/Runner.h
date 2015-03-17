@@ -5,12 +5,12 @@
 #include "FileManager.h"
 #include <string>
 #include <vector>
+#include <unistd.h>
 
 #ifdef WIN32
 #include <windows.h>
 #else
 #include <sys/types.h>
-#include <unistd.h>
 #endif
 
 class Runner
@@ -53,6 +53,10 @@ private:
 #else
     pid_t pid;
     int _exitcode();
+    unsigned _getmemory();
+    char **__cmd;
+    bool disposed;
+    void dispose();
 #endif
 };
 

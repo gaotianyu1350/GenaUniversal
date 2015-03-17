@@ -3,9 +3,6 @@ CPPDEPS = -MT$@ -MF$@.d -MD -MP -std=gnu++11
 LIBS = `wx-config --libs core,base` -ldl
 WIDGETS_CXXFLAGS = `wx-config --cppflags` -std=gnu++11
 
-SRC_RUNNER = runner_linux.c
-RUNNER = runner_linux
-
 DIR_DEBUG = bin/Debug
 DIROBJ_DEBUG = obj/Debug
 DIR_PLUGIN_DEBUG = $(DIR_DEBUG)/plugin
@@ -66,10 +63,6 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Runner.o \
 	$(DIROBJ_DEBUG)/RunCompile.o
-$(DIR_DEBUG)/runner:
-	mkdir -p $@
-$(DIR_DEBUG)/runner/$(RUNNER): $(DIR_DEBUG)/runner $(SRC_RUNNER)
-	gcc $(SRC_RUNNER) -o $@ -static -O2
 $(DIROBJ_DEBUG)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
@@ -102,7 +95,7 @@ $(DIROBJ_DEBUG)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)/RunCompile.o: RunCompile.cpp RunCompile.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
-$(BIN_DEBUG): $(OBJ_DEBUG) $(DIR_DEBUG)/runner/$(RUNNER)
+$(BIN_DEBUG): $(OBJ_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(LIBS)
 $(DIR_DEBUG):
 	mkdir -p $@
@@ -143,19 +136,19 @@ PLUGIN_RELEASE = \
 $(DIR_PLUGIN_RELEASE):
 	mkdir -p $@
 $(DIR_PLUGIN_RELEASE)/libContest_Normal.so: Contest_Normal.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libPlayer_Normal.so: Player_Normal.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libProblem_Normal.so: Problem_Normal.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libPoint_Normal.so: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_RELEASE)
-	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 
 BIN_RELEASE = $(DIR_RELEASE)/$(PROJECT)
 OBJ_RELEASE = \
@@ -175,10 +168,6 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Runner.o \
 	$(DIROBJ_RELEASE)/RunCompile.o
-$(DIR_RELEASE)/runner:
-	mkdir -p $@
-$(DIR_RELEASE)/runner/$(RUNNER): $(DIR_RELEASE)/runner $(SRC_RUNNER)
-	gcc $(SRC_RUNNER) -o $@ -static -O2
 $(DIROBJ_RELEASE)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
@@ -211,7 +200,7 @@ $(DIROBJ_RELEASE)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/RunCompile.o: RunCompile.cpp RunCompile.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
-$(BIN_RELEASE): $(OBJ_RELEASE) $(DIR_RELEASE)/runner/$(RUNNER)
+$(BIN_RELEASE): $(OBJ_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(LIBS)
 $(DIR_RELEASE):
 	mkdir -p $@

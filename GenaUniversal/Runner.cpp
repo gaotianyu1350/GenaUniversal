@@ -2,12 +2,14 @@
 #include <fstream>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <sys/timeb.h>
 #include <dirent.h>
 #include <algorithm>
 #include <stdexcept>
 
 Runner::Runner(const bool *flag)
+    : in(FileManager::nul), out(FileManager::nul), err(FileManager::nul)
 {
     fin = fout = "!";
     time = memory = -1;
@@ -117,7 +119,7 @@ bool Runner::check()
 }
 
 #ifdef WIN32
-#include <windows.h>
+
 #include <psapi.h>
 
 void Runner::closeAllHandle()
@@ -141,7 +143,7 @@ void Runner::kill()
     {
         TerminateProcess(pinfo->hProcess, 4);
         __haveexit = true;
-		__exitcode = 0;
+        __exitcode = 0;
     }
     closeAllHandle();
 }
@@ -165,7 +167,7 @@ DWORD Runner::_exitcode()
 void Runner::run()
 {
     if (__haveexit)
-       throw std::logic_error("You can only use runner once.");
+        throw std::logic_error("You can only use runner once.");
     if (!check())
     {
         __haveexit = true;
@@ -173,7 +175,8 @@ void Runner::run()
     }
     if (fin != "!" && fin != in.getPath())
     {
-        if (system(("copy \"" + in.getPath() + "\" \"" + fin + "\" /Y >nul 2>&1").c_str()))
+        if (system(("copy \"" + in.getPath() + "\" \"" + fin +
+                    "\" /Y >nul 2>&1").c_str()))
         {
             status = 2;
             __haveexit = true;
@@ -189,16 +192,22 @@ void Runner::run()
     StartInfo.cb = sizeof(STARTUPINFO);
     StartInfo.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
     StartInfo.wShowWindow = SW_HIDE;
-    hErrorFile = CreateFile(err.getPath().c_str(), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    hErrorFile = CreateFile(err.getPath().c_str(), GENERIC_WRITE,
+                            FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL,
+                            NULL);
     StartInfo.hStdError = hErrorFile;
     if (fin == "!")
     {
-        hInputFile = CreateFile(in.getPath().c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        hInputFile = CreateFile(in.getPath().c_str(), GENERIC_READ,
+                                FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
+                                NULL);
         StartInfo.hStdInput = hInputFile;
     }
     if (fout == "!")
     {
-        hOutFile = CreateFile(out.getPath().c_str(), GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        hOutFile = CreateFile(out.getPath().c_str(), GENERIC_WRITE,
+                              FILE_SHARE_READ | FILE_SHARE_WRITE, &psa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL,
+                              NULL);
         StartInfo.hStdOutput = hOutFile;
     }
     std::string cmdline;
@@ -247,7 +256,8 @@ void Runner::run()
     {
         if (!FileManager::isfile(fout))
             out.createFile();
-        else if (system(("copy \"" + fout + "\" \"" + out.getPath() + "\" /Y >nul 2>&1").c_str()))
+        else if (system(("copy \"" + fout + "\" \"" + out.getPath() +
+                         "\" /Y >nul 2>&1").c_str()))
         {
             status = 3;
             return;
@@ -256,4 +266,139 @@ void Runner::run()
 }
 
 #else
+
+#include <sys/wait.h>
+
+void Runner::kill()
+{
+    if (active())
+    {
+        system(("kill " + std::to_string(pid) + " >/dev/null").c_str());
+        __haveexit = true;
+        __exitcode = 0;
+    }
+    dispose();
+}
+
+int Runner::_exitcode()
+{
+    if (active())
+        return __exitcode = 259;
+    if (__exitcode != 259)
+        return __exitcode;
+    wait(&__exitcode);
+    __exitcode = WEXITSTATUS(__exitcode);
+    return __exitcode;
+}
+
+bool Runner::active()
+{
+    if (__haveexit)
+        return false;
+    __haveexit = !system(("ps -A | grep " + std::to_string(pid) +
+                          " | grep \\<defunct\\> >/dev/null 2>&1").c_str());
+    if (__haveexit)
+        _exitcode();
+    return !__haveexit;
+}
+
+unsigned Runner::_getmemory()
+{
+    FILE *f = popen(("ps -eo pid,rss | grep \"" + std::to_string(pid) + " \"").c_str(), "r");
+    unsigned tmp, ans;
+    if (fscanf(f, "%*d%u", &tmp) != EOF)
+        ans = tmp;
+    else
+        ans = 0;
+    pclose(f);
+    return ans;
+}
+
+void Runner::dispose()
+{
+    if (!disposed)
+    {
+        for (size_t i = 0; i < cmd.size(); ++i)
+            delete[] __cmd[i];
+        delete[] __cmd;
+        disposed = true;
+    }
+}
+
+void Runner::run()
+{
+    if (__haveexit)
+        throw std::logic_error("You can only use runner once.");
+    if (!check())
+    {
+        __haveexit = true;
+        return;
+    }
+    if (fin != "!" && fin != in.getPath())
+    {
+        if (system(("cp \"" + in.getPath() + "\" \"" + fin +
+                    "\" -f >/dev/null 2>&1").c_str()))
+        {
+            status = 2;
+            __haveexit = true;
+            return;
+        }
+    }
+    timeb times, timet;
+    __exitcode = 259;
+    disposed = false;
+    __cmd = new char*[cmd.size() + 1];
+    for (size_t i = 0; i < cmd.size(); ++i)
+    {
+        __cmd[i] = new char[cmd[i].size() + 1];
+        strcpy(__cmd[i], cmd[i].c_str());
+    }
+    __cmd[cmd.size()] = NULL;
+    pid = fork();
+    if (!pid)
+    {
+        if (fin == "!")
+            freopen(in.getPath().c_str(), "r", stdin);
+        if (fout == "!")
+            freopen(out.getPath().c_str(), "w", stdout);
+        freopen(err.getPath().c_str(), "w", stderr);
+        execvp(__cmd[0], __cmd);
+    }
+    else
+    {
+        ftime(&times);
+        while (active())
+        {
+            if (*flagStop)
+            {
+                kill();
+                status = -1;
+                return;
+            }
+            ftime(&timet);
+            utime = (timet.time - times.time) * 1000 + (timet.millitm - times.millitm);
+            umemory = std::max(umemory, _getmemory());
+            if (umemory > memory || utime > time)
+            {
+                kill();
+                return;
+            }
+        }
+    }
+    dispose();
+    ftime(&timet);
+    utime = (timet.time - times.time) * 1000 + (timet.millitm - times.millitm);
+    if (fout != "!" && fout != out.getPath())
+    {
+        if (!FileManager::isfile(fout))
+            out.createFile();
+        else if (system(("cp \"" + fout + "\" \"" + out.getPath() +
+                         "\" -f >/dev/null 2>&1").c_str()))
+        {
+            status = 3;
+            return;
+        }
+    }
+}
+
 #endif
