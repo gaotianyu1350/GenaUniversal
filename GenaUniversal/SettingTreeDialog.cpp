@@ -1,18 +1,18 @@
-#include "SettingTreeFrame.h"
+#include "SettingTreeDialog.h"
 
-BEGIN_EVENT_TABLE(SettingTreeFrame, wxFrame)
-    EVT_BUTTON(wxID_OK, SettingTreeFrame::clickOK)
-    EVT_BUTTON(wxID_CANCEL, SettingTreeFrame::clickCancel)
+BEGIN_EVENT_TABLE(SettingTreeDialog, wxDialog)
+    EVT_BUTTON(wxID_OK, SettingTreeDialog::clickOK)
+    EVT_BUTTON(wxID_CANCEL, SettingTreeDialog::clickCancel)
 END_EVENT_TABLE()
 
-SettingTreeFrame::SettingTreeFrame(wxWindow *parent, wxWindowID winid, Setting *init, const wxString &name)
+SettingTreeDialog::SettingTreeDialog(wxWindow *parent, wxWindowID winid, Setting *init, const wxString &name)
 {
     deepCopy(init, data);
     Create(parent, winid, data->getName(), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, name);
     SetIcon(wxICON(GenaIcon));
     panel = new wxPanel(this);
-    btnOK = new wxButton(panel, wxID_OK, "OK");
-    btnCancel = new wxButton(panel, wxID_CANCEL, "Cancel");
+    btnOK = new wxButton(panel, wxID_OK, "&OK");
+    btnCancel = new wxButton(panel, wxID_CANCEL, "&Cancel");
     topSizer = new wxBoxSizer(wxVERTICAL);
     btnSizer = new wxBoxSizer(wxHORIZONTAL);
     canvas = new SettingGLCanvas(panel);
@@ -21,15 +21,29 @@ SettingTreeFrame::SettingTreeFrame(wxWindow *parent, wxWindowID winid, Setting *
     btnSizer->Add(btnOK, 0, wxALL, 10);
     btnSizer->Add(btnCancel, 0, wxALL, 10);
     panel->SetSizerAndFit(topSizer);
+    topSizer->SetSizeHints(panel);
 }
 
-void SettingTreeFrame::clickOK(wxCommandEvent &event)
+SettingTreeDialog::~SettingTreeDialog()
 {
+    deepRemove(data);
 }
 
-void SettingTreeFrame::clickCancel(wxCommandEvent &event)
+void SettingTreeDialog::clickOK(wxCommandEvent &event)
 {
-    Close();
+    EndModal(wxID_OK);
+}
+
+void SettingTreeDialog::clickCancel(wxCommandEvent &event)
+{
+    EndModal(wxID_CANCEL);
+}
+
+Setting *SettingTreeDialog::getData()
+{
+    Setting *tmp;
+    deepCopy(data, tmp);
+    return tmp;
 }
 
 BEGIN_EVENT_TABLE(SettingGLCanvas, wxGLCanvas)
@@ -41,6 +55,11 @@ SettingGLCanvas::SettingGLCanvas(wxWindow *parent, wxWindowID id, const wxString
     : wxGLCanvas(parent, id, NULL, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE, name)
 {
     glRC = new wxGLContext(this);
+}
+
+SettingGLCanvas::~SettingGLCanvas()
+{
+    delete glRC;
 }
 
 void SettingGLCanvas::OnPaint(wxPaintEvent &event)
