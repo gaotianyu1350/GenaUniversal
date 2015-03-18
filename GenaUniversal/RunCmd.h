@@ -14,8 +14,8 @@ public:
     void setCommand(const std::vector<std::string> &command);
     void addArg(const std::string &arg);
     void run();
-    bool active();
     void getOutput(std::string &output);
+    int getExitCode();
 
 private:
     const bool *flag;

@@ -26,11 +26,6 @@ void RunCmd::run()
     runner->run();
 }
 
-bool RunCmd::active()
-{
-    return runner->active();
-}
-
 void RunCmd::getOutput(std::string &output)
 {
     std::ifstream fOut(strOutFile.c_str());
@@ -40,4 +35,9 @@ void RunCmd::getOutput(std::string &output)
     std::getline(fOut, resOut, (char)-1);
     std::getline(fErr, resErr, (char)-1);
     output = resOut + resErr;
+}
+
+int RunCmd::getExitCode()
+{
+    return runner->exitCode();
 }
