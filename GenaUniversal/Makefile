@@ -35,6 +35,7 @@ PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)\Player_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Problem_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Point_Normal.dll \
+	$(DIR_PLUGIN_DEBUG)\Compile_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Compare_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Compare_Normal2.dll \
 	$(DIR_PLUGIN_DEBUG)\Compare_Float.dll
@@ -47,6 +48,8 @@ $(DIR_PLUGIN_DEBUG)\Player_Normal.dll: Player_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 $(DIR_PLUGIN_DEBUG)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
+$(DIR_PLUGIN_DEBUG)\Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
@@ -149,6 +152,7 @@ PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)\Player_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Problem_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Point_Normal.dll \
+	$(DIR_PLUGIN_RELEASE)\Compile_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Compare_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Compare_Normal2.dll \
 	$(DIR_PLUGIN_RELEASE)\Compare_Float.dll
@@ -161,6 +165,8 @@ $(DIR_PLUGIN_RELEASE)\Player_Normal.dll: Player_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 $(DIR_PLUGIN_RELEASE)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
+$(DIR_PLUGIN_RELEASE)\Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2

@@ -1,6 +1,0 @@
-#ifndef COMPILE_NORMAL_H
-#define COMPILE_NORMAL_H
-
-
-
-#endif // COMPILE_NORMAL_H
