@@ -17,9 +17,9 @@ extern "C"
         }
         virtual void run()
         {
-            AnsFile = setting->getItem("AnsFile").operator string&();
-            OutFile = setting->getItem("OutFile").operator string&();
-            sscanf((setting->getItem("Eps").operator string&()).c_str(),"%lf",&eps);
+            AnsFile = setting->getItem("AnsFile").operator string & ();
+            OutFile = setting->getItem("OutFile").operator string & ();
+            sscanf((setting->getItem("Eps").operator string & ()).c_str(), "%lf", &eps);
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;
@@ -38,11 +38,25 @@ extern "C"
             result->setItem("compare", "Accepted");
             while (getline(fans, tmpstr))
             {
-                vecans.push_back(tmpstr);
+                int pos = tmpstr.find('\r');
+                while (pos != -1)
+                {
+                    tmpstr.erase(pos, 1);
+                    pos = tmpstr.find('\r', pos);
+                }
+                if (!tmpstr.empty())
+                    vecans.push_back(tmpstr);
             }
             while (getline(fout, tmpstr))
             {
-                vecout.push_back(tmpstr);
+                int pos = tmpstr.find('\r');
+                while (pos != -1)
+                {
+                    tmpstr.erase(pos, 1);
+                    pos = tmpstr.find('\r', pos);
+                }
+                if (!tmpstr.empty())
+                    vecout.push_back(tmpstr);
             }
             if (vecans.size() > vecout.size())
             {
@@ -56,7 +70,7 @@ extern "C"
             }
             else
             {
-                vector<double>vecans,vecout;
+                vector<double>vecans, vecout;
                 fans.close();
                 fout.close();
                 fans.clear();
@@ -95,7 +109,7 @@ extern "C"
             Compare::onStop();
         }
     private:
-        string AnsFile,OutFile;
+        string AnsFile, OutFile;
         double eps;
         char str[10];
     };

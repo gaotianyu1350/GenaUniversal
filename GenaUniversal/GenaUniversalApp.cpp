@@ -8,7 +8,7 @@
 
 #include "GenaUniversalApp.h"
 #include "GenaUniversalMain.h"
-#include "SettingTreeFrame.h"
+#include "SettingTreeDialog.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <iostream>
@@ -35,9 +35,11 @@ bool GenaUniversalApp::OnInit()
     /*GenaUniversalFrame *Frame = new GenaUniversalFrame(NULL);
     Frame->Show();
     SetTopWindow(Frame);*/
-    SettingTreeFrame *Frame = new SettingTreeFrame(NULL, wxID_ANY);
-    Frame->Show();
-    SetTopWindow(Frame);
+    Setting *setting;
+    SettingTreeDialog *Dialog = new SettingTreeDialog(NULL, wxID_ANY);
+    if (Dialog->ShowModal() == wxID_OK)
+        setting = Dialog->getData();
+    Dialog->Destroy();
 
     return wxOK;
 }

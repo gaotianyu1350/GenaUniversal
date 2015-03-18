@@ -58,7 +58,7 @@ BIN_DEBUG = $(DIR_DEBUG)\$(PROJECT).exe
 OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\GenaUniversalApp.o \
 	$(DIROBJ_DEBUG)\GenaUniversalMain.o \
-	$(DIROBJ_DEBUG)\SettingTreeFrame.o \
+	$(DIROBJ_DEBUG)\SettingTreeDialog.o \
 	$(DIROBJ_DEBUG)\File.o \
 	$(DIROBJ_DEBUG)\FileManager.o \
 	$(DIROBJ_DEBUG)\TempFile.o \
@@ -79,7 +79,7 @@ $(DIROBJ_DEBUG)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)\SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+$(DIROBJ_DEBUG)\SettingTreeDialog.o: SettingTreeDialog.cpp SettingTreeDialog.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)\FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -168,7 +168,7 @@ BIN_RELEASE = $(DIR_RELEASE)\$(PROJECT).exe
 OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\GenaUniversalApp.o \
 	$(DIROBJ_RELEASE)\GenaUniversalMain.o \
-	$(DIROBJ_RELEASE)\SettingTreeFrame.o \
+	$(DIROBJ_RELEASE)\SettingTreeDialog.o \
 	$(DIROBJ_RELEASE)\FileManager.o \
 	$(DIROBJ_RELEASE)\File.o \
 	$(DIROBJ_RELEASE)\TempFile.o \
@@ -190,7 +190,7 @@ $(DIROBJ_RELEASE)\GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)\SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+$(DIROBJ_RELEASE)\SettingTreeDialog.o: SettingTreeDialog.cpp SettingTreeDialog.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)\File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
