@@ -30,6 +30,26 @@ extern "C"
                 if ('A' <= *p && *p <= 'Z')
                     *p = *p - 'A' + 'a';
 
+            if (!setting->hasItem("compilesetting"))
+            {
+                setResult(Compile::COMPILE_RES_NO_COMPILER, "There is no compiler for the code. ");
+                return;
+            }
+            Setting *cmpSet = setting->getItem("compilesetting");
+            if (!cmpSet->hasItem(ext))
+            {
+                setResult(Compile::COMPILE_RES_NO_COMPILER, "There is no compiler for the code. ");
+                return;
+            }
+
+            std::string spSource("${src}");
+            std::string spExe("${exe}");
+            std::string strCmd = cmpSet->getItem(ext);
+            std::string exe = TempFile::GetTempFile();
+
+
+            RunCmd *cmdrunner = new RunCmd(flagStop);
+
 
         }
 
