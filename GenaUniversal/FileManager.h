@@ -24,13 +24,14 @@ public:
     static bool isdir(const std::string &path);
     static bool isfile(const std::string &path);
     static bool rmdir_recursive(const std::string &dir);
-    static bool isabspath(const std::string &path);
     static std::string getcurabsdir();
     static std::string getdir(const std::string &path);
     static std::string getext(const std::string &path);
     static std::string getabspath(const std::string &path);
     static std::string getfilename(const std::string &path);
     static int getfilesize(const std::string &path);
+private:
+    static bool isabspath(const std::string &path);
 };
 
 #endif // FILEMANAGER_H

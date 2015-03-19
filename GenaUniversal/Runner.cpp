@@ -21,27 +21,27 @@ Runner::Runner(const bool *flag)
 
 void Runner::setIn(const std::string &path)
 {
-    in.setFile(path);
+    in.setFile(FileManager::getabspath(path));
 }
 
 void Runner::setOut(const std::string &path)
 {
-    out.setFile(path);
+    out.setFile(FileManager::getabspath(path));
 }
 
 void Runner::setErr(const std::string &path)
 {
-    err.setFile(path);
+    err.setFile(FileManager::getabspath(path));
 }
 
 void Runner::setFin(const std::string &path)
 {
-    fin = path;
+    fin = FileManager::getabspath(path);
 }
 
 void Runner::setFout(const std::string &path)
 {
-    fout = path;
+    fout = FileManager::getabspath(path);
 }
 
 void Runner::setCommand(const std::vector<std::string> &command)

@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <cstring>
+#include <stdexcept>
 
 constexpr char FileManager::nul[];
 
@@ -98,9 +99,30 @@ std::string FileManager::getdir(const std::string &path)
 
 std::string FileManager::getabspath(const std::string &path)
 {
+    std::string a, f;
     if (isabspath(path))
-        return path;
-    return getcurabsdir() + path;
+        a = path;
+    else
+        a = getcurabsdir() + path;
+    int n = a.length();
+    for (int i = 0; i < n;)
+    {
+        if (i && a[i - 1] == sep && a[i] == '.' && a[i + 1] == '.' && a[i + 2] == sep)
+        {
+            do
+            {
+                f.pop_back();
+            } while (f.length() && f.back() != sep);
+            if (!f.length())
+                throw std::logic_error("cannot transform " + path + " into abspath.");
+            i += 3;
+        }
+        else if (i && a[i - 1] == sep && a[i] == '.' &&a[i + 1] == sep)
+            i += 2;
+        else
+            f += a[i++];
+    }
+    return f;
 }
 
 std::string FileManager::getext(const std::string &path)
