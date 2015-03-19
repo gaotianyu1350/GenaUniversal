@@ -39,7 +39,9 @@ extern "C"
                 total += res->getItem("total");
             }
             result->setItem("total", total);
-            pushMessage(0, setting->getName() + " total score " + std::to_string(total));
+            char strTmp[100];
+            sprintf(strTmp, "%d", total);
+            pushMessage(0, setting->getName() + " total score " + std::string(strTmp));
         }
 
         virtual void onStop()

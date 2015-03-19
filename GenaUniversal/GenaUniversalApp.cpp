@@ -40,6 +40,7 @@ bool GenaUniversalApp::OnInit()
     if (Dialog->ShowModal() == wxID_OK)
         setting = Dialog->getData();
     Dialog->Destroy();
+
     return wxOK;
 }
 
