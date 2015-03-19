@@ -1,36 +1,48 @@
-#include "sdk.h"
+#include "Compile.h"
 
 extern "C"
 {
-    class Compile_Normal
+    class Compile_Normal : public Compile
     {
-        static int COMPILE_RES_NULL        = 0;
-        static int COMPILE_RES_OK          = 1;
-        static int COMPILE_RES_NO_FILE     = 2;
-        static int COMPILE_RES_NO_COMPILER = 3;
-        static int COMPILE_RES_CE          = 4;
-
-        static void Tool::strToLower(std::string &s)
+    public:
+        Compile_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+            : Compile(flag, queueMessage, setting, result)
         {
-            transform(s.begin(), s.end(), s.begin(), std::tolower);
         }
 
-        static bool Compile(const File *source, const std::string &extraCommand, Result *res, const bool *flagStop)
+        virtual void run()
         {
-            res->setName("Compile Info");
-            res->setItem("result", Result_data(COMPILE_RES_NULL));
-            res->setItem("detail", Result_data(std::string("Hasn't been compiled. "));
-
-            if (!File->exist())
+            if (!setting->hasItem("code"))
             {
-                res->setItem("result", Result_data(COMPILE_RES_NO_FILE));
-                res->setItem("detail", Result_data(std::string("Cannot find the file. ")));
-                return false;
+                setResult(Compile::COMPILE_RES_NO_CODE, "Hasn't set the code. ");
+                return;
             }
 
-            std::string ext = source->getExt();
-            ext = strToLower(ext);
+            std::string code = setting->getItem("code").operator std::string &();
+            if (!FileManager::isfile(code))
+            {
+                setResult(Compile::COMPILE_RES_NO_CODE, "There is no code. ");
+                return;
+            }
 
+            std::string ext = FileManager::getext(code);
+            for (std::string::iterator p = ext.begin(); p != ext.end(); p++)
+                if ('A' <= *p && *p <= 'Z')
+                    *p = *p - 'A' + 'a';
+
+
+        }
+
+        virtual void onStop()
+        {
+            Compile::onStop();
+        }
+
+    private:
+        void setResult(int resultCode, const std::string &detail)
+        {
+            result->setItem("result", resultCode);
+            result->setItem("detail", detail);
         }
     };
 }
