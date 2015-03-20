@@ -143,6 +143,11 @@ void Result_data::CopyUnion(const Result_data &data)
     }
 }
 
+void Result_data::setKey(const std::string &key)
+{
+    this->key = key;
+}
+
 Result::Result()
 {
 }
@@ -160,6 +165,7 @@ void Result::setName(const std::string &name)
 void Result::setItem(const std::string &idx, const Result_data &val)
 {
     data[idx] = val;
+    data[idx].setKey(idx);
 }
 
 std::string Result::getName() const

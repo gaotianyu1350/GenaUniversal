@@ -2,8 +2,9 @@ PROJECT = GenaUniversal
 CPPDEPS = -MT$@ -MF$@.d -MD -MP -std=gnu++11
 WXINCLUDEDIR = D:\msys64\mingw64\include\wx-3.0
 SETUPDIR = D:\msys64\mingw64\lib\wx\include\msw-unicode-3.0
-LIBS = -pipe -lwx_mswu_core-3.0.dll -lwx_baseu-3.0.dll -lwx_mswu_gl-3.0.dll -lpsapi -lopengl32 -lglu32
-WIDGETS_CXXFLAGS = -mthreads -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXMSW__ -I$(WXINCLUDEDIR) -I$(SETUPDIR) -fpermissive
+FREETYPEDIR = D:\msys64\mingw64\include\freetype2
+LIBS = -pipe -lwx_mswu_core-3.0.dll -lwx_baseu-3.0.dll -lwx_mswu_gl-3.0.dll -lpsapi -lopengl32 -lglu32 -lfreetype -lftgl
+WIDGETS_CXXFLAGS = -mthreads -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXMSW__ -I$(WXINCLUDEDIR) -I$(SETUPDIR) -I$(FREETYPEDIR) -fpermissive
 DLLDEPS = -std=gnu++11 -fPIC -shared -lpsapi
 
 RESOURCE = GenaUniversal.rc
@@ -114,7 +115,7 @@ $(DIROBJ_DEBUG)\Library.o: Library.cpp Library.h
 $(DIROBJ_DEBUG)\Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
-	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
+	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS)
 $(DIR_DEBUG):
 	-if not exist $@ mkdir $@
 $(DIROBJ_DEBUG):
@@ -232,7 +233,7 @@ $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
 $(DIROBJ_RELEASE)\Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
-	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
+	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -mwindows
 $(DIR_RELEASE):
 	-if not exist $@ mkdir $@
 $(DIROBJ_RELEASE):

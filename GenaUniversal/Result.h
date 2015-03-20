@@ -28,6 +28,9 @@ public:
     Result_data operator =(const Result_data &data);
     friend Result *deepCopy(Result *from, Result *&to);
     friend void deepRemove(Result *&a);
+    enum {INT, STR, RES} is;
+    std::string key;
+    void setKey(const std::string &key);
 private:
     union
     {
@@ -35,7 +38,6 @@ private:
         std::string StrData;
         Result *ResData;
     };
-    enum {INT, STR, RES} is;
     void CopyUnion(const Result_data &dat);
 };
 

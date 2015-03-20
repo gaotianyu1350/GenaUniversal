@@ -17,6 +17,7 @@ class Runner
 {
 public:
     Runner(const bool *flag);
+    ~Runner();
     void setIn(const std::string &path); //acquiring
     void setOut(const std::string &path); //acquiring
     void setErr(const std::string &path); //acquiring

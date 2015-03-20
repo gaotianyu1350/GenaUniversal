@@ -11,6 +11,7 @@ class RunCmd
 {
 public:
     RunCmd(const bool *flag);
+    ~RunCmd();
     void setCommand(const std::vector<std::string> &command);
     void addArg(const std::string &arg);
     void run();
