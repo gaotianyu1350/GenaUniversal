@@ -1,11 +1,3 @@
-/***************************************************************
- * Name:      GenaUniversalApp.cpp
- * Purpose:   Code for Application Class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-10
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
 #include "GenaUniversalApp.h"
 #include "GenaUniversalMain.h"
 #include "SettingTreeDialog.h"
@@ -36,7 +28,8 @@ bool GenaUniversalApp::OnInit()
     Frame->Show();
     SetTopWindow(Frame);*/
     Setting *setting;
-    SettingTreeDialog *Dialog = new SettingTreeDialog(NULL, wxID_ANY);
+    setting = new Setting();
+    SettingTreeDialog *Dialog = new SettingTreeDialog(NULL, wxID_ANY, setting);
     if (Dialog->ShowModal() == wxID_OK)
         setting = Dialog->getData();
     Dialog->Destroy();

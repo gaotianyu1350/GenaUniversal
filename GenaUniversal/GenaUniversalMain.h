@@ -1,10 +1,3 @@
-/***************************************************************
- * Name:      GenaUniversalMain.h
- * Purpose:   Defines Application Frame
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-10
- **************************************************************/
-
 #ifndef GENAUNIVERSALMAIN_H
 #define GENAUNIVERSALMAIN_H
 

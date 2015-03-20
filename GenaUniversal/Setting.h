@@ -31,6 +31,9 @@ public:
     Setting_data operator =(const Setting_data &data);
     friend Setting *deepCopy(Setting *from, Setting *&to);
     friend void deepRemove(Setting *&a);
+    enum {INT, STR, FIL, SET} is;
+    std::string key;
+    void setKey(const std::string &key);
 private:
     union
     {
@@ -39,7 +42,6 @@ private:
         File *FileData;
         Setting *SetData;
     };
-    enum {INT, STR, FIL, SET} is;
     void CopyUnion(const Setting_data &dat);
 };
 

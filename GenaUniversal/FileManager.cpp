@@ -1,11 +1,3 @@
-/***************************************************************
- * Name:      FileManager.cpp
- * Purpose:   Code for FileManager class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-11
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
 #include "FileManager.h"
 #include <dirent.h>
 #include <unistd.h>
@@ -142,7 +134,7 @@ std::string FileManager::getfilename(const std::string &path)
 {
     std::string::size_type pos = path.rfind(sep);
     if (pos == std::string::npos)
-        pos = -1;
+        return path;
     return path.substr(pos + 1, path.length() - pos - 1);
 }
 

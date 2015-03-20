@@ -169,6 +169,11 @@ void Setting_data::CopyUnion(const Setting_data &data)
     }
 }
 
+void Setting_data::setKey(const std::string &key)
+{
+    this->key = key;
+}
+
 Setting::Setting()
 {
 }
@@ -191,6 +196,7 @@ std::string Setting::getName() const
 void Setting::setItem(const std::string &idx, const Setting_data &val)
 {
     data[idx] = val;
+    data[idx].setKey(idx);
 }
 
 Setting_data &Setting::getItem(const std::string &idx)

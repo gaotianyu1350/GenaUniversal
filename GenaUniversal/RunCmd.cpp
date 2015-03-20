@@ -41,3 +41,8 @@ int RunCmd::getExitCode()
 {
     return runner->exitCode();
 }
+
+RunCmd::~RunCmd()
+{
+    delete runner;
+}
