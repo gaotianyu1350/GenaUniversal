@@ -1,9 +1,12 @@
 PROJECT = GenaUniversal
 CPPDEPS = -MT$@ -MF$@.d -MD -MP -std=gnu++11
-WXINCLUDEDIR = D:\msys64\mingw64\include\wx-3.0
-SETUPDIR = D:\msys64\mingw64\lib\wx\include\msw-unicode-3.0
-LIBS = -pipe -lwx_mswu_core-3.0.dll -lwx_baseu-3.0.dll -lwx_mswu_gl-3.0.dll -lpsapi -lopengl32 -lglu32
-WIDGETS_CXXFLAGS = -mthreads -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXMSW__ -I$(WXINCLUDEDIR) -I$(SETUPDIR) -fpermissive
+WXDIR = E:\wxWidgets-3.0.2
+WXLIBDIR = $(WXDIR)\lib\gcc_lib
+WXINCLUDEDIR = $(WXDIR)\include
+SETUPDIR = $(WXLIBDIR)\mswu
+LIBS = -lwxmsw30u_core -lwxbase30u -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lwxmsw30u_gl -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lwininet -lpsapi -lopengl32 -lglu32
+DEFINES = -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -DNOPCH
+WIDGETS_CXXFLAGS = -mthreads $(DEFINES) -I$(WXINCLUDEDIR) -I$(SETUPDIR) -W -Wno-ctor-dtor-privacy
 DLLDEPS = -std=gnu++11 -fPIC -shared -lpsapi
 
 RESOURCE = GenaUniversal.rc
