@@ -26,7 +26,7 @@ bool FileManager::isdir(const std::string &path)
 
 bool FileManager::isfile(const std::string &path)
 {
-    return access(path.c_str(), F_OK) && !isdir(path);
+    return !access(path.c_str(), F_OK) && !isdir(path);
 }
 
 bool FileManager::rmdir_recursive(const std::string &dir)
