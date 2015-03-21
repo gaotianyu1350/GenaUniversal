@@ -1,4 +1,5 @@
 #include "Compile.h"
+#include "RunCmd.h"
 
 extern "C"
 {
@@ -30,7 +31,63 @@ extern "C"
                 if ('A' <= *p && *p <= 'Z')
                     *p = *p - 'A' + 'a';
 
+            if (!setting->hasItem("compilesetting"))
+            {
+                setResult(Compile::COMPILE_RES_NO_COMPILER, "There is no compiler for the code. ");
+                return;
+            }
+            Setting *cmpSet = setting->getItem("compilesetting");
+            if (!cmpSet->hasItem(ext))
+            {
+                setResult(Compile::COMPILE_RES_NO_COMPILER, "There is no compiler for the code. ");
+                return;
+            }
 
+            std::string spSource("${src}");
+            std::string spExe("${exe}");
+            std::string strCmd = cmpSet->getItem(ext);
+            std::string exe = TempFile::GetTempFile();
+            std::size_t found;
+
+            while ((found = strCmd.find(spSource)) != std::string::npos)
+                strCmd.replace(found, spSource.size(), "\"" + code + "\"");
+            while ((found = strCmd.find(spExe)) != std::string::npos)
+                strCmd.replace(found, spExe.size(), "\"" + exe + "\"");
+
+            RunCmd *cmdrunner = new RunCmd(flagStop);
+            std::string tmp("");
+            bool inquote = false;
+            for (std::string::iterator p = strCmd.begin(); p != strCmd.end(); p++)
+            {
+                switch (*p)
+                {
+                case '\"':
+                    inquote = !inquote;
+                    break;
+                case ' ':
+                    if (inquote)
+                        tmp += ' ';
+                    else
+                    {
+                        if (tmp.empty())
+                            break;
+                        cmdrunner->addArg(tmp);
+                        tmp = "";
+                    }
+                    break;
+                default:
+                    tmp += *p;
+                }
+            }
+            if (!tmp.empty())
+                cmdrunner->addArg(tmp);
+
+            cmdrunner->run();
+            cmdrunner->getOutput(tmp);
+            if (cmdrunner->getExitCode())
+                setResult(Compile::COMPILE_RES_CE, "Compile error. \n" + tmp);
+            else
+                setResult(Compile::COMPILE_RES_OK, "Compile success. \n" +tmp);
         }
 
         virtual void onStop()
@@ -45,4 +102,9 @@ extern "C"
             result->setItem("detail", detail);
         }
     };
+
+    Compile_Normal *get(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
+    {
+        return new Compile_Normal(flag, queueMessage, setting, result);
+    }
 }
