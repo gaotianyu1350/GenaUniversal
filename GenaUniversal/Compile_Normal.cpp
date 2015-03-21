@@ -83,6 +83,10 @@ extern "C"
                 cmdrunner->addArg(tmp);
 
             cmdrunner->run();
+
+            if (cmdrunner->getStatus() == Runner::RUNNER_RES_KILL)
+                onStop();
+
             cmdrunner->getOutput(tmp);
             if (cmdrunner->getExitCode())
                 setResult(Compile::COMPILE_RES_CE, "Compile error. \n" + tmp);
@@ -92,6 +96,7 @@ extern "C"
 
         virtual void onStop()
         {
+            setResult(Compile::COMPILE_RES_TER, "Terminate. ");
             Compile::onStop();
         }
 

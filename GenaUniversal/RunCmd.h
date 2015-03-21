@@ -17,6 +17,7 @@ public:
     void run();
     void getOutput(std::string &output);
     int getExitCode();
+    int getStatus();
 
 private:
     const bool *flag;

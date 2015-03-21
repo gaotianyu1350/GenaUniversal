@@ -16,6 +16,8 @@ public:
     static bool isdir(const std::string &path);
     static bool isfile(const std::string &path);
     static bool rmdir_recursive(const std::string &dir);
+    static bool rmfile(const std::string &file);
+    static bool movefile(const std::string &oldpath, const std::string &newpath);
     static std::string getcurabsdir();
     static std::string getdir(const std::string &path);
     static std::string getext(const std::string &path);
