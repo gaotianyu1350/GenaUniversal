@@ -1,4 +1,4 @@
-#include "SettingTreeDialog.h"
+/*#include "SettingTreeDialog.h"
 #include <algorithm>
 #include <deque>
 
@@ -274,3 +274,4 @@ void SettingGLCanvas::calcPos()
     }
     delete q1;
 }
+*/

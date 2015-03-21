@@ -5,7 +5,7 @@
 #include <wx/filename.h>
 #include <iostream>
 #include "Library.h"
-#include "Compile.h"
+#include "RunProg.h"
 #include "sdk.h"
 
 IMPLEMENT_APP(GenaUniversalApp);
@@ -27,7 +27,9 @@ bool GenaUniversalApp::OnInit()
     chdir(cwd.c_str());
     TempFile::InitTempFile();
 
-    GenaUniversalFrame *Frame = new GenaUniversalFrame(NULL);
+    Library lib("plugin\\RunProg_Normal.dll");
+
+    /*GenaUniversalFrame *Frame = new GenaUniversalFrame(NULL);
     Frame->Show();
     SetTopWindow(Frame);
     Setting *setting;
@@ -35,7 +37,7 @@ bool GenaUniversalApp::OnInit()
     SettingTreeDialog *Dialog = new SettingTreeDialog(NULL, wxID_ANY, setting);
     if (Dialog->ShowModal() == wxID_OK)
         setting = Dialog->getData();
-    Dialog->Destroy();
+    Dialog->Destroy();*/
 
     return wxOK;
 }
