@@ -26,12 +26,14 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)\Compare.o \
 	$(DIROBJ_DEBUG)\Compile.o \
 	$(DIROBJ_DEBUG)\RunCmd.o \
+	$(DIROBJ_DEBUG)\RunProg.o \
 	$(DIROBJ_DEBUG)\Runner.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)\Contest_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Player_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Problem_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Point_Normal.dll \
+	$(DIR_PLUGIN_DEBUG)\RunProg_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Compile_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Compare_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)\Compare_Normal2.dll \
@@ -47,6 +49,8 @@ $(DIR_PLUGIN_DEBUG)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 $(DIR_PLUGIN_DEBUG)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
+$(DIR_PLUGIN_DEBUG)\Run_Prog.dll: Run_Prog.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
@@ -74,6 +78,7 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)\Compare.o \
 	$(DIROBJ_DEBUG)\Compile.o \
 	$(DIROBJ_DEBUG)\RunCmd.o \
+	$(DIROBJ_DEBUG)\RunProg.o \
 	$(DIROBJ_DEBUG)\Runner.o
 RES_DEBUG = $(DIROBJ_DEBUG)\GenaUniversal.o
 $(RES_DEBUG): $(RESOURCE)
@@ -114,6 +119,8 @@ $(DIROBJ_DEBUG)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)\Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
+$(DIROBJ_DEBUG)\RunProg.o: RunProg.cpp RunProg.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS) -static
 $(DIR_DEBUG):
@@ -144,12 +151,14 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)\Compare.o \
 	$(DIROBJ_RELEASE)\Compile.o \
 	$(DIROBJ_RELEASE)\RunCmd.o \
+	$(DIROBJ_RELEASE)\RunProg.o \
 	$(DIROBJ_RELEASE)\Runner.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)\Contest_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Player_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Problem_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Point_Normal.dll \
+	$(DIR_PLUGIN_RELEASE)\RunProg_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Compile_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Compare_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)\Compare_Normal2.dll \
@@ -165,6 +174,8 @@ $(DIR_PLUGIN_RELEASE)\Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_RELEAS
 $(DIR_PLUGIN_RELEASE)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
+$(DIR_PLUGIN_RELEASE)\RunProg_Normal.dll: RunProg_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
 $(DIR_PLUGIN_RELEASE)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
@@ -192,6 +203,7 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)\Compare.o \
 	$(DIROBJ_RELEASE)\Compile.o \
 	$(DIROBJ_RELEASE)\RunCmd.o \
+	$(DIROBJ_RELEASE)\RunProg.o \
 	$(DIROBJ_RELEASE)\Runner.o
 RES_RELEASE = $(DIROBJ_RELEASE)\GenaUniversal.o
 $(RES_RELEASE): $(RESOURCE)
@@ -231,6 +243,8 @@ $(DIROBJ_RELEASE)\RunCmd.o: RunCmd.cpp RunCmd.h
 $(DIROBJ_RELEASE)\Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)\Runner.o: Runner.cpp Runner.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)\RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -static -mwindows
