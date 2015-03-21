@@ -53,7 +53,7 @@ $(DIR_PLUGIN_DEBUG)\Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
-$(DIR_PLUGIN_DEBUG)\Run_Prog.dll: Run_Prog.cpp $(OBJ_PLUGIN_DEBUG)
+$(DIR_PLUGIN_DEBUG)\RunProg_Normal.dll: RunProg_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)\Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g

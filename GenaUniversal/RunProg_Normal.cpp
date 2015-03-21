@@ -6,7 +6,7 @@ extern "C"
     {
     public:
         RunProg_Normal(const bool *flag, qMs *queueMessage, Setting *setting, Result *result)
-            : Compare(flag, queueMessage, setting, result)
+            : RunProg(flag, queueMessage, setting, result)
         {
         }
 
@@ -26,15 +26,18 @@ extern "C"
             }
 
             Runner *runner = new Runner(flagStop);
+            runner->addArg(exe);
 
             if (setting->hasItem("fin"))
             {
                 fin = setting->getItem("fin").operator std::string &();
+                fin = FileManager::getdir(exe) + fin;
                 runner->setFin(fin);
             }
             if (setting->hasItem("fout"))
             {
                 fout = setting->getItem("fout").operator std::string &();
+                fout = FileManager::getdir(exe) + fout;
                 runner->setFout(fout);
             }
             if (setting->hasItem("in"))
@@ -42,6 +45,17 @@ extern "C"
                 in = setting->getItem("in").operator std::string &();
                 runner->setIn(in);
             }
+
+            if (setting->hasItem("time"))
+                runner->setTime(setting->getItem("time"));
+            else
+                runner->setTime(INFINITE);
+
+            if (setting->hasItem("memory"))
+                runner->setMemory(setting->getItem("memory"));
+            else
+                runner->setMemory(INFINITE);
+
             out = TempFile::GetTempFile();
             err = TempFile::GetTempFile();
             runner->setOut(out);
@@ -58,7 +72,7 @@ extern "C"
                 setResult(RunProg::RUNPROG_RES_FAIL);
                 return;
             }
-            setResult(RunProg`::RUNPROG_RES_OK, runner->timeUsed(), runner->memoryUsed(), runner->exitCode());
+            setResult(RunProg::RUNPROG_RES_OK, runner->timeUsed(), runner->memoryUsed(), runner->exitCode());
         }
 
         virtual void onStop()
@@ -82,7 +96,7 @@ extern "C"
             if (!fout.empty() && FileManager::isfile(fout))
             {
                 tmpfout = TempFile::GetTempFile();
-                FileManager::movefile(fout, tmpfout):
+                FileManager::movefile(fout, tmpfout);
             }
         }
 
@@ -102,16 +116,16 @@ extern "C"
 
         void setResult(int res, int time = 0, int memory = 0, int exitcode = 0)
         {
-            result.setItem("result", res);
-            result.setItem("time", time);
-            result.setItem("memory", memory);
-            result.setItem("exitcode", exitcode);
+            result->setItem("result", res);
+            result->setItem("time", time);
+            result->setItem("memory", memory);
+            result->setItem("exitcode", exitcode);
         }
 
         void setResultFile()
         {
-            result.setItem("in", in);
-            result.setItem("err", err);
+            result->setItem("out", out.c_str());
+            result->setItem("err", err.c_str());
         }
 
     };
