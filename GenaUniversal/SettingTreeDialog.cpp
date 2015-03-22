@@ -10,7 +10,7 @@ END_EVENT_TABLE()
 SettingTreeDialog::SettingTreeDialog(wxWindow *parent, wxWindowID winid, Setting *init, const wxString &name)
 {
     deepCopy(init, data);
-    Create(parent, winid, data->getName(), wxDefaultPosition, wxSize(600, 600), wxDEFAULT_FRAME_STYLE, name);
+    Create(parent, winid, "Setting Tree", wxDefaultPosition, wxSize(600, 600), wxDEFAULT_FRAME_STYLE, name);
     SetIcon(wxICON(GenaIcon));
     panel = new wxPanel(this);
     btnOK = new wxButton(panel, wxID_OK, "&OK");
@@ -25,6 +25,7 @@ SettingTreeDialog::SettingTreeDialog(wxWindow *parent, wxWindowID winid, Setting
     panel->SetSizerAndFit(topSizer);
     topSizer->SetSizeHints(panel);
     Center();
+    //ShowFullScreen(true, 0);
 }
 
 SettingTreeDialog::~SettingTreeDialog()
@@ -53,6 +54,7 @@ glSetting::glSetting(Setting_data data, int num)
 {
     this->data = data;
     this->num = num;
+    fold = false;
     ct = 1;
     if (data.is == Setting_data::SET)
     {
@@ -92,11 +94,11 @@ SettingGLCanvas::SettingGLCanvas(Setting *data, wxWindow *parent, wxWindowID id,
     , font("simkai.ttf")
 {
     glRC = new wxGLContext(this);
-    font.CharMap(ft_encoding_unicode);
     fontsize = 20;
+    font.CharMap(ft_encoding_unicode);
+    font.FaceSize(fontsize);
     ClientSize = GetClientSize();
     gldata = new glSetting(data);
-
 }
 
 SettingGLCanvas::~SettingGLCanvas()
@@ -111,9 +113,10 @@ void SettingGLCanvas::OnPaint(wxPaintEvent &event)
     SetCurrent(*glRC);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslated(-center.m_x, -center.m_y, 0);
-
+    glLoadIdentity();
+    glTranslated(-center.m_x, -center.m_y, 0);
+    calcPos();
+    draw(gldata);
     glFlush();
     SwapBuffers();
 }
@@ -135,7 +138,7 @@ void SettingGLCanvas::OnMouseMove(wxMouseEvent &event)
     if (event.Dragging() && event.RightIsDown())
     {
         Tpoint pos = pix2pos(event.GetX(), event.GetY());
-        center = pos - move_last;
+        center -= pos - move_last;
         move_last = pos;
         Refresh();
     }
@@ -174,13 +177,13 @@ SettingGLCanvas::Tpoint SettingGLCanvas::pos2world(const Tpoint &pos)
 double SettingGLCanvas::printstr(const std::string &s, const Tpoint &pos)
 {
     wxString str(s);
-    double clientx = GetClientSize().x;
     double x = pos.m_x;
+    double mv = (double)fontsize / ClientSize.y;
     for (int i = 0; i < str.length(); ++i)
     {
-        glRasterPos2d(x, pos.m_y);
+        glRasterPos2d(x, pos.m_y - mv);
         font.Render((wchar_t*)str.wchar_str() + i, 1);
-        x += font.Advance((wchar_t*)str.wchar_str() + i, 1) / clientx * 2;
+        x += font.Advance((wchar_t*)str.wchar_str() + i, 1) / ClientSize.x * 2;
     }
     return x;
 }
@@ -188,7 +191,7 @@ double SettingGLCanvas::printstr(const std::string &s, const Tpoint &pos)
 double SettingGLCanvas::advance(const std::string &s)
 {
     wxString str(s);
-    return font.Advance((wchar_t*)str.wchar_str());
+    return 2.0 * font.Advance((wchar_t*)str.wchar_str()) / ClientSize.x;
 }
 
 void SettingGLCanvas::OnMouseLeftDown(wxMouseEvent &event)
@@ -211,16 +214,50 @@ void SettingGLCanvas::OnChar(wxKeyEvent &event)
 void SettingGLCanvas::getSettingSize(glSetting *data)
 {
     double ans = 0;
-    for (std::map<std::string, glSetting*>::iterator i = data->son.begin(); i != data->son.end(); ++i)
-        if (i->second->data.is == Setting_data::SET)
-            ans += 2.0 * fontsize / ClientSize.y;
-        else
+    if (!data->fold)
+    {
+        for (std::map<std::string, glSetting*>::iterator i = data->son.begin(); i != data->son.end(); ++i)
         {
             getSettingSize(i->second);
             ans += i->second->size;
         }
-    ans += (data->son.size() - 1) * 0.05;
+        if (data->son.size())
+            ans += (data->son.size() - 1) * 0.05;
+    }
     data->size = std::max(ans, 2.0 * fontsize / ClientSize.y);
+}
+
+std::string SettingGLCanvas::strofset(glSetting *data)
+{
+    std::string ans;
+    switch (data->data.is)
+    {
+    case Setting_data::SET:
+        ans = ((Setting*)(data->data))->getName();
+        if (ans.empty())
+            ans = "(empty)";
+        ans += (data->fold ? " + +" : " + -");
+        break;
+    case Setting_data::INT:
+        char tmp[40];
+        sprintf(tmp, "%d", (int)(data->data));
+        ans = data->data.key + " | " + tmp;
+        break;
+    case Setting_data::STR:
+        ans = (std::string&)(data->data);
+        if (ans.empty())
+            ans = data->data.key + " | (empty)";
+        else
+            ans = data->data.key + " | " + ans;
+        break;
+    case Setting_data::FIL:
+        ans = ((File*)(data->data))->getAbsPath();
+        if (ans.length() > 10)
+            ans = FileManager::getfilename(ans);
+        ans = data->data.key + " | " + ans;
+        break;
+    }
+    return ans;
 }
 
 void SettingGLCanvas::calcPos()
@@ -230,47 +267,46 @@ void SettingGLCanvas::calcPos()
     q1 = new std::deque<glSetting*>();
     q1->push_back(gldata);
     gldata->pos = Tpoint(-0.9, 0);
-    double startx, starty;
+    double startx = -0.9, starty;
     while (!q1->empty())
     {
         q2 = new std::deque<glSetting*>();
         double xmax = 0;
         for (std::deque<glSetting*>::iterator i = q1->begin(); i != q1->end(); ++i)
-            if ((*i)->data.is == Setting_data::SET)
-            switch ((*i)->data.is)
-            {
-            case Setting_data::SET:
-                xmax = std::max(xmax, advance(((Setting*)((*i)->data))->getName() + " + +"));
-                break;
-            case Setting_data::INT:
-                char tmp[40];
-                sprintf(tmp, "%d", (int)((*i)->data));
-                xmax = std::max(xmax, advance((*i)->data.key + " | " + tmp));
-                break;
-            case Setting_data::STR:
-                xmax = std::max(xmax, advance((*i)->data.key + " | " + ((std::string&)((*i)->data))));
-                break;
-            case Setting_data::FIL:
-                xmax = std::max(xmax, advance((*i)->data.key + " | " + ((File*)((*i)->data))->getFileName()));
-                break;
-            }
-        startx += xmax + 0.2;
+            xmax = std::max(xmax, advance(strofset(*i)));
+        startx += xmax + 0.1;
         starty = gldata->size / 2;
         while (!q1->empty())
         {
             glSetting *fr = q1->front();
             q1->pop_front();
-            if (fr->data.is == Setting_data::SET)
+            double y2 = starty;
+            if (fr->data.is == Setting_data::SET && !fr->fold)
                 for (std::map<std::string, glSetting*>::iterator i = fr->son.begin(); i != fr->son.end(); ++i)
                 {
                     i->second->pos.m_x = startx;
-                    i->second->pos.m_y = starty;
+                    i->second->pos.m_y = y2 - i->second->size / 2;
                     q2->push_back(i->second);
-                    starty += i->second->size;
+                    y2 -= i->second->size + 0.05;
                 }
+            starty -= fr->size + 0.05;
         }
         delete q1;
         q1 = q2;
     }
     delete q1;
+}
+
+void SettingGLCanvas::draw(glSetting *a)
+{
+    double x2 = printstr(strofset(a), a->pos);
+    if (a->data.is == Setting_data::SET && !a->fold)
+        for (std::map<std::string, glSetting*>::iterator i = a->son.begin(); i != a->son.end(); ++i)
+        {
+            draw(i->second);
+            glBegin(GL_LINES);
+            glVertex2d(x2, a->pos.m_y);
+            glVertex2d(i->second->pos.m_x, i->second->pos.m_y);
+            glEnd();
+        }
 }

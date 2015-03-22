@@ -34,10 +34,12 @@ private:
     Tpoint pos2world(const Tpoint &a);
     double printstr(const std::string &s, const Tpoint &pos);
     double advance(const std::string &s);
+    std::string strofset(glSetting *data);
     void getSettingSize(glSetting *data);
     Tpoint center, move_last;
     glSetting *gldata;
     void calcPos();
+    void draw(glSetting *a);
     DECLARE_EVENT_TABLE()
 };
 
@@ -53,6 +55,7 @@ private:
     std::map<std::string, glSetting*> son;
     Setting_data data;
     SettingGLCanvas::Tpoint pos;
+    bool fold;
 };
 
 void deepRemove(glSetting *&a);

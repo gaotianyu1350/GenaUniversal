@@ -144,6 +144,7 @@ Setting_data Setting_data::operator =(const Setting_data &data)
 void Setting_data::CopyUnion(const Setting_data &data)
 {
     using std::string;
+    key = data.key;
     if (is == STR && data.is == STR)
         StrData = data.StrData;
     else
