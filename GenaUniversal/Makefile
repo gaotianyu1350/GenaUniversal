@@ -73,6 +73,7 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/Player.o \
 	$(DIROBJ_DEBUG)/Problem.o \
 	$(DIROBJ_DEBUG)/Point.o \
+	$(DIROBJ_DEBUG)/Library.o \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/RunCmd.o \

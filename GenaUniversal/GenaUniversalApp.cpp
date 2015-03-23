@@ -60,11 +60,11 @@ bool GenaUniversalApp::OnInit()
     SetTopWindow(Frame);
     Setting *setting;
     setting = new Setting;
-    std::string file1;
     /*std::cout << "file1 : ";
     std::cin >> file1;*/
     //setting->setName(file1);
-    setting->setItem("file1", new File(file1));
+    //setting->setItem("file1", new File(file1));
+    std::string file1;
     setting->setItem("int1", 2147483647);
     setting->setItem("int1 (1)", 100);
     setting->setItem("string1", "wo shi doubi");
@@ -76,11 +76,6 @@ bool GenaUniversalApp::OnInit()
     SettingTreeFrame *Frame = new SettingTreeFrame(NULL, wxID_ANY, setting);
     Frame->Show();
     //Frame->Destroy();
-    setting = new Setting();
-    SettingTreeDialog *Dialog = new SettingTreeDialog(NULL, wxID_ANY, setting);
-    if (Dialog->ShowModal() == wxID_OK)
-        setting = Dialog->getData();
-    Dialog->Destroy();
 
     return wxOK;
 }
