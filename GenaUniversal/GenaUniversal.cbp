@@ -204,6 +204,18 @@
 		<Unit filename="Setting.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
+		<Unit filename="SettingDialog.cpp">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
+		<Unit filename="SettingDialog.h">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
+		<Unit filename="SettingGLCanvas.cpp">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
+		<Unit filename="SettingGLCanvas.h">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
 		<Unit filename="SettingTreeFrame.cpp">
 			<Option virtualFolder="GUI/TreeView/" />
 		</Unit>
