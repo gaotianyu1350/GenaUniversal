@@ -24,7 +24,7 @@ public:
 *
 * Setting :
 *     "code" : the file that need compiling.
-*     ¡°setting" : the settings about compiling.
+*     "compilesetting" : the settings about compiling.
 *         (example) "cpp" : "g++ ${src} -o ${exe}"
 *
 * Result :

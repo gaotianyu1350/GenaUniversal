@@ -183,6 +183,15 @@
 		<Unit filename="RunCmd.h">
 			<Option virtualFolder="judge/Runner/" />
 		</Unit>
+		<Unit filename="RunProg.cpp">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="RunProg.h">
+			<Option virtualFolder="judge/sdk/" />
+		</Unit>
+		<Unit filename="RunProg_Normal.cpp">
+			<Option virtualFolder="judge/sdk/templete/" />
+		</Unit>
 		<Unit filename="Runner.cpp">
 			<Option virtualFolder="judge/Runner/" />
 		</Unit>

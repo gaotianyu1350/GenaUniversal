@@ -49,6 +49,8 @@ $(DIR_PLUGIN_DEBUG)/Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)/Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
+$(DIR_PLUGIN_DEBUG)/RunProg_Normal.dll: RunProg_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)/Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) $(DLLDEPS) -o $@ -g
 $(DIR_PLUGIN_DEBUG)/Compare_Normal2.dll: Compare_Normal2.cpp $(OBJ_PLUGIN_DEBUG)
@@ -114,6 +116,8 @@ $(DIROBJ_DEBUG)/Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
+$(DIROBJ_DEBUG)\RunProg.o: RunProg.cpp RunProg.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads $(LIBS)
 $(DIR_DEBUG):
@@ -165,6 +169,8 @@ $(DIR_PLUGIN_RELEASE)/Problem_Normal.dll: Problem_Normal.cpp $(OBJ_PLUGIN_RELEAS
 $(DIR_PLUGIN_RELEASE)/Point_Normal.dll: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
 $(DIR_PLUGIN_RELEASE)/Compile_Normal.dll: Compile_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
+$(DIR_PLUGIN_RELEASE)/RunProg_Normal.dll: RunProg_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
 $(DIR_PLUGIN_RELEASE)/Compare_Normal.dll: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) $(DLLDEPS) -o $@ -O2
@@ -231,6 +237,8 @@ $(DIROBJ_RELEASE)/RunCmd.o: RunCmd.cpp RunCmd.h
 $(DIROBJ_RELEASE)/Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Runner.o: Runner.cpp Runner.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)\RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -Wl,--subsystem,windows $(LIBS) -mwindows

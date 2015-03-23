@@ -19,7 +19,7 @@ bool FileManager::isdir(const std::string &path)
 
 bool FileManager::isfile(const std::string &path)
 {
-    return access(path.c_str(), F_OK) && !isdir(path);
+    return !access(path.c_str(), F_OK) && !isdir(path);
 }
 
 bool FileManager::rmdir_recursive(const std::string &dir)
@@ -148,4 +148,18 @@ int FileManager::getfilesize(const std::string &path)
     struct stat info;
     stat(path.c_str(), &info);
     return info.st_size;
+}
+
+bool FileManager::movefile(const std::string &oldpath, const std::string &newpath)
+{
+    if (!isfile(oldpath))
+        return false;
+    return rename(oldpath.c_str(), newpath.c_str()) == 0;
+}
+
+bool FileManager::rmfile(const std::string &file)
+{
+    if (!isfile(file))
+        return true;
+    return remove(file.c_str()) == 0;
 }
