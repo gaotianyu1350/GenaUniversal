@@ -1,14 +1,3 @@
-/***************************************************************
- * Name:      File.cpp
- * Purpose:   Code for File Class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-10
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
-#ifndef FILE_CPP_INCLUDED
-#define FILE_CPP_INCLUDED
-
 #include "File.h"
 #include <unistd.h>
 
@@ -122,10 +111,7 @@ bool File::isDir() const
 
 std::string File::getAbsPath() const
 {
-    if (FileManager::isabspath(path))
-        return path;
-    else
-        return FileManager::getcurabsdir() + path;
+    return FileManager::getabspath(path);
 }
 
 std::string File::getPath() const
@@ -157,5 +143,3 @@ int File::getSize() const
 {
     return FileManager::getfilesize(path);
 }
-
-#endif // FILE_CPP_INCLUDED

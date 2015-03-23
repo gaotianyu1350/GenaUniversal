@@ -1,29 +1,25 @@
-/***************************************************************
- * Name:      FileManager.cpp
- * Purpose:   Code for FileManager class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-11
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
 #include "FileManager.h"
 #include <dirent.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <cstring>
+#include <stdexcept>
 
 constexpr char FileManager::nul[];
 
 bool FileManager::isdir(const std::string &path)
 {
     struct stat info;
-    stat(path.c_str(), &info);
+    if (path.length() && *path.rbegin() == sep)
+        stat(path.substr(0, path.length() - 1).c_str(), &info);
+    else
+        stat(path.c_str(), &info);
     return S_ISDIR(info.st_mode);
 }
 
 bool FileManager::isfile(const std::string &path)
 {
-    return access(path.c_str(), F_OK) && !isdir(path);
+    return !access(path.c_str(), F_OK) && !isdir(path);
 }
 
 bool FileManager::rmdir_recursive(const std::string &dir)
@@ -98,9 +94,32 @@ std::string FileManager::getdir(const std::string &path)
 
 std::string FileManager::getabspath(const std::string &path)
 {
+    std::string a, f;
     if (isabspath(path))
-        return path;
-    return getcurabsdir() + path;
+        a = path;
+    else
+        a = getcurabsdir() + path;
+    if (isdir(a) && *a.rbegin() != sep)
+        a += sep;
+    int n = a.length();
+    for (int i = 0; i < n;)
+    {
+        if (i && a[i - 1] == sep && a[i] == '.' && a[i + 1] == '.' && a[i + 2] == sep)
+        {
+            do
+            {
+                f.pop_back();
+            } while (f.length() && f.back() != sep);
+            if (!f.length())
+                throw std::logic_error("cannot transform " + path + " into abspath.");
+            i += 3;
+        }
+        else if (i && a[i - 1] == sep && a[i] == '.' &&a[i + 1] == sep)
+            i += 2;
+        else
+            f += a[i++];
+    }
+    return f;
 }
 
 std::string FileManager::getext(const std::string &path)
@@ -115,10 +134,11 @@ std::string FileManager::getext(const std::string &path)
 
 std::string FileManager::getfilename(const std::string &path)
 {
-    std::string::size_type pos = path.rfind(sep);
+    std::string path2 = (path.length() && *path.rbegin() == sep ? path.substr(0, path.length() - 1) : path);
+    std::string::size_type pos = path2.rfind(sep);
     if (pos == std::string::npos)
-        pos = -1;
-    return path.substr(pos + 1, path.length() - pos - 1);
+        return path2;
+    return path2.substr(pos + 1, path2.length() - pos - 1);
 }
 
 int FileManager::getfilesize(const std::string &path)
@@ -128,4 +148,18 @@ int FileManager::getfilesize(const std::string &path)
     struct stat info;
     stat(path.c_str(), &info);
     return info.st_size;
+}
+
+bool FileManager::movefile(const std::string &oldpath, const std::string &newpath)
+{
+    if (!isfile(oldpath))
+        return false;
+    return rename(oldpath.c_str(), newpath.c_str()) == 0;
+}
+
+bool FileManager::rmfile(const std::string &file)
+{
+    if (!isfile(file))
+        return true;
+    return remove(file.c_str()) == 0;
 }

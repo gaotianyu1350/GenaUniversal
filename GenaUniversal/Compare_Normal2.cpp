@@ -13,8 +13,8 @@ extern "C"
         }
         virtual void run()
         {
-            AnsFile = setting->getItem("AnsFile").operator string();
-            OutFile = setting->getItem("OutFile").operator string();
+            AnsFile = setting->getItem("AnsFile").operator string & ();
+            OutFile = setting->getItem("OutFile").operator string & ();
             ifstream fans(AnsFile.c_str());
             ifstream fout(OutFile.c_str());
             string tmpstr;
@@ -33,11 +33,11 @@ extern "C"
             result->setItem("compare", "Accepted");
             string file1, file2;
             char c;
-            while (fans.get(c))
-                file1.push_back(c);
-            while (fout.get(c))
-                file2.push_back(c);
-            if(file1!=file2)
+            while (fans.get(c))if (c != '\r')
+                    file1.push_back(c);
+            while (fout.get(c))if (c != '\r')
+                    file2.push_back(c);
+            if (file1 != file2)
                 result->setItem("compare", "Wrong_Answer at 0");
             pushMessage(0, "Compare finished");
         }

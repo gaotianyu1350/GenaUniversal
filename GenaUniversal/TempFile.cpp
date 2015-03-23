@@ -1,11 +1,3 @@
-/***************************************************************
- * Name:      TempFile.cpp
- * Purpose:   Code for TempFile Class
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-11
- * Copyright: VL (Vincent Gao, Liangjs)
- **************************************************************/
-
 #include "TempFile.h"
 #include "FileManager.h"
 #include <cstdlib>
@@ -16,11 +8,7 @@
 void TempFile::InitTempFile()
 {
     ClearTempDir();
-#ifdef WIN32
     mkdir("tmp");
-#else
-    system("mkdir -p tmp");
-#endif
     srand(time(0));
 }
 
@@ -42,7 +30,7 @@ std::string TempFile::GetTempFile(const std::string &prefix, const std::string &
             ans += charrec[rand() % (26 * 2 + 10)];
         ans += suffix;
     }
-    while (access(ans.c_str(), F_OK) || use.find(ans) != use.end());
+    while (!access(ans.c_str(), F_OK) || use.find(ans) != use.end());
     use.insert(ans);
     return ans;
 }

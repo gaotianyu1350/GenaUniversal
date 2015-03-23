@@ -51,13 +51,12 @@ Result_data::operator int()
     return IntData;
 }
 
-Result_data::operator std::string()
+Result_data::operator std::string&()
 {
     if (is != STR)
         throw std::logic_error("error usage of union in Result_data");
     return StrData;
 }
-
 
 Result_data::operator const char*()
 {
@@ -66,7 +65,7 @@ Result_data::operator const char*()
     return StrData.c_str();
 }
 
-Result_data::operator Result*()
+Result_data::operator Result*&()
 {
     if (is != RES)
         throw std::logic_error("error usage of union in Result_data");
@@ -122,6 +121,7 @@ Result_data Result_data::operator =(const Result_data &data)
 void Result_data::CopyUnion(const Result_data &data)
 {
     using std::string;
+    key = data.key;
     if (is == STR && data.is == STR)
         StrData = data.StrData;
     else
@@ -144,6 +144,11 @@ void Result_data::CopyUnion(const Result_data &data)
     }
 }
 
+void Result_data::setKey(const std::string &key)
+{
+    this->key = key;
+}
+
 Result::Result()
 {
 }
@@ -161,6 +166,12 @@ void Result::setName(const std::string &name)
 void Result::setItem(const std::string &idx, const Result_data &val)
 {
     data[idx] = val;
+    data[idx].setKey(idx);
+}
+
+std::string Result::getName() const
+{
+    return name;
 }
 
 Result_data &Result::getItem(const std::string &idx)
@@ -171,4 +182,35 @@ Result_data &Result::getItem(const std::string &idx)
 bool Result::hasItem(const std::string &idx)
 {
     return data.find(idx) != data.end();
+}
+
+Result *deepCopy(Result *from, Result *&to)
+{
+    if (from == NULL)
+        return to = new Result;
+    to = new Result(from->getName());
+    Result *subres;
+    for (std::map<std::string, Result_data>::iterator i = from->data.begin(); i != from->data.end(); ++i)
+        switch (i->second.is)
+        {
+        case Result_data::INT:
+            to->setItem(i->first, i->second);
+            break;
+        case Result_data::STR:
+            to->setItem(i->first, i->second);
+            break;
+        case Result_data::RES:
+            to->setItem(i->first, deepCopy(i->second, subres));
+            break;
+        }
+    return to;
+}
+
+void deepRemove(Result *&a)
+{
+    for (std::map<std::string, Result_data>::iterator i = a->data.begin(); i != a->data.end(); ++i)
+        if (i->second.is == Result_data::RES)
+            deepRemove(i->second);
+    delete a;
+    a = NULL;
 }
