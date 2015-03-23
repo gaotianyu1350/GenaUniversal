@@ -121,6 +121,7 @@ Result_data Result_data::operator =(const Result_data &data)
 void Result_data::CopyUnion(const Result_data &data)
 {
     using std::string;
+    key = data.key;
     if (is == STR && data.is == STR)
         StrData = data.StrData;
     else
