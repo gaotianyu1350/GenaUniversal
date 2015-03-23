@@ -41,8 +41,7 @@ std::string TempFile::GetTempFile(const std::string &prefix, const std::string &
         for (int i = 0; i < 10; ++i)
             ans += charrec[rand() % (26 * 2 + 10)];
         ans += suffix;
-    }
-    while (access(ans.c_str(), F_OK) || use.find(ans) != use.end());
+    } while (!access(ans.c_str(), F_OK) || use.find(ans) != use.end());
     use.insert(ans);
     return ans;
 }
