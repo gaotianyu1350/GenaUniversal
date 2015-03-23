@@ -1,4 +1,5 @@
 #include "RunProg.h"
+#include <climits>
 
 extern "C"
 {
@@ -49,12 +50,12 @@ extern "C"
             if (setting->hasItem("time"))
                 runner->setTime(setting->getItem("time"));
             else
-                runner->setTime(INFINITE);
+                runner->setTime(INT_MAX);
 
             if (setting->hasItem("memory"))
                 runner->setMemory(setting->getItem("memory"));
             else
-                runner->setMemory(INFINITE);
+                runner->setMemory(INT_MAX);
 
             out = TempFile::GetTempFile();
             err = TempFile::GetTempFile();

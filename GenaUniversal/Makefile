@@ -224,6 +224,8 @@ $(DIROBJ_RELEASE)/Problem.o: Problem.cpp Problem.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Point.o: Point.cpp Point.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)/Compare.o: Compare.cpp Compare.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Compile.o: Compile.cpp Compile.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Library.o: Library.cpp Library.h

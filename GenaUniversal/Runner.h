@@ -16,7 +16,13 @@
 class Runner
 {
 public:
+    static const int RUNNER_RES_OK = 0;
+    static const int RUNNER_RES_KILL = -1;
+    static const int RUNNER_RES_INERROR = 2;
+    static const int RUNNER_RES_OUTERROR = 3;
+
     Runner(const bool *flag);
+    ~Runner();
     void setIn(const std::string &path); //acquiring
     void setOut(const std::string &path); //acquiring
     void setErr(const std::string &path); //acquiring
