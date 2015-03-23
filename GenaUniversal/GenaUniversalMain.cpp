@@ -1,10 +1,3 @@
-/***************************************************************
- * Name:      GenaUniversalMain.cpp
- * Purpose:   Code for Application Frame
- * Author:    VL (Vincent Gao, Liangjs)
- * Created:   2015-03-10
- **************************************************************/
-
 #include "GenaUniversalMain.h"
 #ifndef WIN32
 #include "GenaIcon.xpm"

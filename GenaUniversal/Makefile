@@ -1,7 +1,8 @@
 PROJECT = GenaUniversal
 CPPDEPS = -MT$@ -MF$@.d -MD -MP -std=gnu++11
-LIBS = `wx-config --libs core,base` -ldl
-WIDGETS_CXXFLAGS = `wx-config --cppflags` -std=gnu++11
+FREETYPEDIR = /usr/include/freetype2
+LIBS = `wx-config --libs core,base,gl` -ldl -lGL -lGLU -lftgl -lfreetype
+WIDGETS_CXXFLAGS = `wx-config --cppflags` -std=gnu++11 -I$(FREETYPEDIR)
 
 DIR_DEBUG = bin/Debug
 DIROBJ_DEBUG = obj/Debug
@@ -19,16 +20,20 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)/Point.o \
 	$(DIROBJ_DEBUG)/Library.o \
 	$(DIROBJ_DEBUG)/Compare.o \
+	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/Runner.o \
-	$(DIROBJ_DEBUG)/RunCompile.o
+	$(DIROBJ_DEBUG)/RunCmd.o \
+	$(DIROBJ_DEBUG)/RunProg.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)/libContest_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libPlayer_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libProblem_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libPoint_Normal.so \
+	$(DIR_PLUGIN_DEBUG)/libCompile_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libCompare_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libCompare_Normal2.so \
-	$(DIR_PLUGIN_DEBUG)/libCompare_Float.so
+	$(DIR_PLUGIN_DEBUG)/libCompare_Float.so \
+	$(DIR_PLUGIN_DEBUG)/libRunProg_Normal.so
 $(DIR_PLUGIN_DEBUG):
 	mkdir -p $@
 $(DIR_PLUGIN_DEBUG)/libContest_Normal.so: Contest_Normal.cpp $(OBJ_PLUGIN_DEBUG)
@@ -39,17 +44,22 @@ $(DIR_PLUGIN_DEBUG)/libProblem_Normal.so: Problem_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libPoint_Normal.so: Point_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
+$(DIR_PLUGIN_DEBUG)/libCompile_Normal.so: Compile_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
+$(DIR_PLUGIN_DEBUG)/libRunProg_Normal.so: RunProg_Normal.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 
 BIN_DEBUG = $(DIR_DEBUG)/$(PROJECT)
 OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/GenaUniversalApp.o \
 	$(DIROBJ_DEBUG)/GenaUniversalMain.o \
+	$(DIROBJ_DEBUG)/SettingTreeFrame.o \
 	$(DIROBJ_DEBUG)/File.o \
 	$(DIROBJ_DEBUG)/FileManager.o \
 	$(DIROBJ_DEBUG)/TempFile.o \
@@ -60,12 +70,17 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/Player.o \
 	$(DIROBJ_DEBUG)/Problem.o \
 	$(DIROBJ_DEBUG)/Point.o \
+	$(DIROBJ_DEBUG)/Library.o \
+	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Runner.o \
-	$(DIROBJ_DEBUG)/RunCompile.o
+	$(DIROBJ_DEBUG)/RunCmd.o \
+	$(DIROBJ_DEBUG)/RunProg.o
 $(DIROBJ_DEBUG)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -91,9 +106,13 @@ $(DIROBJ_DEBUG)/Compare.o: Compare.cpp Compare.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)/Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
+$(DIROBJ_DEBUG)/Compile.o: Compile.cpp Compile.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
-$(DIROBJ_DEBUG)/RunCompile.o: RunCompile.cpp RunCompile.h
+$(DIROBJ_DEBUG)/RunCmd.o: RunCmd.cpp RunCmd.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
+$(DIROBJ_DEBUG)/RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(LIBS)
@@ -122,17 +141,21 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)/Problem.o \
 	$(DIROBJ_RELEASE)/Point.o \
 	$(DIROBJ_RELEASE)/Library.o \
+	$(DIROBJ_RELEASE)/Compile.o \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Runner.o \
-	$(DIROBJ_RELEASE)/RunCompile.o
+	$(DIROBJ_RELEASE)/RunCmd.o \
+	$(DIROBJ_RELEASE)/RunProg.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)/libContest_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libPlayer_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libProblem_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libPoint_Normal.so \
+	$(DIR_PLUGIN_RELEASE)/libCompile_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libCompare_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so \
-	$(DIR_PLUGIN_RELEASE)/libCompare_Float.so
+	$(DIR_PLUGIN_RELEASE)/libCompare_Float.so \
+	$(DIR_PLUGIN_RELEASE)/libRunProg_Normal.so
 $(DIR_PLUGIN_RELEASE):
 	mkdir -p $@
 $(DIR_PLUGIN_RELEASE)/libContest_Normal.so: Contest_Normal.cpp $(OBJ_PLUGIN_RELEASE)
@@ -143,17 +166,22 @@ $(DIR_PLUGIN_RELEASE)/libProblem_Normal.so: Problem_Normal.cpp $(OBJ_PLUGIN_RELE
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libPoint_Normal.so: Point_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+$(DIR_PLUGIN_RELEASE)/libCompile_Normal.so: Compile_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+$(DIR_PLUGIN_RELEASE)/libRunProg_Normal.so: RunProg_Normal.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 
 BIN_RELEASE = $(DIR_RELEASE)/$(PROJECT)
 OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/GenaUniversalApp.o \
 	$(DIROBJ_RELEASE)/GenaUniversalMain.o \
+	$(DIROBJ_RELEASE)/SettingTreeFrame.o \
 	$(DIROBJ_RELEASE)/FileManager.o \
 	$(DIROBJ_RELEASE)/File.o \
 	$(DIROBJ_RELEASE)/TempFile.o \
@@ -165,12 +193,16 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/Problem.o \
 	$(DIROBJ_RELEASE)/Point.o \
 	$(DIROBJ_RELEASE)/Library.o \
+	$(DIROBJ_RELEASE)/Compile.o \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Runner.o \
-	$(DIROBJ_RELEASE)/RunCompile.o
+	$(DIROBJ_RELEASE)/RunCmd.o \
+	$(DIROBJ_RELEASE)/RunProg.o
 $(DIROBJ_RELEASE)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
@@ -194,11 +226,15 @@ $(DIROBJ_RELEASE)/Point.o: Point.cpp Point.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Compare.o: Compare.cpp Compare.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)/Compile.o: Compile.cpp Compile.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Library.o: Library.cpp Library.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
-$(DIROBJ_RELEASE)/RunCompile.o: RunCompile.cpp RunCompile.h
+$(DIROBJ_RELEASE)/RunCmd.o: RunCmd.cpp RunCmd.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)/RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(LIBS)
