@@ -1,7 +1,7 @@
 PROJECT = GenaUniversal
 CPPDEPS = -MT$@ -MF$@.d -MD -MP -std=gnu++11
 FREETYPEDIR = /usr/include/freetype2
-LIBS = `wx-config --libs core,base` -ldl -lGL -lGLU -lftgl -lfreetype
+LIBS = `wx-config --libs core,base,gl` -ldl -lGL -lGLU -lftgl -lfreetype
 WIDGETS_CXXFLAGS = `wx-config --cppflags` -std=gnu++11 -I$(FREETYPEDIR)
 
 DIR_DEBUG = bin/Debug
