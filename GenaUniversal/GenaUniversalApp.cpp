@@ -43,8 +43,8 @@ bool GenaUniversalApp::OnInit()
     setting->setItem("fin", "input.txt");
     setting->setItem("fout", "output.txt");
     setting->setItem("in", "F:\\a.in");
-    setting->setItem("time", INFINITE);
-    setting->setItem("memory", INFINITE);
+    setting->setItem("time", 100000);
+    setting->setItem("memory", 100000);
 
     //rp->run();
     //std::cout << result->getItem("out").operator std::string &() << std::endl;

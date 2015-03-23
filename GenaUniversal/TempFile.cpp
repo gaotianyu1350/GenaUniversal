@@ -4,6 +4,8 @@
 #include <ctime>
 #include <unistd.h>
 #include <set>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 void TempFile::InitTempFile()
 {

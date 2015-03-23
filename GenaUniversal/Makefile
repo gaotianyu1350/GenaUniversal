@@ -22,7 +22,8 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/Runner.o \
-	$(DIROBJ_DEBUG)/RunCmd.o
+	$(DIROBJ_DEBUG)/RunCmd.o \
+	$(DIROBJ_DEBUG)/RunProg.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)/libContest_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libPlayer_Normal.so \
@@ -31,7 +32,8 @@ PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)/libCompile_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libCompare_Normal.so \
 	$(DIR_PLUGIN_DEBUG)/libCompare_Normal2.so \
-	$(DIR_PLUGIN_DEBUG)/libCompare_Float.so
+	$(DIR_PLUGIN_DEBUG)/libCompare_Float.so \
+	$(DIR_PLUGIN_DEBUG)/libRunProg_Normal.so
 $(DIR_PLUGIN_DEBUG):
 	mkdir -p $@
 $(DIR_PLUGIN_DEBUG)/libContest_Normal.so: Contest_Normal.cpp $(OBJ_PLUGIN_DEBUG)
@@ -49,6 +51,8 @@ $(DIR_PLUGIN_DEBUG)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 $(DIR_PLUGIN_DEBUG)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 $(DIR_PLUGIN_DEBUG)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_DEBUG)
+	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
+$(DIR_PLUGIN_DEBUG)/libRunProg_Normal.so: RunProg_Normal.cpp $(OBJ_PLUGIN_DEBUG)
 	g++ $< $(OBJ_PLUGIN_DEBUG) -shared -ldl -fPIC -std=gnu++11 -o $@ -g
 
 BIN_DEBUG = $(DIR_DEBUG)/$(PROJECT)
@@ -70,7 +74,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Runner.o \
-	$(DIROBJ_DEBUG)/RunCmd.o
+	$(DIROBJ_DEBUG)/RunCmd.o \
+	$(DIROBJ_DEBUG)/RunProg.o
 $(DIROBJ_DEBUG)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
@@ -107,6 +112,8 @@ $(DIROBJ_DEBUG)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(DIROBJ_DEBUG)/RunCmd.o: RunCmd.cpp RunCmd.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
+$(DIROBJ_DEBUG)/RunProg.o: RunProg.cpp RunProg.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG)
 	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(LIBS)
 $(DIR_DEBUG):
@@ -137,7 +144,8 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)/Compile.o \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Runner.o \
-	$(DIROBJ_RELEASE)/RunCmd.o
+	$(DIROBJ_RELEASE)/RunCmd.o \
+	$(DIROBJ_RELEASE)/RunProg.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)/libContest_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libPlayer_Normal.so \
@@ -146,7 +154,8 @@ PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)/libCompile_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libCompare_Normal.so \
 	$(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so \
-	$(DIR_PLUGIN_RELEASE)/libCompare_Float.so
+	$(DIR_PLUGIN_RELEASE)/libCompare_Float.so \
+	$(DIR_PLUGIN_RELEASE)/libRunProg_Normal.so
 $(DIR_PLUGIN_RELEASE):
 	mkdir -p $@
 $(DIR_PLUGIN_RELEASE)/libContest_Normal.so: Contest_Normal.cpp $(OBJ_PLUGIN_RELEASE)
@@ -164,6 +173,8 @@ $(DIR_PLUGIN_RELEASE)/libCompare_Normal.so: Compare_Normal.cpp $(OBJ_PLUGIN_RELE
 $(DIR_PLUGIN_RELEASE)/libCompare_Normal2.so: Compare_Normal2.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 $(DIR_PLUGIN_RELEASE)/libCompare_Float.so: Compare_Float.cpp $(OBJ_PLUGIN_RELEASE)
+	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
+$(DIR_PLUGIN_RELEASE)/libRunProg_Normal.so: RunProg_Normal.cpp $(OBJ_PLUGIN_RELEASE)
 	g++ $< $(OBJ_PLUGIN_RELEASE) -shared -ldl -fPIC -std=gnu++11 -o $@ -ldl -O2
 
 BIN_RELEASE = $(DIR_RELEASE)/$(PROJECT)
@@ -185,7 +196,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/Compile.o \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Runner.o \
-	$(DIROBJ_RELEASE)/RunCmd.o
+	$(DIROBJ_RELEASE)/RunCmd.o \
+	$(DIROBJ_RELEASE)/RunProg.o
 $(DIROBJ_RELEASE)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
@@ -219,6 +231,8 @@ $(DIROBJ_RELEASE)/Library.o: Library.cpp Library.h
 $(DIROBJ_RELEASE)/Runner.o: Runner.cpp Runner.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(DIROBJ_RELEASE)/RunCmd.o: RunCmd.cpp RunCmd.h
+	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
+$(DIROBJ_RELEASE)/RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE)
 	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(LIBS)

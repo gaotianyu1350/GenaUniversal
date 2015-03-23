@@ -3,6 +3,9 @@
 #include <deque>
 #include <vector>
 #include <cmath>
+#ifndef WIN32
+#include "GenaIcon.xpm"
+#endif
 
 BEGIN_EVENT_TABLE(SettingTreeFrame, wxFrame)
     EVT_BUTTON(wxID_OK, SettingTreeFrame::clickOK)
