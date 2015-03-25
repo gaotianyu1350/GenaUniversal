@@ -27,8 +27,8 @@ OBJ_PLUGIN_DEBUG = \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/RunCmd.o \
-	$(DIROBJ_DEBUG)/RunProg.o \
-	$(DIROBJ_DEBUG)/Runner.o
+	$(DIROBJ_DEBUG)/Runner.o \
+	$(DIROBJ_DEBUG)/RunProg.o
 PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)/Contest_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)/Player_Normal.dll \
@@ -38,7 +38,8 @@ PLUGIN_DEBUG = \
 	$(DIR_PLUGIN_DEBUG)/Compile_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)/Compare_Normal.dll \
 	$(DIR_PLUGIN_DEBUG)/Compare_Normal2.dll \
-	$(DIR_PLUGIN_DEBUG)/Compare_Float.dll
+	$(DIR_PLUGIN_DEBUG)/Compare_Float.dll \
+	$(DIR_PLUGIN_DEBUG)/RunProg_Normal.dll
 $(DIR_PLUGIN_DEBUG):
 	mkdir -p $@
 $(DIR_PLUGIN_DEBUG)/Contest_Normal.dll: Contest_Normal.cpp $(OBJ_PLUGIN_DEBUG)
@@ -66,6 +67,7 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/GenaUniversalMain.o \
 	$(DIROBJ_DEBUG)/SettingTreeDialog.o \
 	$(DIROBJ_DEBUG)/SettingTreeFrame.o \
+	$(DIROBJ_DEBUG)/SettingGLCanvas.o \
 	$(DIROBJ_DEBUG)/File.o \
 	$(DIROBJ_DEBUG)/FileManager.o \
 	$(DIROBJ_DEBUG)/TempFile.o \
@@ -80,8 +82,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/Compare.o \
 	$(DIROBJ_DEBUG)/Compile.o \
 	$(DIROBJ_DEBUG)/RunCmd.o \
-	$(DIROBJ_DEBUG)/RunProg.o \
-	$(DIROBJ_DEBUG)/Runner.o
+	$(DIROBJ_DEBUG)/Runner.o \
+	$(DIROBJ_DEBUG)/RunProg.o
 RES_DEBUG = $(DIROBJ_DEBUG)/GenaUniversal.o
 $(RES_DEBUG): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
@@ -92,6 +94,8 @@ $(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 $(DIROBJ_DEBUG)/SettingTreeDialog.o: SettingTreeDialog.cpp SettingTreeDialog.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -155,8 +159,8 @@ OBJ_PLUGIN_RELEASE = \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Compile.o \
 	$(DIROBJ_RELEASE)/RunCmd.o \
-	$(DIROBJ_RELEASE)/RunProg.o \
-	$(DIROBJ_RELEASE)/Runner.o
+	$(DIROBJ_RELEASE)/Runner.o \
+	$(DIROBJ_RELEASE)/RunProg.o
 PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)/Contest_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)/Player_Normal.dll \
@@ -166,7 +170,8 @@ PLUGIN_RELEASE = \
 	$(DIR_PLUGIN_RELEASE)/Compile_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)/Compare_Normal.dll \
 	$(DIR_PLUGIN_RELEASE)/Compare_Normal2.dll \
-	$(DIR_PLUGIN_RELEASE)/Compare_Float.dll
+	$(DIR_PLUGIN_RELEASE)/Compare_Float.dll \
+	$(DIR_PLUGIN_RELEASE)/RunProg_Normal.dll
 $(DIR_PLUGIN_RELEASE):
 	mkdir -p $@
 $(DIR_PLUGIN_RELEASE)/Contest_Normal.dll: Contest_Normal.cpp $(OBJ_PLUGIN_RELEASE)
@@ -194,6 +199,7 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/GenaUniversalMain.o \
 	$(DIROBJ_RELEASE)/SettingTreeDialog.o \
 	$(DIROBJ_RELEASE)/SettingTreeFrame.o \
+	$(DIROBJ_RELEASE)/SettingGLCanvas.o \
 	$(DIROBJ_RELEASE)/FileManager.o \
 	$(DIROBJ_RELEASE)/File.o \
 	$(DIROBJ_RELEASE)/TempFile.o \
@@ -208,8 +214,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/Compare.o \
 	$(DIROBJ_RELEASE)/Compile.o \
 	$(DIROBJ_RELEASE)/RunCmd.o \
-	$(DIROBJ_RELEASE)/RunProg.o \
-	$(DIROBJ_RELEASE)/Runner.o
+	$(DIROBJ_RELEASE)/Runner.o \
+	$(DIROBJ_RELEASE)/RunProg.o
 RES_RELEASE = $(DIROBJ_RELEASE)/GenaUniversal.o
 $(RES_RELEASE): $(RESOURCE)
 	windres --use-temp-file -i$< -o$@ --define __WXMSW__ --define NDEBUG --define _UNICODE  --include-dir $(SETUPDIR) --include-dir $(WXINCLUDEDIR) --define NOPCH
@@ -220,6 +226,8 @@ $(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 $(DIROBJ_RELEASE)/SettingTreeDialog.o: SettingTreeDialog.cpp SettingTreeDialog.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
