@@ -19,6 +19,11 @@ Runner::Runner(const bool *flag)
     __haveexit = false;
 }
 
+Runner::~Runner()
+{
+    kill();
+}
+
 void Runner::setIn(const std::string &path)
 {
     in.setFile(FileManager::getabspath(path));

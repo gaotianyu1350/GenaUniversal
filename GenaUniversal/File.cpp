@@ -1,6 +1,3 @@
-#ifndef FILE_CPP_INCLUDED
-#define FILE_CPP_INCLUDED
-
 #include "File.h"
 #include <unistd.h>
 
@@ -146,5 +143,3 @@ int File::getSize() const
 {
     return FileManager::getfilesize(path);
 }
-
-#endif // FILE_CPP_INCLUDED

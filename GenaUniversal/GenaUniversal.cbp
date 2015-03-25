@@ -204,10 +204,10 @@
 		<Unit filename="Setting.h">
 			<Option virtualFolder="judge/sdk/" />
 		</Unit>
-		<Unit filename="SettingTreeDialog.cpp">
+		<Unit filename="SettingTreeFrame.cpp">
 			<Option virtualFolder="GUI/TreeView/" />
 		</Unit>
-		<Unit filename="SettingTreeDialog.h">
+		<Unit filename="SettingTreeFrame.h">
 			<Option virtualFolder="GUI/TreeView/" />
 		</Unit>
 		<Unit filename="TempFile.cpp">

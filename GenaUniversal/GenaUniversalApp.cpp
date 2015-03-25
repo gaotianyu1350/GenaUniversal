@@ -1,6 +1,6 @@
 #include "GenaUniversalApp.h"
 #include "GenaUniversalMain.h"
-#include "SettingTreeDialog.h"
+#include "SettingTreeFrame.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <iostream>
@@ -34,10 +34,10 @@ bool GenaUniversalApp::OnInit()
     Setting *setting = new Setting();
     Result *result = new Result();
 
-    Library lib("plugin\\RunProg_Normal.dll");
-    typedef RunProg *(*GET)(const bool*, qMs*, Setting*, Result*);
-    GET get = (GET)lib.get("get");
-    RunProg *rp = get(&flag, &qms, setting, result);
+    //Library lib("plugin\\RunProg_Normal.dll");
+    //typedef RunProg *(*GET)(const bool*, qMs*, Setting*, Result*);
+    //GET get = (GET)lib.get("get");
+    //RunProg *rp = get(&flag, &qms, setting, result);
 
     setting->setItem("exe", "F:\\a.exe");
     setting->setItem("fin", "input.txt");
@@ -46,12 +46,12 @@ bool GenaUniversalApp::OnInit()
     setting->setItem("time", INFINITE);
     setting->setItem("memory", INFINITE);
 
-    rp->run();
-    std::cout << result->getItem("out").operator std::string &() << std::endl;
-    std::cout << (int)result->getItem("time") << std::endl;
-    std::cout << (int)result->getItem("memory") << std::endl;
+    //rp->run();
+    //std::cout << result->getItem("out").operator std::string &() << std::endl;
+    //std::cout << (int)result->getItem("time") << std::endl;
+    //std::cout << (int)result->getItem("memory") << std::endl;
 
-    return 0;
+    //return 0;
 
     // Test end
 
@@ -59,11 +59,23 @@ bool GenaUniversalApp::OnInit()
     Frame->Show();
     SetTopWindow(Frame);
     Setting *setting;
-    setting = new Setting();
-    SettingTreeDialog *Dialog = new SettingTreeDialog(NULL, wxID_ANY, setting);
-    if (Dialog->ShowModal() == wxID_OK)
-        setting = Dialog->getData();
-    Dialog->Destroy();*/
+    setting = new Setting;
+    /*std::cout << "file1 : ";
+    std::cin >> file1;*/
+    //setting->setName(file1);
+    //setting->setItem("file1", new File(file1));
+    std::string file1;
+    setting->setItem("int1", 2147483647);
+    setting->setItem("int1 (1)", 100);
+    setting->setItem("string1", "wo shi doubi");
+    Setting *setting1 = new Setting;
+    setting1->setName("haha");
+    setting1->setItem("file1", "hehe");
+    setting1->setItem("int1", new File(file1));
+    setting->setItem("setting1", setting1);
+    SettingTreeFrame *Frame = new SettingTreeFrame(NULL, wxID_ANY, setting);
+    Frame->Show();
+    //Frame->Destroy();
 
     return wxOK;
 }

@@ -99,6 +99,8 @@ std::string FileManager::getabspath(const std::string &path)
         a = path;
     else
         a = getcurabsdir() + path;
+    if (isdir(a) && *a.rbegin() != sep)
+        a += sep;
     int n = a.length();
     for (int i = 0; i < n;)
     {
@@ -132,10 +134,11 @@ std::string FileManager::getext(const std::string &path)
 
 std::string FileManager::getfilename(const std::string &path)
 {
-    std::string::size_type pos = path.rfind(sep);
+    std::string path2 = (path.length() && *path.rbegin() == sep ? path.substr(0, path.length() - 1) : path);
+    std::string::size_type pos = path2.rfind(sep);
     if (pos == std::string::npos)
-        return path;
-    return path.substr(pos + 1, path.length() - pos - 1);
+        return path2;
+    return path2.substr(pos + 1, path2.length() - pos - 1);
 }
 
 int FileManager::getfilesize(const std::string &path)

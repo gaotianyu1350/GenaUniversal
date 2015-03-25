@@ -65,6 +65,7 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/GenaUniversalApp.o \
 	$(DIROBJ_DEBUG)/GenaUniversalMain.o \
 	$(DIROBJ_DEBUG)/SettingTreeDialog.o \
+	$(DIROBJ_DEBUG)/SettingTreeFrame.o \
 	$(DIROBJ_DEBUG)/File.o \
 	$(DIROBJ_DEBUG)/FileManager.o \
 	$(DIROBJ_DEBUG)/TempFile.o \
@@ -89,6 +90,8 @@ $(DIROBJ_DEBUG)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 $(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/SettingTreeDialog.o: SettingTreeDialog.cpp SettingTreeDialog.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -123,7 +126,7 @@ $(DIROBJ_DEBUG)/Runner.o: Runner.cpp Runner.h
 $(DIROBJ_DEBUG)/RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
 $(BIN_DEBUG): $(OBJ_DEBUG) $(RES_DEBUG)
-	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads -L$(WXLIBDIR) $(LIBS)
+	g++ -o $(BIN_DEBUG) $(OBJ_DEBUG) $(RES_DEBUG) -mthreads $(LIBS)
 $(DIR_DEBUG):
 	mkdir -p $@
 $(DIROBJ_DEBUG):
@@ -190,6 +193,7 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/GenaUniversalApp.o \
 	$(DIROBJ_RELEASE)/GenaUniversalMain.o \
 	$(DIROBJ_RELEASE)/SettingTreeDialog.o \
+	$(DIROBJ_RELEASE)/SettingTreeFrame.o \
 	$(DIROBJ_RELEASE)/FileManager.o \
 	$(DIROBJ_RELEASE)/File.o \
 	$(DIROBJ_RELEASE)/TempFile.o \
@@ -214,6 +218,8 @@ $(DIROBJ_RELEASE)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 $(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/SettingTreeDialog.o: SettingTreeDialog.cpp SettingTreeDialog.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
@@ -248,7 +254,7 @@ $(DIROBJ_RELEASE)/Runner.o: Runner.cpp Runner.h
 $(DIROBJ_RELEASE)/RunProg.o: RunProg.cpp RunProg.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
 $(BIN_RELEASE): $(OBJ_RELEASE) $(RES_RELEASE)
-	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -L$(WXLIBDIR) -Wl,--subsystem,windows $(LIBS) -mwindows
+	g++ -o $(BIN_RELEASE) $(OBJ_RELEASE) $(RES_RELEASE) -mthreads -Wl,--subsystem,windows $(LIBS) -mwindows
 $(DIR_RELEASE):
 	mkdir -p $@
 $(DIROBJ_RELEASE):
