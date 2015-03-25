@@ -60,6 +60,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/GenaUniversalApp.o \
 	$(DIROBJ_DEBUG)/GenaUniversalMain.o \
 	$(DIROBJ_DEBUG)/SettingTreeFrame.o \
+	$(DIROBJ_DEBUG)/SettingGLCanvas.o \
+	$(DIROBJ_DEBUG)/SettingDialog.o \
 	$(DIROBJ_DEBUG)/File.o \
 	$(DIROBJ_DEBUG)/FileManager.o \
 	$(DIROBJ_DEBUG)/TempFile.o \
@@ -81,6 +83,10 @@ $(DIROBJ_DEBUG)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 $(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/SettingDialog.o: SettingDialog.cpp SettingDialog.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -182,6 +188,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/GenaUniversalApp.o \
 	$(DIROBJ_RELEASE)/GenaUniversalMain.o \
 	$(DIROBJ_RELEASE)/SettingTreeFrame.o \
+	$(DIROBJ_RELEASE)/SettingGLCanvas.o \
+	$(DIROBJ_RELEASE)/SettingDialog.o \
 	$(DIROBJ_RELEASE)/FileManager.o \
 	$(DIROBJ_RELEASE)/File.o \
 	$(DIROBJ_RELEASE)/TempFile.o \
@@ -203,6 +211,10 @@ $(DIROBJ_RELEASE)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 $(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/SettingDialog.o: SettingDialog.cpp SettingDialog.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2
