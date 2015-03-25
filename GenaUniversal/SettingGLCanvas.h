@@ -8,9 +8,10 @@
 #include <FTGL/ftgl.h>
 #include <sys/timeb.h>
 #include "Setting.h"
-#include "SettingDialog.h"
 
 class glSetting;
+
+#include "SettingDialog.h"
 
 class SettingGLCanvas : public wxGLCanvas
 {
@@ -66,6 +67,7 @@ public:
     SettingGLCanvas::Tpoint getMovePos(double tm);
     void moveEnd();
     void setFold(const SettingGLCanvas::Tpoint &pos);
+    friend class SettingDialog;
 private:
     int num, ct;
     double size;

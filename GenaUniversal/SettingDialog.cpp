@@ -1,4 +1,7 @@
 #include "SettingDialog.h"
+#ifndef WIN32
+#include "GenaIcon.xpm"
+#endif
 
 BEGIN_EVENT_TABLE(SettingDialog, wxDialog)
 END_EVENT_TABLE()
