@@ -1,4 +1,4 @@
-/*#ifndef SETTINGTREEFRAME_H
+#ifndef SETTINGTREEFRAME_H
 #define SETTINGTREEFRAME_H
 
 #include <wx/wx.h>
@@ -75,4 +75,3 @@ private:
 };
 
 #endif // SETTINGTREEFRAME_H
-*/
