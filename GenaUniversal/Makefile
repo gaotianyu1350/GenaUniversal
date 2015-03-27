@@ -3,6 +3,7 @@ CPPDEPS = -MT$@ -MF$@.d -MD -MP -std=gnu++11
 FREETYPEDIR = /usr/include/freetype2
 LIBS = `wx-config --libs core,base,gl` -ldl -lGL -lGLU -lftgl -lfreetype
 WIDGETS_CXXFLAGS = `wx-config --cppflags` -std=gnu++11 -I$(FREETYPEDIR)
+ICON = GenaIcon.xpm
 
 DIR_DEBUG = bin/Debug
 DIROBJ_DEBUG = obj/Debug
@@ -62,6 +63,8 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/SettingTreeFrame.o \
 	$(DIROBJ_DEBUG)/SettingGLCanvas.o \
 	$(DIROBJ_DEBUG)/SettingDialog.o \
+	$(DIROBJ_DEBUG)/SettingEvent.o \
+	$(DIROBJ_DEBUG)/glSetting.o \
 	$(DIROBJ_DEBUG)/File.o \
 	$(DIROBJ_DEBUG)/FileManager.o \
 	$(DIROBJ_DEBUG)/TempFile.o \
@@ -80,13 +83,17 @@ OBJ_DEBUG = \
 	$(DIROBJ_DEBUG)/RunProg.o
 $(DIROBJ_DEBUG)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
+$(DIROBJ_DEBUG)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h $(ICON)
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+$(DIROBJ_DEBUG)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h $(ICON)
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
-$(DIROBJ_DEBUG)/SettingDialog.o: SettingDialog.cpp SettingDialog.h
+$(DIROBJ_DEBUG)/SettingDialog.o: SettingDialog.cpp SettingDialog.h $(ICON)
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/SettingEvent.o: SettingEvent.cpp SettingEvent.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
+$(DIROBJ_DEBUG)/glSetting.o: glSetting.cpp glSetting.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -g
 $(DIROBJ_DEBUG)/FileManager.o: FileManager.cpp FileManager.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -g
@@ -190,6 +197,8 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/SettingTreeFrame.o \
 	$(DIROBJ_RELEASE)/SettingGLCanvas.o \
 	$(DIROBJ_RELEASE)/SettingDialog.o \
+	$(DIROBJ_RELEASE)/SettingEvent.o \
+	$(DIROBJ_RELEASE)/glSetting.o \
 	$(DIROBJ_RELEASE)/FileManager.o \
 	$(DIROBJ_RELEASE)/File.o \
 	$(DIROBJ_RELEASE)/TempFile.o \
@@ -208,13 +217,17 @@ OBJ_RELEASE = \
 	$(DIROBJ_RELEASE)/RunProg.o
 $(DIROBJ_RELEASE)/GenaUniversalApp.o: GenaUniversalApp.cpp GenaUniversalApp.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h
+$(DIROBJ_RELEASE)/GenaUniversalMain.o: GenaUniversalMain.cpp GenaUniversalMain.h $(ICON)
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h
+$(DIROBJ_RELEASE)/SettingTreeFrame.o: SettingTreeFrame.cpp SettingTreeFrame.h $(ICON)
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h
+$(DIROBJ_RELEASE)/SettingGLCanvas.o: SettingGLCanvas.cpp SettingGLCanvas.h $(ICON)
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
-$(DIROBJ_RELEASE)/SettingDialog.o: SettingDialog.cpp SettingDialog.h
+$(DIROBJ_RELEASE)/SettingDialog.o: SettingDialog.cpp SettingDialog.h $(ICON)
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/SettingEvent.o: SettingEvent.cpp SettingEvent.h
+	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
+$(DIROBJ_RELEASE)/glSetting.o: glSetting.cpp glSetting.h
 	g++ -c -o $@ $(WIDGETS_CXXFLAGS) $(CPPDEPS) $< -O2
 $(DIROBJ_RELEASE)/File.o: File.cpp File.h
 	g++ -c -o $@ $(CPPDEPS) -fPIC $< -O2

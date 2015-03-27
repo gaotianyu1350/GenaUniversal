@@ -69,7 +69,6 @@ bool GenaUniversalApp::OnInit()
     setting->setItem("int1 (1)", 100);
     setting->setItem("string1", "wo shi doubi");
     Setting *setting1 = new Setting;
-    setting1->setName("haha");
     setting1->setItem("file1", "hehe");
     setting1->setItem("int1", new File(file1));
     setting->setItem("setting1", setting1);

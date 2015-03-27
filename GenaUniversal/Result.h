@@ -44,18 +44,14 @@ private:
 class Result
 {
 public:
-    Result();
-    Result(const std::string &name);
-    void setName(const std::string &name);
-    std::string getName() const;
     void setItem(const std::string &idx, const Result_data &val);
+    void eraseItem(const std::string &idx);
     Result_data &getItem(const std::string &idx);
     bool hasItem(const std::string &idx);
     friend Result *deepCopy(Result *from, Result *&to);
     friend void deepRemove(Result *&a);
 private:
     std::map<std::string, Result_data> data;
-    std::string name;
 };
 
 /***************************************************************

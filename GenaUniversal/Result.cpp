@@ -149,29 +149,15 @@ void Result_data::setKey(const std::string &key)
     this->key = key;
 }
 
-Result::Result()
-{
-}
-
-Result::Result(const std::string &name)
-{
-    setName(name);
-}
-
-void Result::setName(const std::string &name)
-{
-    this->name = name;
-}
-
 void Result::setItem(const std::string &idx, const Result_data &val)
 {
     data[idx] = val;
     data[idx].setKey(idx);
 }
 
-std::string Result::getName() const
+void Result::eraseItem(const std::string &idx)
 {
-    return name;
+    data.erase(idx);
 }
 
 Result_data &Result::getItem(const std::string &idx)
@@ -188,7 +174,7 @@ Result *deepCopy(Result *from, Result *&to)
 {
     if (from == NULL)
         return to = new Result;
-    to = new Result(from->getName());
+    to = new Result();
     Result *subres;
     for (std::map<std::string, Result_data>::iterator i = from->data.begin(); i != from->data.end(); ++i)
         switch (i->second.is)

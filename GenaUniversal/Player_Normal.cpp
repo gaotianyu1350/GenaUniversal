@@ -31,7 +31,7 @@ extern "C"
                 typedef Problem *(*GET)(const bool*, qMs*, Setting*, Result*);
                 GET getProb = (GET)lib.get("get");
                 ((Setting*)(i->second))->setItem("data", data->getItem(i->first));
-                Result *res = new Result(i->first);
+                Result *res = new Result();
                 Problem *prob = getProb(flagStop, queueMessage, i->second, res);
                 prob->run();
                 delete prob;
@@ -39,9 +39,6 @@ extern "C"
                 total += res->getItem("total");
             }
             result->setItem("total", total);
-            char tmp[30];
-            sprintf(tmp, "%d", total);
-            pushMessage(0, setting->getName() + " total score " + tmp);
         }
 
         virtual void onStop()
