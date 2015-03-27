@@ -8,20 +8,6 @@ File::File(const std::string &file)
     setFile(file);
 }
 
-// Set Information
-
-void File::setStrName(const std::string &newName)
-{
-    strName = newName;
-}
-
-// Get Information
-
-std::string File::getStrName() const
-{
-    return strName;
-}
-
 // Maintain File
 
 bool File::setFile(const std::string &newFile)
@@ -32,7 +18,6 @@ bool File::setFile(const std::string &newFile)
 bool File::setFile(const File &newFile)
 {
     path = newFile.getPath();
-    strName = newFile.getStrName();
 }
 
 bool File::deleteFile()

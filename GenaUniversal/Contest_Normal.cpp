@@ -28,11 +28,14 @@ extern "C"
                     return;
                 }
                 ((Setting*)(i->second))->setItem("data", data);
-                Result *res = new Result(i->first);
+                Result *res = new Result();
                 Player *player = getPlayer(flagStop, queueMessage, i->second, res);
                 player->run();
                 delete player;
                 result->setItem(i->first, res);
+                char tmp[10];
+                sprintf(tmp, "%d", int(res->getItem("total")));
+                pushMessage(0, "Player " + i->first + " total score: " + tmp);
             }
             pushMessage(0, "Contest judgement finished");
         }

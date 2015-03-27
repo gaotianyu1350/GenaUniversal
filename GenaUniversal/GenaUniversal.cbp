@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="GUI\;judge\;judge\sdk\;judge\SharedLibrary\;judge\FileManager\;judge\sdk\templete\;judge\Runner\;GUI\TreeView\;" />
+		<Option virtualFolders="GUI/;judge/;judge/sdk/;judge/SharedLibrary/;judge/FileManager/;judge/sdk/templete/;judge/Runner/;GUI/TreeView/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GenaUniversal" prefix_auto="1" extension_auto="1" />
@@ -210,6 +210,12 @@
 		<Unit filename="SettingDialog.h">
 			<Option virtualFolder="GUI/TreeView/" />
 		</Unit>
+		<Unit filename="SettingEvent.cpp">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
+		<Unit filename="SettingEvent.h">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
 		<Unit filename="SettingGLCanvas.cpp">
 			<Option virtualFolder="GUI/TreeView/" />
 		</Unit>
@@ -227,6 +233,12 @@
 		</Unit>
 		<Unit filename="TempFile.h">
 			<Option virtualFolder="judge/FileManager/" />
+		</Unit>
+		<Unit filename="glSetting.cpp">
+			<Option virtualFolder="GUI/TreeView/" />
+		</Unit>
+		<Unit filename="glSetting.h">
+			<Option virtualFolder="GUI/TreeView/" />
 		</Unit>
 		<Unit filename="sdk.cpp">
 			<Option virtualFolder="judge/sdk/" />

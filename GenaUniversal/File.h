@@ -13,15 +13,9 @@ public:
 #else
     static const char sep = '/';
 #endif
-    static const char dot = '.';
 
     File();
     File(const std::string &file);
-
-    // Set Information
-    void setStrName(const std::string &newName);
-
-    std::string getStrName() const;
 
     bool setFile(const std::string &newFile);
     bool setFile(const File &newFile);
@@ -47,9 +41,6 @@ public:
     int getSize() const;
 
 private:
-    // Information
-    std::string strName;
-
     // File
     std::string path;
 };

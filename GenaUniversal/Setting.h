@@ -48,11 +48,8 @@ private:
 class Setting
 {
 public:
-    Setting();
-    Setting(const std::string &name);
-    void setName(const std::string &name);
-    std::string getName() const;
     void setItem(const std::string &idx, const Setting_data &val);
+    void eraseItem(const std::string &idx);
     Setting_data &getItem(const std::string &idx);
     bool hasItem(const std::string &idx);
     std::map<std::string, Setting_data> &getAllItems();
@@ -60,7 +57,6 @@ public:
     friend void deepRemove(Setting *&a);
 private:
     std::map<std::string, Setting_data> data;
-    std::string name;
 };
 
 /***************************************************************

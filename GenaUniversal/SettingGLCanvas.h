@@ -1,6 +1,3 @@
-#ifndef SETTINGGLCANVAS_H
-#define SETTINGGLCANVAS_H
-
 #include <wx/wx.h>
 #include <wx/glcanvas.h>
 #include <GL/gl.h>
@@ -8,10 +5,16 @@
 #include <FTGL/ftgl.h>
 #include <sys/timeb.h>
 #include "Setting.h"
-
-class glSetting;
-
+#include "SettingEvent.h"
 #include "SettingDialog.h"
+
+class SettingGLCanvas;
+typedef wxPoint2DDouble Tpoint;
+
+#ifndef SETTINGGLCANVAS_H
+#define SETTINGGLCANVAS_H
+
+#include "glSetting.h"
 
 class SettingGLCanvas : public wxGLCanvas
 {
@@ -26,8 +29,7 @@ public:
     void OnKeyPress(wxKeyEvent &event);
     void OnSize(wxSizeEvent &event);
     virtual ~SettingGLCanvas();
-    typedef wxPoint2DDouble Tpoint;
-    static constexpr double time_sum = 0.2;
+    double time_sum;
 private:
     wxGLContext *glRC;
     FTGLPixmapFont font;
@@ -41,6 +43,7 @@ private:
     void getSettingSize(glSetting *data);
     Tpoint center, move_last;
     glSetting *gldata;
+    Setting *data;
     void calcPos();
     void draw(glSetting *a, double tm, bool clarity = false);
     glSetting *getSelect(glSetting *a, const Tpoint &pos);
@@ -53,30 +56,10 @@ private:
     void StartTimer();
     double time_start, time_now;
     void eraseNode(bool real);
+    SettingDialog *dialog;
+    void OnName(settingNameEvent &event);
+    void DialogClosed(dialogCloseEvent &event);
     DECLARE_EVENT_TABLE()
 };
 
-class glSetting
-{
-public:
-    friend class SettingGLCanvas;
-    glSetting(Setting_data data, glSetting *fa = NULL, int num = 0);
-    friend void deepRemove(glSetting *&a);
-    void setSelect();
-    void deSelect();
-    SettingGLCanvas::Tpoint getMovePos(double tm);
-    void moveEnd();
-    void setFold(const SettingGLCanvas::Tpoint &pos);
-    friend class SettingDialog;
-private:
-    int num, ct;
-    double size;
-    std::map<std::string, glSetting*> son;
-    glSetting *fa;
-    Setting_data data;
-    SettingGLCanvas::Tpoint pos_s, pos_t;
-    bool fold, isSelect, erased;
-};
-
-void deepRemove(glSetting *&a);
 #endif // SETTINGGLCANVAS_H

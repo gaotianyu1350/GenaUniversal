@@ -143,21 +143,18 @@ Setting_data Setting_data::operator =(const Setting_data &data)
 
 void Setting_data::CopyUnion(const Setting_data &data)
 {
-    using std::string;
     key = data.key;
     if (is == STR && data.is == STR)
         StrData = data.StrData;
     else
     {
-        if (is == STR && data.is != STR)
-            StrData.~string();
         switch (data.is)
         {
         case INT:
             IntData = data.IntData;
             break;
         case STR:
-            new(&StrData) string(data.StrData);
+            new(&StrData) std::string(data.StrData);
             break;
         case FIL:
             FileData = data.FileData;
@@ -175,29 +172,15 @@ void Setting_data::setKey(const std::string &key)
     this->key = key;
 }
 
-Setting::Setting()
-{
-}
-
-Setting::Setting(const std::string &name)
-{
-    setName(name);
-}
-
-void Setting::setName(const std::string &name)
-{
-    this->name = name;
-}
-
-std::string Setting::getName() const
-{
-    return name;
-}
-
 void Setting::setItem(const std::string &idx, const Setting_data &val)
 {
     data[idx] = val;
     data[idx].setKey(idx);
+}
+
+void Setting::eraseItem(const std::string &idx)
+{
+    data.erase(idx);
 }
 
 Setting_data &Setting::getItem(const std::string &idx)
@@ -219,7 +202,7 @@ Setting *deepCopy(Setting *from, Setting *&to)
 {
     if (from == NULL)
         return to = new Setting;
-    to = new Setting(from->getName());
+    to = new Setting();
     File *subfile;
     Setting *subset;
     for (std::map<std::string, Setting_data>::iterator i = from->data.begin(); i != from->data.end(); ++i)
@@ -233,7 +216,6 @@ Setting *deepCopy(Setting *from, Setting *&to)
             break;
         case Setting_data::FIL:
             subfile = new File(((File*&)(i->second))->getPath());
-            subfile->setFileName(((File*&)(i->second))->getStrName());
             to->setItem(i->first, subfile);
             break;
         case Setting_data::SET:
