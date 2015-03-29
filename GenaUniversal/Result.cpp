@@ -155,7 +155,19 @@ void Result::setItem(const std::string &idx, const Result_data &val)
     data[idx].setKey(idx);
 }
 
+
+void Result::setItem(const char *idx, const Result_data &val)
+{
+    data[idx] = val;
+    data[idx].setKey(idx);
+}
+
 void Result::eraseItem(const std::string &idx)
+{
+    data.erase(idx);
+}
+
+void Result::eraseItem(const char *idx)
 {
     data.erase(idx);
 }

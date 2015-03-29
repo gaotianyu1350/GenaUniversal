@@ -1,4 +1,5 @@
 #include "File.h"
+#include <sstream>
 #include <unistd.h>
 
 File::File() {}
@@ -66,10 +67,7 @@ bool File::moveFileTo(const std::string &newDir)
         newPath = newDir + getFileName();
     else
         newPath = newDir + sep + getFileName();
-    if (rename(path.c_str(), newPath.c_str()) != 0)
-        return false;
-    path = newPath;
-    return true;
+    return moveFile(newPath);
 }
 
 bool File::rmDir()
@@ -83,10 +81,7 @@ bool File::rmDir()
 
 bool File::exist() const
 {
-    if (access(path.c_str(), F_OK) != 0)
-        return false;
-    else
-        return true;
+    return access(path.c_str(), F_OK) == 0;
 }
 
 bool File::isDir() const

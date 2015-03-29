@@ -149,22 +149,21 @@ Tpoint SettingGLCanvas::pos2world(const Tpoint &pos)
 double SettingGLCanvas::printstr(const std::string &s, const Tpoint &pos)
 {
     glColor3d(1, 1, 1);
-    wxString str(s);
     double x = pos.m_x;
     double mv = (double)fontsize / ClientSize.y;
-    for (int i = 0; i < str.length(); ++i)
+    wxString s2(s);
+    for (int i = 0; i < s2.length(); ++i)
     {
         glRasterPos2d(x, pos.m_y - mv);
-        font.Render((wchar_t*)str.wchar_str() + i, 1);
-        x += font.Advance((wchar_t*)str.wchar_str() + i, 1) / ClientSize.x * 2;
+        font.Render((wchar_t*)s2.wc_str() + i, 1);
+        x += font.Advance((wchar_t*)s2.wc_str() + i, 1) / ClientSize.x * 2;
     }
     return x;
 }
 
 double SettingGLCanvas::advance(const std::string &s)
 {
-    wxString str(s);
-    return 2.0 * font.Advance((wchar_t*)str.wchar_str()) / ClientSize.x;
+    return 2.0 * font.Advance(wxString(s).wc_str()) / ClientSize.x;
 }
 
 glSetting *SettingGLCanvas::getSelect(glSetting *a, const Tpoint &pos)
@@ -498,18 +497,31 @@ void SettingGLCanvas::DialogClosed(dialogCloseEvent &event)
     dialog->Destroy();
     delete dialog;
     dialog = NULL;
-    std::string name = a->data.key.substr(0, a->data.key.rfind('\1')) + "\1none";
-    if (a->fa->son.find(name) != a->fa->son.end())
+    std::string name = a->data.key.substr(0, a->data.key.rfind('\1'));
+    if (a->fa && a->fa->son.find(name + "\1none") != a->fa->son.end())
     {
         std::string key = name + " (1)";
         int num = 1;
-        while (a->fa->son.find(key) != a->fa->son.end())
+        while (a->fa->son.find(key + "\1none") != a->fa->son.end())
             key = name + " (" + std::to_string(++num) + ')';
-        name = key;
+        wxMessageDialog msg(this, "Already has name " + name + ".\nUse " + key + " instead?", "Name Conflict!", wxYES_NO | wxICON_INFORMATION);
+        if (msg.ShowModal() == wxID_NO)
+        {
+            dialog = new SettingDialog(this, wxID_ANY, a);
+            dialog->Show();
+            return;
+        }
+        name = key + "\1none";
     }
-    a->fa->son[name] = a->fa->son[a->data.key];
-    a->fa->son.erase(a->data.key);
-    ((Setting*)(a->fa->data))->setItem(name, ((Setting*)(a->fa->data))->getItem(a->data.key));
-    ((Setting*)(a->fa->data))->eraseItem(a->data.key);
-    a->data.key = name;
+    else
+        name += "\1none";
+    if (a->fa)
+    {
+        a->fa->son[name] = a->fa->son[a->data.key];
+        a->fa->son.erase(a->data.key);
+        ((Setting*)(a->fa->data))->setItem(name, ((Setting*)(a->fa->data))->getItem(a->data.key));
+        ((Setting*)(a->fa->data))->eraseItem(a->data.key);
+        a->data.key = name;
+    }
+    Refresh();
 }

@@ -48,8 +48,10 @@ private:
 class Setting
 {
 public:
+    void setItem(const char *idx, const Setting_data &val);
     void setItem(const std::string &idx, const Setting_data &val);
     void eraseItem(const std::string &idx);
+    void eraseItem(const char *idx);
     Setting_data &getItem(const std::string &idx);
     bool hasItem(const std::string &idx);
     std::map<std::string, Setting_data> &getAllItems();

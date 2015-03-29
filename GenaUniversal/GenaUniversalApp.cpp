@@ -27,6 +27,8 @@ bool GenaUniversalApp::OnInit()
     chdir(cwd.c_str());
     TempFile::InitTempFile();
 
+    setlocale(LC_ALL, "");
+
     // Test
 
     bool flag = false;
@@ -69,7 +71,7 @@ bool GenaUniversalApp::OnInit()
     setting->setItem("int1 (1)", 100);
     setting->setItem("string1", "wo shi doubi");
     Setting *setting1 = new Setting;
-    setting1->setItem("file1", "hehe");
+    setting1->setItem("是地方", "hehe");
     setting1->setItem("int1", new File(file1));
     setting->setItem("setting1", setting1);
     SettingTreeFrame *Frame = new SettingTreeFrame(NULL, wxID_ANY, setting);

@@ -278,7 +278,9 @@ void Runner::kill()
 {
     if (active())
     {
-        system(("kill " + std::to_string(pid) + " >/dev/null").c_str());
+        char tmp[30];
+        sprintf(tmp, "kill %d >/dev/null", pid);
+        system(tmp);
         __haveexit = true;
         __exitcode = 0;
     }
@@ -300,8 +302,9 @@ bool Runner::active()
 {
     if (__haveexit)
         return false;
-    __haveexit = !system(("ps -A | grep " + std::to_string(pid) +
-                          " | grep \\<defunct\\> >/dev/null 2>&1").c_str());
+    char tmp[70];
+    sprintf(tmp, "ps -A | grep %d | grep \\<defunct\\> >/dev/null 2>&1", pid);
+    __haveexit = !system(tmp);
     if (__haveexit)
         _exitcode();
     return !__haveexit;
@@ -309,10 +312,12 @@ bool Runner::active()
 
 unsigned Runner::_getmemory()
 {
-    FILE *f = popen(("ps -eo pid,rss | grep \"" + std::to_string(pid) + " \"").c_str(), "r");
-    unsigned tmp, ans;
-    if (fscanf(f, "%*d%u", &tmp) != EOF)
-        ans = tmp;
+    char tmp[50];
+    sprintf(tmp, "ps -eo pid,rss | grep \"%d\"", pid);
+    FILE *f = popen(tmp, "r");
+    unsigned t, ans;
+    if (fscanf(f, "%*d%u", &t) != EOF)
+        ans = t;
     else
         ans = 0;
     pclose(f);

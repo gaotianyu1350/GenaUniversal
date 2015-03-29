@@ -17,17 +17,19 @@ public:
     void OnClose(wxCloseEvent &event);
     void OnRadioBox(wxCommandEvent &event);
     void OnName(wxCommandEvent &event);
+    void OnEnter(wxCommandEvent &event);
     void OnOnClose(wxCloseEvent &event);
+    void OnDirChoose(wxCommandEvent &event);
+    void OnFileChoose(wxCommandEvent &event);
     friend class SettingGLCanvas;
 private:
     glSetting *setting;
     wxPanel *panel;
-    wxButton *btnOK, *intbtn, *strbtn, *filebtn, *setbtn, *choosebtn;
+    wxButton *btnOK, *intbtn, *strbtn, *filebtn, *setbtn, *filechoosebtn, *dirchoosebtn;
     wxBoxSizer *topSizer;
     wxRadioBox *radiobox;
     wxTextCtrl *nameText, *intText, *strText, *fileText;
     wxGridBagSizer *sizer_now, *intSizer, *strSizer, *fileSizer, *setSizer;
-    wxWindow *parent;
     DECLARE_EVENT_TABLE()
 };
 

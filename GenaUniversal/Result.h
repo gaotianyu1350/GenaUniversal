@@ -45,7 +45,9 @@ class Result
 {
 public:
     void setItem(const std::string &idx, const Result_data &val);
+    void setItem(const char *idx, const Result_data &val);
     void eraseItem(const std::string &idx);
+    void eraseItem(const char *idx);
     Result_data &getItem(const std::string &idx);
     bool hasItem(const std::string &idx);
     friend Result *deepCopy(Result *from, Result *&to);

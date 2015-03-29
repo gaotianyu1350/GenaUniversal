@@ -3,6 +3,7 @@
 #ifndef WIN32
 #include "GenaIcon.xpm"
 #endif
+#include <wx/valnum.h>
 
 BEGIN_EVENT_TABLE(SettingDialog, wxDialog)
     EVT_BUTTON(wxID_OK, SettingDialog::clickOK)
@@ -14,13 +15,15 @@ SettingDialog::SettingDialog(wxWindow *parent, wxWindowID id, glSetting *setting
     std::string name = setting->data.key.substr(0, setting->data.key.rfind('\1'));
     Create(parent, id, name, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     name += "\1editing";
-    setting->fa->son[name] = setting->fa->son[setting->data.key];
-    setting->fa->son.erase(setting->data.key);
-    ((Setting*)(setting->fa->data))->setItem(name, ((Setting*)(setting->fa->data))->getItem(setting->data.key));
-    ((Setting*)(setting->fa->data))->eraseItem(setting->data.key);
-    setting->data.key = name;
+    if (name != setting->data.key && setting->fa)
+    {
+        setting->fa->son[name] = setting->fa->son[setting->data.key];
+        setting->fa->son.erase(setting->data.key);
+        ((Setting*)(setting->fa->data))->setItem(name, ((Setting*)(setting->fa->data))->getItem(setting->data.key));
+        ((Setting*)(setting->fa->data))->eraseItem(setting->data.key);
+        setting->data.key = name;
+    }
     this->setting = setting;
-    this->parent = parent;
     SetIcon(wxICON(GenaIcon));
     panel = new wxPanel(this);
     topSizer = new wxBoxSizer(wxVERTICAL);
@@ -36,8 +39,9 @@ SettingDialog::SettingDialog(wxWindow *parent, wxWindowID id, glSetting *setting
     wxGridBagSizer *nameSizer = new wxGridBagSizer();
     nameSizer->SetEmptyCellSize(wxSize(70, 0));
     nameSizer->Add(new wxStaticText(panel, wxID_ANY, "name"), wxGBPosition(0, 0), wxGBSpan(1, 1), wxLEFT | wxRIGHT, 10);
-    nameText = new wxTextCtrl(panel, wxID_ANY, setting->data.key.substr(0, setting->data.key.rfind('\1')));
+    nameText = new wxTextCtrl(panel, wxID_ANY, setting->data.key.substr(0, setting->data.key.rfind('\1')), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     Connect(nameText->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnName));
+    Connect(nameText->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnEnter));
     nameSizer->Add(nameText, wxGBPosition(0, 1), wxGBSpan(1, 5), wxGROW | wxRIGHT, 10);
     nameSizer->AddGrowableCol(1);
     topSizer->Add(nameSizer, 1, wxGROW);
@@ -46,7 +50,9 @@ SettingDialog::SettingDialog(wxWindow *parent, wxWindowID id, glSetting *setting
         intSizer = new wxGridBagSizer();
         intSizer->SetEmptyCellSize(wxSize(70, 0));
         intSizer->Add(new wxStaticText(panel, wxID_ANY, "integer"), wxGBPosition(0, 0), wxGBSpan(1, 1), wxLEFT | wxRIGHT, 10);
-        intText = new wxTextCtrl(panel, wxID_ANY);
+        wxTextValidator validator(wxFILTER_NUMERIC);
+        intText = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER, validator);
+        Connect(intText->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnEnter));
         intSizer->Add(intText, wxGBPosition(0, 1), wxGBSpan(1, 5), wxGROW | wxRIGHT, 10);
         intSizer->AddGrowableCol(1);
         topSizer->Add(intSizer, 1, wxGROW);
@@ -63,7 +69,8 @@ SettingDialog::SettingDialog(wxWindow *parent, wxWindowID id, glSetting *setting
         strSizer = new wxGridBagSizer();
         strSizer->SetEmptyCellSize(wxSize(70, 0));
         strSizer->Add(new wxStaticText(panel, wxID_ANY, "string"), wxGBPosition(0, 0), wxGBSpan(1, 1), wxLEFT | wxRIGHT, 10);
-        strText = new wxTextCtrl(panel, wxID_ANY);
+        strText = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+        Connect(strText->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnEnter));
         strSizer->Add(strText, wxGBPosition(0, 1), wxGBSpan(1, 5), wxGROW | wxRIGHT, 10);
         strSizer->AddGrowableCol(1);
         topSizer->Add(strSizer, 1, wxGROW);
@@ -80,11 +87,16 @@ SettingDialog::SettingDialog(wxWindow *parent, wxWindowID id, glSetting *setting
         fileSizer = new wxGridBagSizer();
         fileSizer->SetEmptyCellSize(wxSize(70, 0));
         fileSizer->Add(new wxStaticText(panel, wxID_ANY, "file"), wxGBPosition(0, 0), wxGBSpan(1, 1), wxLEFT | wxRIGHT, 10);
-        fileText = new wxTextCtrl(panel, wxID_ANY);
+        fileText = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+        Connect(fileText->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnEnter));
         fileSizer->Add(fileText, wxGBPosition(0, 1), wxGBSpan(1, 5), wxGROW | wxRIGHT, 10);
         fileSizer->AddGrowableCol(1);
-        choosebtn = new wxButton(panel, wxID_ANY, "choose");
-        fileSizer->Add(choosebtn, wxGBPosition(0, 6), wxGBSpan(1, 1), wxGROW | wxRIGHT, 10);
+        filechoosebtn = new wxButton(panel, wxID_ANY, "file...");
+        dirchoosebtn = new wxButton(panel, wxID_ANY, "directory...");
+        Connect(filechoosebtn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnFileChoose));
+        Connect(dirchoosebtn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnDirChoose));
+        fileSizer->Add(filechoosebtn, wxGBPosition(0, 6), wxGBSpan(1, 1), wxGROW | wxRIGHT, 10);
+        fileSizer->Add(dirchoosebtn, wxGBPosition(0, 7), wxGBSpan(1, 1), wxGROW | wxRIGHT, 10);
         topSizer->Add(fileSizer, 1, wxGROW);
         if (setting->data.is == Setting_data::FIL)
         {
@@ -129,6 +141,13 @@ SettingDialog::SettingDialog(wxWindow *parent, wxWindowID id, glSetting *setting
     Center();
 }
 
+void SettingDialog::OnEnter(wxCommandEvent &event)
+{
+    wxCommandEvent btnevent(wxEVT_BUTTON, wxID_OK);
+    btnevent.SetEventObject(this);
+    GetEventHandler()->ProcessEvent(btnevent);
+}
+
 void SettingDialog::clickOK(wxCommandEvent &event)
 {
     Close();
@@ -137,6 +156,11 @@ void SettingDialog::clickOK(wxCommandEvent &event)
 void SettingDialog::OnRadioBox(wxCommandEvent &event)
 {
     int pos = radiobox->GetSelection();
+    if (setting->fa == NULL && pos)
+    {
+        radiobox->SetSelection(3);
+        return;
+    }
     topSizer->Show(sizer_now, false);
     switch (pos)
     {
@@ -161,21 +185,64 @@ void SettingDialog::OnRadioBox(wxCommandEvent &event)
 void SettingDialog::OnName(wxCommandEvent &event)
 {
     std::string name = nameText->GetValue().ToStdString();
+    if (setting->fa == NULL && !name.empty())
+    {
+        nameText->Clear();
+        return;
+    }
     SetTitle(name);
     name += "\1editing";
-    setting->fa->son[name] = setting->fa->son[setting->data.key];
-    setting->fa->son.erase(setting->data.key);
-    ((Setting*)(setting->fa->data))->setItem(name, ((Setting*)(setting->fa->data))->getItem(setting->data.key));
-    ((Setting*)(setting->fa->data))->eraseItem(setting->data.key);
-    setting->data.key = name;
+    if (setting->fa)
+    {
+        setting->fa->son[name] = setting->fa->son[setting->data.key];
+        setting->fa->son.erase(setting->data.key);
+        ((Setting*)(setting->fa->data))->setItem(name, ((Setting*)(setting->fa->data))->getItem(setting->data.key));
+        ((Setting*)(setting->fa->data))->eraseItem(setting->data.key);
+        setting->data.key = name;
+    }
     settingNameEvent NameEvent(wxEVT_COMMAND_SETTING_NAME_CHANGED);
     NameEvent.SetEventObject(this);
-    parent->GetEventHandler()->ProcessEvent(NameEvent);
+    GetParent()->GetEventHandler()->ProcessEvent(NameEvent);
+}
+
+void SettingDialog::OnFileChoose(wxCommandEvent &event)
+{
+    std::string file = fileText->GetValue().ToStdString();
+    wxFileDialog ch(this, "choose a file", FileManager::getdir(file), FileManager::getfilename(file));
+    if (ch.ShowModal() == wxID_OK)
+        fileText->SetValue(ch.GetPath());
+    ch.Destroy();
+}
+
+void SettingDialog::OnDirChoose(wxCommandEvent &event)
+{
+
 }
 
 void SettingDialog::OnClose(wxCloseEvent &event)
 {
+    int pos = radiobox->GetSelection();
+    switch (pos)
+    {
+    case 0:
+        long x;
+        if (!intText->GetValue().ToLong(&x))
+        {
+            wxMessageDialog err(this, intText->GetValue() + " is not an integer!", "Number Error", wxOK | wxICON_ERROR);
+            err.ShowModal();
+            event.Veto();
+            return;
+        }
+        setting->data = x;
+        break;
+    case 1:
+        setting->data = strText->GetValue().ToStdString();
+        break;
+    case 2:
+        ((File*)(setting->data))->setFile(fileText->GetValue().ToStdString());
+        break;
+    }
     dialogCloseEvent closeEvent(wxEVT_COMMAND_DIALOG_CLOSED);
     closeEvent.SetEventObject(this);
-    parent->GetEventHandler()->ProcessEvent(closeEvent);
+    GetParent()->GetEventHandler()->ProcessEvent(closeEvent);
 }

@@ -28,7 +28,7 @@ Setting_data::Setting_data(const char *data)
 Setting_data::Setting_data(File *data)
 {
     is = FIL;
-    FileData = data;
+    FileData = new File(*data);
 }
 
 Setting_data::Setting_data(Setting *data)
@@ -48,6 +48,8 @@ Setting_data::~Setting_data()
     using std::string;
     if (is == STR)
         StrData.~string();
+    else if (is == FIL)
+        delete FileData;
 }
 
 Setting_data::operator int()
@@ -121,7 +123,7 @@ Setting_data Setting_data::operator= (File *data)
     if (is == STR)
         StrData.~string();
     is = FIL;
-    FileData = data;
+    FileData = new File(*data);
     return *this;
 }
 
@@ -157,7 +159,7 @@ void Setting_data::CopyUnion(const Setting_data &data)
             new(&StrData) std::string(data.StrData);
             break;
         case FIL:
-            FileData = data.FileData;
+            FileData = new File(*data.FileData);
             break;
         case SET:
             SetData = data.SetData;
@@ -178,7 +180,19 @@ void Setting::setItem(const std::string &idx, const Setting_data &val)
     data[idx].setKey(idx);
 }
 
+void Setting::setItem(const char *idx, const Setting_data &val)
+{
+    data[idx] = val;
+    data[idx].setKey(idx);
+}
+
 void Setting::eraseItem(const std::string &idx)
+{
+    data.erase(idx);
+}
+
+
+void Setting::eraseItem(const char *idx)
 {
     data.erase(idx);
 }
